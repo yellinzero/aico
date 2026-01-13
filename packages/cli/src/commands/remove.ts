@@ -350,12 +350,8 @@ export const remove = new Command()
           'Please specify at least one employee or skill to remove.'
         );
         logger.dim('Examples:');
-        logger.dim(
-          '  aico remove pm                     # Remove employee'
-        );
-        logger.dim(
-          '  aico remove @the-aico/pm/brainstorming # Remove skill'
-        );
+        logger.dim('  aico remove pm                     # Remove employee');
+        logger.dim('  aico remove @the-aico/pm/brainstorming # Remove skill');
         process.exit(1);
       }
 
