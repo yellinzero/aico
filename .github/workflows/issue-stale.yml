@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'yellinzero'
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         name: 'Mark and close stale issues'
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
