@@ -55,9 +55,7 @@ async function runInit(options: InitOptions): Promise<void> {
   logger.break();
   logger.info('Next steps:');
   logger.log(`  ${logger.highlight('aico add pm')}  Add the PM employee`);
-  logger.log(
-    `  ${logger.highlight('aico list')}   View available employees`
-  );
+  logger.log(`  ${logger.highlight('aico list')}   View available employees`);
 }
 
 export const init = new Command()

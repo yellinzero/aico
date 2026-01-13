@@ -163,9 +163,7 @@ export default async function SkillDetailPage({
                       <span className="flex-1 truncate">
                         aico add {employee.fullName}
                       </span>
-                      <CodeCopyButton
-                        code={`aico add ${employee.fullName}`}
-                      />
+                      <CodeCopyButton code={`aico add ${employee.fullName}`} />
                     </div>
                   </div>
 
