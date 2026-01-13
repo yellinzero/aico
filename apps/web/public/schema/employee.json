@@ -1,0 +1,167 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://the-aico.com/schema/employee.json",
+  "title": "aico Employee",
+  "description": "Employee definition schema for employee.json",
+  "type": "object",
+  "required": ["name", "role"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Employee name (hyphen-case)"
+    },
+    "namespace": {
+      "type": "string",
+      "pattern": "^@[a-z0-9-]+$",
+      "description": "Registry namespace (@registry format)"
+    },
+    "fullName": {
+      "type": "string",
+      "pattern": "^@[a-z0-9-]+/[a-z0-9-]+$",
+      "description": "Full name (@registry/employee format)"
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Employee role title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Employee description"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["pm", "frontend", "backend", "devops", "general"],
+      "description": "Employee category"
+    },
+    "skills": {
+      "type": "array",
+      "description": "Employee skills",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Skill fullName reference"
+          },
+          {
+            "type": "object",
+            "required": ["name", "files"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$",
+                "description": "Skill name (hyphen-case)"
+              },
+              "files": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/definitions/fileSource"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "commands": {
+      "type": "array",
+      "description": "Employee commands",
+      "items": {
+        "type": "object",
+        "required": ["name", "files"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$",
+            "description": "Command name (hyphen-case)"
+          },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/file"
+            }
+          }
+        }
+      }
+    },
+    "docs": {
+      "type": "array",
+      "description": "Employee documentation",
+      "items": {
+        "type": "object",
+        "required": ["name", "files"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Document name"
+          },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/file"
+            }
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Shared skill dependencies",
+      "items": {
+        "type": "string",
+        "description": "Dependency reference (@registry/_shared/skill)"
+      }
+    }
+  },
+  "definitions": {
+    "fileSource": {
+      "type": "object",
+      "required": ["path", "type"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative file path"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["skill", "command", "doc"],
+          "description": "File type"
+        }
+      }
+    },
+    "file": {
+      "type": "object",
+      "required": ["path", "type"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative file path"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["skill", "command", "doc"],
+          "description": "File type"
+        },
+        "content": {
+          "type": "string",
+          "description": "File content (populated at build time)"
+        }
+      }
+    }
+  }
+}

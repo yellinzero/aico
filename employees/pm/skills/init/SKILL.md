@@ -54,10 +54,31 @@ Ask user about:
 
 See `references/constitution.template.md` for the full constitution template.
 
+## Update Instructions File
+
+After creating constraint files, update the project's AI instructions file to reference them:
+
+1. **Check for existing instructions file**:
+   - Look for `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex) in project root
+   - If neither exists, create `CLAUDE.md`
+
+2. **Add reference section** at the end of the file:
+
+   ```markdown
+   ## Reference Documents
+
+   The following constraint documents should be read before starting work:
+
+   - `docs/reference/pm/constitution.md` - Product constitution with domain info and constraints
+   ```
+
+3. **If file already has Reference Documents section**: Append the new reference if not already present
+
 ## Output
 
 ```
 ✓ Created docs/reference/pm/constitution.md
+✓ Updated CLAUDE.md with reference to constitution
 ✓ PM environment initialized
 ```
 
@@ -66,3 +87,4 @@ See `references/constitution.template.md` for the full constitution template.
 - ALWAYS use the unified header format
 - MUST guide user through key questions before generating
 - ALWAYS save to `docs/reference/pm/constitution.md`
+- MUST update CLAUDE.md or AGENTS.md with reference to constraint files

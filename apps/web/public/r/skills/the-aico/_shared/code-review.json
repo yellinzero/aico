@@ -1,0 +1,17 @@
+{
+  "name": "code-review",
+  "namespace": "@the-aico/_shared",
+  "fullName": "@the-aico/_shared/code-review",
+  "version": "1.0.0",
+  "description": "Request structured code review to catch correctness, security, performance, and readability issues. Reviews should happen early and often.\n\nUse this skill when:\n- Completing a task and need quality check\n- After major feature implementation\n- Before merging to main branch\n- When stuck and need fresh perspective on code\n- User asks for \"code review\", \"review my code\", \"check my code\"\n- Subagent-driven workflow needs spec compliance or quality review\n\nReview categories: Correctness, Tests, Security, Performance, Readability, Error Handling\nSeverity levels: Critical (fix now), Important (fix before proceeding), Minor (note for later)\n",
+  "category": "general",
+  "tags": [],
+  "dependencies": [],
+  "files": [
+    {
+      "path": "SKILL.md",
+      "type": "skill",
+      "content": "---\nname: aico-code-review\ndescription: |\n  Request structured code review to catch correctness, security, performance, and readability issues. Reviews should happen early and often.\n\n  Use this skill when:\n  - Completing a task and need quality check\n  - After major feature implementation\n  - Before merging to main branch\n  - When stuck and need fresh perspective on code\n  - User asks for \"code review\", \"review my code\", \"check my code\"\n  - Subagent-driven workflow needs spec compliance or quality review\n\n  Review categories: Correctness, Tests, Security, Performance, Readability, Error Handling\n  Severity levels: Critical (fix now), Important (fix before proceeding), Minor (note for later)\n---\n\n# Code Review\n\n## When to Request Review\n\n**Mandatory:**\n\n- After completing each task\n- After implementing major feature\n- Before merge to main\n\n**Optional:**\n\n- When stuck (fresh perspective)\n- Before refactoring\n- After fixing complex bug\n\n## Review Checklist\n\n| Category       | Check                           |\n| -------------- | ------------------------------- |\n| Correctness    | Does it do what it should?      |\n| Tests          | Are there tests? Do they pass?  |\n| Security       | Any vulnerabilities?            |\n| Performance    | Any obvious bottlenecks?        |\n| Readability    | Is code clear and maintainable? |\n| Error Handling | Are errors handled properly?    |\n\n## Issue Severity\n\n| Severity      | Action                           |\n| ------------- | -------------------------------- |\n| **Critical**  | Fix immediately, blocks progress |\n| **Important** | Fix before proceeding            |\n| **Minor**     | Note for later, can proceed      |\n\n## Review Output Template\n\n```markdown\n## Code Review: [Feature/Task Name]\n\n### Files Modified\n\n- `path/to/file.ts` - [what changed]\n\n### Issues\n\n**Critical:**\n\n- [ ] [Issue description]\n\n**Important:**\n\n- [ ] [Issue description]\n\n**Minor:**\n\n- [ ] [Issue description]\n\n### Assessment\n\n- [ ] Ready to proceed\n- [ ] Needs fixes (see issues above)\n```\n\n## Key Rules\n\n- ALWAYS review after each task completion\n- MUST fix Critical issues immediately\n- MUST fix Important issues before proceeding\n- Minor issues can be noted for later\n- If reviewer is wrong, push back with technical reasoning\n\n## Common Mistakes\n\n- ❌ Skip review because \"it's simple\" → ✅ Review everything\n- ❌ Ignore Critical issues → ✅ Fix immediately\n- ❌ Proceed with Important issues → ✅ Fix first\n"
+    }
+  ]
+}

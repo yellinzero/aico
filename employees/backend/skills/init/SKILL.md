@@ -60,11 +60,32 @@ All generated documents MUST use this unified header format:
 
 See `references/constraints.template.md` for the full constraints template.
 
+## Update Instructions File
+
+After creating constraint files, update the project's AI instructions file to reference them:
+
+1. **Check for existing instructions file**:
+   - Look for `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex) in project root
+   - If neither exists, create `CLAUDE.md`
+
+2. **Add reference section** at the end of the file:
+
+   ```markdown
+   ## Reference Documents
+
+   The following constraint documents should be read before starting work:
+
+   - `docs/reference/backend/constraints.md` - Tech stack and coding conventions
+   ```
+
+3. **If file already has Reference Documents section**: Append the new reference if not already present
+
 ## Output
 
 ```
 ✓ Created docs/reference/backend/constraints.md
 ✓ Created docs/reference/backend/tasks/
+✓ Updated CLAUDE.md with reference to constraint files
 ✓ Backend environment initialized
 ```
 
@@ -74,3 +95,4 @@ See `references/constraints.template.md` for the full constraints template.
 - MUST guide user through tech stack questions
 - ALWAYS create tasks/ directory
 - ALWAYS save to `docs/reference/backend/constraints.md`
+- MUST update CLAUDE.md or AGENTS.md with reference to constraint files

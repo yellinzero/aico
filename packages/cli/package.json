@@ -1,6 +1,6 @@
 {
   "name": "@the-aico/cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "aico CLI - AI employee management tool",
   "type": "module",
   "bin": {

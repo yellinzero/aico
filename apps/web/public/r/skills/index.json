@@ -1,0 +1,191 @@
+[
+  {
+    "name": "init",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/init",
+    "version": "1.0.0",
+    "description": "Initialize PM environment by creating constitution document from template.\n\nUse this skill when:\n- Running /pm.init command\n- User asks to \"initialize PM\", \"setup product management\", \"create constitution\"\n- Starting a new project and need to establish product constraints and domain info\n- Need to create docs/reference/pm/constitution.md for a new project\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "brainstorming",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/brainstorming",
+    "version": "1.0.0",
+    "description": "Guide users through structured dialogue to transform vague ideas into clear, actionable product concepts. Uses one-question-at-a-time approach with multiple choice options.\n\nUse this skill when:\n- User says \"I have an idea\", \"I want to build\", \"let me think about\"\n- User mentions \"brainstorm\", \"explore ideas\", \"think through\"\n- Requirements are vague, incomplete, or user seems unsure what they want\n- Need to explore problem space before jumping to solutions\n- Running /pm.plan but requirements are unclear or missing context\n- User asks \"what should I build?\", \"how should this work?\"\n\nProcess: Ask ONE question at a time, prefer multiple choice, explore 2-3 approaches before settling.\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "user-story-writing",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/user-story-writing",
+    "version": "1.0.0",
+    "description": "Transform requirements into well-structured User Stories using \"As a [user], I want [goal], So that [benefit]\" format with Given/When/Then acceptance criteria.\n\nUse this skill when:\n- User asks to \"write user story\", \"create story\", \"add story\"\n- User mentions \"user story\", \"backlog item\", \"story\"\n- Running /pm.plan and need to break PRD into implementable stories\n- Creating backlog items for development team\n- Need to formalize a requirement into standard story format\n- Converting feature request into actionable story with acceptance criteria\n\nOutput: ALWAYS write story files to docs/reference/pm/stories/{story-name}.md\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "prd-writing",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/prd-writing",
+    "version": "1.0.0",
+    "description": "Create comprehensive Product Requirements Documents (PRD) that define what to build and why, focusing on goals, scope, user stories, and success criteria without implementation details.\n\nUse this skill when:\n- User asks to \"write a PRD\", \"create PRD\", \"write requirements document\"\n- User mentions \"requirements document\", \"product requirements\", \"product spec\"\n- Running /pm.plan command to create version planning document\n- Starting a new product, major feature, or initiative that needs formal requirements\n- Need to document goals, scope, user stories, functional requirements, and success criteria\n\nOutput: ALWAYS write PRD files to docs/reference/pm/versions/{version-name}.md\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "clarification",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/clarification",
+    "version": "1.0.0",
+    "description": "Resolve requirement ambiguities through STRUCTURED questioning: one question at a time, with recommended options and reasoning.\n\nUNIQUE VALUE: Prevents overwhelming users with multiple questions. Provides expert recommendations for each decision.\n\nUse this skill when:\n- Running /pm.clarify command\n- User says \"unclear\", \"not sure what this means\", \"confused about\"\n- User asks \"what does X mean?\", \"how should X work?\", \"can you clarify?\"\n- Requirements have conflicting or inconsistent details\n- Stories are missing acceptance criteria or have gaps\n- Need to fill information gaps BEFORE development can proceed\n\nProcess: Ask ONE question at a time (max 5 per session), provide recommended option with reasoning.\nDO NOT ask multiple questions at once - this overwhelms users.\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "acceptance-criteria",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/acceptance-criteria",
+    "version": "1.0.0",
+    "description": "Define clear, testable acceptance criteria using Given/When/Then (Gherkin) format that can be directly used for testing.\n\nUse this skill when:\n- User asks for \"acceptance criteria\", \"AC\", \"test criteria\", \"done criteria\"\n- User asks \"how do we know it's done?\", \"what counts as complete?\"\n- User story needs testable success conditions\n- QA needs test scenarios or test cases\n- Running /pm.plan and need to add AC to stories\n- Reviewing story and AC is missing or vague\n\nFormat: Always use Given [context], When [action], Then [expected result] structure.\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "competitor-analysis",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/competitor-analysis",
+    "version": "1.0.0",
+    "description": "Research and analyze competitors with STRUCTURED output: feature comparison matrix, strengths/weaknesses analysis, and actionable recommendations.\n\nUNIQUE VALUE: Creates standardized competitor analysis document with feature matrix and strategic recommendations.\n\nUse this skill when:\n- User asks \"what do competitors do?\", \"who are our competitors?\"\n- User mentions competitor names or asks for product comparison\n- User asks for \"competitor analysis\", \"market research\", \"competitive landscape\"\n- Entering new market, feature area, or evaluating product direction\n- Need to understand competitive landscape before making product decisions\n- Writing PRD and need market context or differentiation strategy\n\nOutput format: Feature comparison matrix + Strengths/Weaknesses + Actionable recommendations\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "story-acceptance",
+    "namespace": "@the-aico/pm",
+    "fullName": "@the-aico/pm/story-acceptance",
+    "version": "1.0.0",
+    "description": "Verify and close stories after frontend/backend tasks are completed. Check ALL related task files, update story acceptance criteria checkboxes.\n\nUNIQUE VALUE: Ensures BOTH frontend AND backend tasks are verified before closing story. Prevents premature story closure.\n\nUse this skill when:\n- Frontend or backend notifies \"task completed, please verify\"\n- User asks to \"verify story\", \"accept story\", \"close story\", \"mark story done\"\n- Need to check if a story can be marked as complete\n- User asks \"is story X done?\", \"can we close story X?\"\n\nCRITICAL: Must check BOTH frontend tasks (docs/reference/frontend/tasks/) AND backend tasks (docs/reference/backend/tasks/) before closing.\nOutput: Update story file checkboxes from `- [ ]` to `- [x]`\n",
+    "category": "pm",
+    "tags": []
+  },
+  {
+    "name": "init",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/init",
+    "version": "1.0.0",
+    "description": "Initialize backend environment by creating constraints document from template.\n\nUse this skill when:\n- Running /backend.init command\n- User asks to \"initialize backend\", \"setup backend environment\"\n- Starting backend work and need to establish tech stack and conventions\n- Need to create docs/reference/backend/constraints.md\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "task-breakdown",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/task-breakdown",
+    "version": "1.0.0",
+    "description": "Break down PM story into backend tasks following LAYERED ARCHITECTURE order: Data Models → Database → Repository → Service → API → Validation → Tests.\n\nUNIQUE VALUE: Ensures proper dependency order and separation of concerns. Tasks are ordered by architectural layers, not random order.\n\nUse this skill when:\n- Running /backend.tasks command\n- User asks to \"break down story for backend\", \"create backend tasks\", \"split into backend tasks\"\n- Have story at docs/reference/pm/stories/ and need organized task list\n- Need tasks ordered by architectural layers (not random order)\n- Starting backend work and want organized, layered task list\n\nLayer order is CRITICAL: Types/Entities → Migrations → Repository → Service → API → Validation → Tests\nOutput: ALWAYS write to docs/reference/backend/tasks/{story-name}.md\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "plan",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/plan",
+    "version": "1.0.0",
+    "description": "Create ATOMIC implementation plan for a single backend task. Each step has TDD, exact code, and verification command.\n\nIMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.\nFor architecture planning or feature scoping, use EnterPlanMode instead.\n\nUse this skill when:\n- Running /backend.plan command\n- User explicitly asks for \"atomic steps\", \"step-by-step plan with verification\"\n- Have a specific task from docs/reference/backend/tasks/ and need implementation steps\n- Need granular TDD steps: Types → DB → Test (failing) → Implementation → Test (passing) → API\n\nDO NOT use for:\n- Architecture planning (use EnterPlanMode)\n- General development planning\n- Feature scoping or estimation\n\nOutput: Present plan to user (not saved to file), each step includes Files, Action, and Verify command.\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "implement",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/implement",
+    "version": "1.0.0",
+    "description": "Execute backend implementation with TDD (Test-Driven Development). Write failing test first, then implement, verify each step.\n\nUse this skill when:\n- User asks to \"implement this backend task\", \"implement backend\"\n- Have an implementation plan ready and need to execute it\n- Executing steps from /backend.plan output\n- User says \"start coding backend\", \"write backend code\"\n- User asks to \"use TDD\", \"write test first\", \"test-driven\" for backend code\n- Fixing backend bugs (write failing test that reproduces bug first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (write failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- MUST have task file in docs/reference/backend/tasks/ (use /backend.tasks first if not exists)\n- MUST read constraints.md before writing any code.\nFlow: Check Task File → Read Constraints → TDD Cycle (RED→GREEN→REFACTOR) → Verify Each → Run All Tests → Update Task Status → Notify PM\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "init",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/init",
+    "version": "1.0.0",
+    "description": "Initialize frontend environment by creating design system and constraints documents from templates.\n\nUse this skill when:\n- Running /frontend.init command\n- User asks to \"initialize frontend\", \"setup frontend environment\"\n- Starting frontend work and need to establish design system and constraints\n- Need to create docs/reference/frontend/design-system.md or constraints.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "style-extraction",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/style-extraction",
+    "version": "1.0.0",
+    "description": "Extract design tokens (colors, typography, spacing, effects) from reference website or screenshot to create project design system.\n\nUNIQUE VALUE: Creates standardized design-system.md file with all design tokens extracted systematically.\n\nUse this skill when:\n- User shares reference website URL and wants to extract its style\n- User provides screenshot or image and asks to \"extract design\", \"extract style\"\n- Running /frontend.init and need to create design system from reference\n- User asks to \"create design system\", \"extract colors\", \"extract typography\"\n- Need to establish consistent design tokens before starting frontend work\n\nMethods: URL (via Playwright MCP screenshot) or direct screenshot analysis\nOutput: ALWAYS write to docs/reference/frontend/design-system.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "design",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/design",
+    "version": "1.0.0",
+    "description": "Transform PRD or story into complete page/component designs with ASCII layouts, component specs, interaction flows, and frontend implementation prompts.\n\nUse this skill when:\n- User asks to \"design the page\", \"design component\", \"create page design\"\n- User mentions \"page design\", \"component design\", \"UI design\", \"layout design\"\n- Running /frontend.design command\n- PRD or story is ready and need visual/interaction design before implementation\n- Need to create design spec that frontend developer can implement from\n\nPrerequisites: Design system must exist at docs/reference/frontend/design-system.md\nOutput: ALWAYS write design files to docs/reference/frontend/designs/{name}.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "task-breakdown",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/task-breakdown",
+    "version": "1.0.0",
+    "description": "Break down PM story into frontend tasks following UI DEVELOPMENT order: Setup → Static UI → Dynamic Logic → Interactions → Testing.\n\nUNIQUE VALUE: Ensures proper dependency order. Tasks are ordered by UI development layers, not random order.\n\nUse this skill when:\n- Running /frontend.tasks command\n- User asks to \"break down story\", \"create frontend tasks\", \"split into tasks\"\n- Have story at docs/reference/pm/stories/ and need organized task list\n- Need tasks ordered by UI development layers (not random order)\n- Starting frontend work and want organized task list\n\nTask order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests\nOutput: ALWAYS write to docs/reference/frontend/tasks/{story-name}.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "plan",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/plan",
+    "version": "1.0.0",
+    "description": "Create ATOMIC implementation plan for a single frontend task. Each step has exact code and verification command.\n\nIMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.\nFor architecture planning or feature scoping, use EnterPlanMode instead.\n\nUse this skill when:\n- Running /frontend.plan command\n- User explicitly asks for \"atomic steps\", \"step-by-step plan with verification\"\n- Have a specific task from docs/reference/frontend/tasks/ and need implementation steps\n- Need granular steps: Setup (create files) → Implementation (write code) → Test (verify) → Commit\n\nDO NOT use for:\n- Architecture planning (use EnterPlanMode)\n- General development planning\n- Feature scoping or estimation\n\nOutput: Present plan to user (not saved to file), each step includes Files, Action, and Verify command.\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "implement",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/implement",
+    "version": "1.0.0",
+    "description": "Execute frontend implementation with TDD. Read all constraint files before coding, write failing test first, verify after each step.\n\nUse this skill when:\n- User asks to \"implement this\", \"implement the plan\", \"start implementation\", \"execute plan\"\n- Have an implementation plan ready and need to execute it\n- Executing steps from /frontend.plan output\n- User says \"start coding\", \"write the code\", \"begin implementation\"\n- User asks to \"use TDD\", \"write test first\", \"test-driven\" for frontend code\n- User asks to \"write tests\", \"add tests\", \"create tests\"\n- Fixing UI bugs (write failing test that reproduces bug first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (write failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- MUST have task file in docs/reference/frontend/tasks/ (use /frontend.tasks first if not exists)\n- MUST read design-system.md, constraints.md, and design spec before writing any code.\nFlow: Check Task File → Read Constraints → TDD Cycle (RED→GREEN→REFACTOR) → Verify Each → Test → Update Task Status → Notify PM\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "code-review",
+    "namespace": "@the-aico/_shared",
+    "fullName": "@the-aico/_shared/code-review",
+    "version": "1.0.0",
+    "description": "Request structured code review to catch correctness, security, performance, and readability issues. Reviews should happen early and often.\n\nUse this skill when:\n- Completing a task and need quality check\n- After major feature implementation\n- Before merging to main branch\n- When stuck and need fresh perspective on code\n- User asks for \"code review\", \"review my code\", \"check my code\"\n- Subagent-driven workflow needs spec compliance or quality review\n\nReview categories: Correctness, Tests, Security, Performance, Readability, Error Handling\nSeverity levels: Critical (fix now), Important (fix before proceeding), Minor (note for later)\n",
+    "category": "general",
+    "tags": []
+  },
+  {
+    "name": "subagent-driven",
+    "namespace": "@the-aico/_shared",
+    "fullName": "@the-aico/_shared/subagent-driven",
+    "version": "1.0.0",
+    "description": "Execute implementation plan by dispatching fresh subagent per task. Each task gets: Implementer → Spec Review → Quality Review. Two-stage review ensures both correctness and quality.\n\nUse this skill when:\n- Have implementation plan with multiple independent tasks\n- Want automated execution with quality gates after each task\n- Tasks are mostly independent (not tightly coupled)\n- User asks to \"execute the plan\", \"run the tasks\", \"auto implement\"\n\nPrerequisites: Must have plan from aico-*-plan or aico-*-task-breakdown skill.\nProcess: For each task: Dispatch Implementer → Spec Review (passes?) → Quality Review (passes?) → Next task\nReview order: ALWAYS spec compliance first, THEN code quality.\n",
+    "category": "general",
+    "tags": []
+  },
+  {
+    "name": "worktree",
+    "namespace": "@the-aico/_shared",
+    "fullName": "@the-aico/_shared/worktree",
+    "version": "1.0.0",
+    "description": "Create isolated git worktree for feature development. Handles directory selection, gitignore verification, project setup, and baseline test verification.\n\nUse this skill when:\n- Starting feature work that needs isolation from current workspace\n- Before executing implementation plans on a new branch\n- Want to work on multiple branches/features simultaneously\n- User asks to \"create worktree\", \"isolate this work\", \"separate branch\"\n- Need clean baseline before starting major changes\n\nSafety: ALWAYS verify worktree directory is gitignored before creating.\nProcess: Check directory → Verify ignored → Create worktree → Run setup → Verify baseline tests\n",
+    "category": "general",
+    "tags": []
+  }
+]

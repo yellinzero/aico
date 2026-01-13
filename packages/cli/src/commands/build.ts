@@ -16,11 +16,13 @@ import {
 } from '../schema/skill.js';
 import { logger, spinner } from '../utils/logger.js';
 import { handleError } from '../utils/errors.js';
+import { buildSchemas } from './build-schema.js';
 
 const buildOptionsSchema = z.object({
   cwd: z.string(),
   employeesDir: z.string(),
   outputDir: z.string(),
+  schemaDir: z.string().optional(),
   registry: z.string(),
   version: z.string(),
 });
@@ -133,10 +135,12 @@ async function buildSharedSkills(
 }
 
 async function runBuild(options: BuildOptions): Promise<void> {
-  const { cwd, employeesDir, outputDir, registry, version } = options;
+  const { cwd, employeesDir, outputDir, schemaDir, registry, version } =
+    options;
 
   const employeesPath = path.resolve(cwd, employeesDir);
   const outputPath = path.resolve(cwd, outputDir);
+  const schemaPath = schemaDir ? path.resolve(cwd, schemaDir) : outputPath;
 
   // Clean output directory before building
   if (await fs.pathExists(outputPath)) {
@@ -156,9 +160,8 @@ async function runBuild(options: BuildOptions): Promise<void> {
 
   const s = spinner(`Building ${employeeFiles.length} employee(s)...`).start();
 
-  // Indexes for new format
+  // Indexes
   const skillsIndex: SkillSummary[] = [];
-  const employeesIndex: EmployeeSummary[] = [];
 
   // Legacy format index
   const legacyIndex: EmployeeSummary[] = [];
@@ -176,7 +179,6 @@ async function runBuild(options: BuildOptions): Promise<void> {
 
       const category = inferCategory(employeeName);
       const namespace = `${registry}/${employeeName}`;
-      const employeeFullName = `${registry}/${employeeName}`;
 
       // Create employee with content to be populated (legacy format)
       const employee = {
@@ -195,13 +197,9 @@ async function runBuild(options: BuildOptions): Promise<void> {
         })),
       } as Employee;
 
-      // Track skill fullNames for employee
-      const skillFullNames: string[] = [];
-
       // Read all skill files and build skill registry
       for (const skill of employee.skills) {
         const skillFullName = `${namespace}/${skill.name}`;
-        skillFullNames.push(skillFullName);
 
         const skillFiles: Skill['files'] = [];
         let skillDescription = '';
@@ -298,41 +296,6 @@ async function runBuild(options: BuildOptions): Promise<void> {
       await fs.ensureDir(outputPath);
       await fs.writeJson(legacyOutputPath, employee, { spaces: 2 });
 
-      // Write new format employee JSON
-      const employeeExtended = {
-        $schema: 'https://the-aico.com/schema/employee.json',
-        name: employee.name,
-        namespace: registry,
-        fullName: employeeFullName,
-        role: employee.role,
-        description: employee.description,
-        version,
-        category,
-        skills: skillFullNames,
-        commands: employee.commands,
-        docs: employee.docs,
-      };
-      const employeesOutputDir = path.join(outputPath, 'employees');
-      await fs.ensureDir(employeesOutputDir);
-      await fs.writeJson(
-        path.join(employeesOutputDir, `${employee.name}.json`),
-        employeeExtended,
-        { spaces: 2 }
-      );
-
-      // Add to employees index
-      employeesIndex.push({
-        name: employee.name,
-        namespace: registry,
-        fullName: employeeFullName,
-        role: employee.role,
-        description: employee.description,
-        version,
-        skillCount: employee.skills.length,
-        commandCount: employee.commands.length,
-        category,
-      });
-
       // Add to legacy index
       legacyIndex.push({
         name: employee.name,
@@ -365,11 +328,6 @@ async function runBuild(options: BuildOptions): Promise<void> {
   await fs.ensureDir(path.dirname(skillsIndexPath));
   await fs.writeJson(skillsIndexPath, skillsIndex, { spaces: 2 });
 
-  // Write employees index (new format)
-  const employeesIndexPath = path.join(outputPath, 'employees', 'index.json');
-  await fs.ensureDir(path.dirname(employeesIndexPath));
-  await fs.writeJson(employeesIndexPath, employeesIndex, { spaces: 2 });
-
   // Write legacy index.json (for backward compatibility)
   const legacyIndexPath = path.join(outputPath, 'index.json');
   await fs.writeJson(
@@ -378,15 +336,19 @@ async function runBuild(options: BuildOptions): Promise<void> {
     { spaces: 2 }
   );
 
+  // Build JSON schemas
+  s.text = 'Building JSON schemas...';
+  await buildSchemas(schemaPath);
+
   s.succeed(`Built ${employeeFiles.length} employee(s) to ${outputDir}/`);
 
   logger.break();
   logger.success('Registry build complete!');
   logger.dim(`  Skills: ${skillsIndex.length} (${sharedSkillCount} shared)`);
-  logger.dim(`  Employees: ${employeesIndex.length}`);
+  logger.dim(`  Employees: ${legacyIndex.length}`);
   logger.break();
-  for (const emp of employeesIndex) {
-    logger.dim(`  - ${emp.name}: ${emp.role} (${emp.skillCount} skills)`);
+  for (const emp of legacyIndex) {
+    logger.dim(`  - ${emp.name}: ${emp.role}`);
   }
 }
 
@@ -399,6 +361,10 @@ export const build = new Command()
     'employees'
   )
   .option('-o, --output-dir <dir>', 'Output directory', 'registry')
+  .option(
+    '-s, --schema-dir <dir>',
+    'Schema output directory (defaults to output-dir)'
+  )
   .option('-r, --registry <name>', 'Registry namespace', '@the-aico')
   .option('-v, --version <version>', 'Version number', '1.0.0')
   .option('-c, --cwd <cwd>', 'Working directory', process.cwd())
@@ -408,6 +374,7 @@ export const build = new Command()
         cwd: opts.cwd,
         employeesDir: opts.employeesDir,
         outputDir: opts.outputDir,
+        schemaDir: opts.schemaDir,
         registry: opts.registry,
         version: opts.version,
       });
