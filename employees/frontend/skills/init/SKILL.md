@@ -84,6 +84,27 @@ If no reference:
 - `references/design-system.template.md` - Design tokens template
 - `references/constraints.template.md` - Tech stack and conventions template
 
+## Update Instructions File
+
+After creating constraint files, update the project's AI instructions file to reference them:
+
+1. **Check for existing instructions file**:
+   - Look for `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex) in project root
+   - If neither exists, create `CLAUDE.md`
+
+2. **Add reference section** at the end of the file:
+
+   ```markdown
+   ## Reference Documents
+
+   The following constraint documents should be read before starting work:
+
+   - `docs/reference/frontend/design-system.md` - Design tokens and visual guidelines
+   - `docs/reference/frontend/constraints.md` - Tech stack and coding conventions
+   ```
+
+3. **If file already has Reference Documents section**: Append the new references if not already present
+
 ## Output
 
 ```
@@ -91,6 +112,7 @@ If no reference:
 ✓ Created docs/reference/frontend/constraints.md
 ✓ Created docs/reference/frontend/designs/
 ✓ Created docs/reference/frontend/tasks/
+✓ Updated CLAUDE.md with reference to constraint files
 ✓ Frontend environment initialized
 ```
 
@@ -99,3 +121,4 @@ If no reference:
 - ALWAYS use the unified header format
 - MUST create both design-system.md and constraints.md
 - ALWAYS create designs/ and tasks/ directories
+- MUST update CLAUDE.md or AGENTS.md with reference to constraint files
