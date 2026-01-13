@@ -1,0 +1,6 @@
+We need to define acceptance criteria for the "User Login" feature.
+
+User Story:
+As a registered user, I want to be able to log into the system so that I can access my personal data.
+
+Please help me write detailed acceptance criteria.

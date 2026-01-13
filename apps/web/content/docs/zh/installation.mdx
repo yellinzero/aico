@@ -1,0 +1,122 @@
+---
+title: 安装
+description: 如何安装 aico 并将 AI 员工添加到你的项目。
+---
+
+## 前置要求
+
+- Node.js 18.17 或更高版本（推荐 20+）
+- Claude Code 或 Codex CLI
+
+## 安装 CLI（推荐）
+
+我们推荐全局安装 aico 以获得最佳体验：
+
+<CodeBlockCommand npm="npm install -g @the-aico/cli" />
+
+安装后，你可以直接使用 `aico` 命令：
+
+```bash
+aico --version
+```
+
+## 无需安装直接使用
+
+如果你不想全局安装，可以使用包管理器的执行器直接运行：
+
+| 包管理器 | 命令 |
+|---------|------|
+| npm | `npx @the-aico/cli <command>` |
+| pnpm | `pnpm dlx @the-aico/cli <command>` |
+| yarn | `yarn dlx @the-aico/cli <command>` |
+| bun | `bunx @the-aico/cli <command>` |
+
+例如：`npx @the-aico/cli list --remote`
+
+> **提示：** 全局安装可以获得更简洁的命令体验，选择你喜欢的方式即可。
+
+## 快速开始
+
+在项目中初始化 aico：
+
+```bash
+aico init
+```
+
+这会创建 `aico.json` 配置文件：
+
+```json
+{
+  "$schema": "https://the-aico.com/schema/config.json",
+  "defaultPlatform": "claude-code",
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    }
+  },
+  "employees": {},
+  "registries": {
+    "@the-aico": "https://the-aico.com/r/{name}.json"
+  }
+}
+```
+
+## 添加员工
+
+将 AI 员工添加到项目：
+
+```bash
+aico add @the-aico/pm
+```
+
+这会安装 PM 员工的所有技能和命令。
+
+## 添加单个技能
+
+你也可以只安装单个技能：
+
+```bash
+aico add @the-aico/pm/brainstorming
+```
+
+## 验证安装
+
+列出已安装的员工：
+
+```bash
+aico list
+```
+
+输出：
+
+```txt
+已安装的员工:
+
+@the-aico/pm (v1.0.0)
+  ├── 8 个技能
+  └── 3 个命令
+
+总计: 1 个员工, 8 个技能, 3 个命令
+```
+
+## 目录结构
+
+安装后，你的项目会有：
+
+```txt
+your-project/
+├── .claude/
+│   ├── skills/
+│   │   └── aico-pm-brainstorming/
+│   │       └── SKILL.md
+│   └── commands/
+│       └── pm.plan.md
+└── aico.json
+```
+
+## 下一步
+
+- 浏览[可用员工](/employees)
+- 学习 [CLI 命令](/docs/cli)
+- 创建自己的[自定义技能](/docs/creating-skills)

@@ -1,0 +1,115 @@
+{
+  "$schema": "https://the-aico.com/schema/employee.json",
+  "name": "pm",
+  "role": "Product Manager",
+  "description": "Product research, requirement analysis, user story writing, and version planning",
+  "skills": [
+    {
+      "name": "init",
+      "files": [
+        {
+          "path": "skills/init/SKILL.md",
+          "type": "skill"
+        },
+        {
+          "path": "skills/init/references/constitution.template.md",
+          "type": "doc"
+        }
+      ]
+    },
+    {
+      "name": "brainstorming",
+      "files": [
+        {
+          "path": "skills/brainstorming/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "user-story-writing",
+      "files": [
+        {
+          "path": "skills/user-story-writing/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "prd-writing",
+      "files": [
+        {
+          "path": "skills/prd-writing/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "clarification",
+      "files": [
+        {
+          "path": "skills/clarification/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "acceptance-criteria",
+      "files": [
+        {
+          "path": "skills/acceptance-criteria/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "competitor-analysis",
+      "files": [
+        {
+          "path": "skills/competitor-analysis/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "story-acceptance",
+      "files": [
+        {
+          "path": "skills/story-acceptance/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "name": "init",
+      "files": [
+        {
+          "path": "commands/init.md",
+          "type": "command"
+        }
+      ]
+    },
+    {
+      "name": "plan",
+      "files": [
+        {
+          "path": "commands/plan.md",
+          "type": "command"
+        }
+      ]
+    },
+    {
+      "name": "clarify",
+      "files": [
+        {
+          "path": "commands/clarify.md",
+          "type": "command"
+        }
+      ]
+    }
+  ],
+  "docs": [],
+  "dependencies": []
+}

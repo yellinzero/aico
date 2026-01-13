@@ -1,0 +1,6 @@
+We're building an AI employee framework product and want to understand what similar competitors exist in the market.
+
+Known competitors:
+- cursor rules
+
+Please help me do a detailed competitor analysis.

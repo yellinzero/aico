@@ -1,0 +1,187 @@
+---
+title: Frontend Engineer
+description: Full-stack frontend development with design systems, component architecture, and TDD.
+---
+
+## Profile
+
+|              |                      |
+| ------------ | -------------------- |
+| **Role**     | Frontend Engineer    |
+| **Package**  | `@the-aico/frontend` |
+| **Skills**   | 6                    |
+| **Commands** | 4                    |
+
+Full-stack frontend development: design system extraction, page design, task breakdown, and implementation with TDD approach.
+
+## Installation
+
+```bash
+aico add @the-aico/frontend
+```
+
+---
+
+## Skills
+
+### init
+
+Initialize frontend environment by creating design system and constraints documents from templates.
+
+**Use when:**
+
+- Running `/frontend.init` command
+- User asks to "initialize frontend", "setup frontend environment"
+- Starting frontend work and need to establish design system and constraints
+- Need to create `docs/reference/frontend/design-system.md` or `constraints.md`
+
+### style-extraction
+
+Extract design tokens (colors, typography, spacing, effects) from reference website or screenshot to create project design system.
+
+**Use when:**
+
+- User shares reference website URL and wants to extract its style
+- User provides screenshot or image and asks to "extract design", "extract style"
+- Running `/frontend.init` and need to create design system from reference
+- User asks to "create design system", "extract colors", "extract typography"
+- Need to establish consistent design tokens before starting frontend work
+
+### design
+
+Transform PRD or story into complete page/component designs with ASCII layouts, component specs, interaction flows, and frontend implementation prompts.
+
+**Use when:**
+
+- User asks to "design the page", "design component", "create page design"
+- User mentions "page design", "component design", "UI design", "layout design"
+- Running `/frontend.design` command
+- PRD or story is ready and need visual/interaction design before implementation
+- Need to create design spec that frontend developer can implement from
+
+### task-breakdown
+
+Break down PM story into frontend tasks following UI development order: Setup → Static UI → Dynamic Logic → Interactions → Testing.
+
+**Use when:**
+
+- Running `/frontend.tasks` command
+- User asks to "break down story", "create frontend tasks", "split into tasks"
+- Have story at `docs/reference/pm/stories/` and need organized task list
+- Need tasks ordered by UI development layers (not random order)
+- Starting frontend work and want organized task list
+
+### plan
+
+Create atomic implementation plan for a single frontend task. Each step has exact code and verification command.
+
+**Use when:**
+
+- Running `/frontend.plan` command
+- User explicitly asks for "atomic steps", "step-by-step plan with verification"
+- Have a specific task from `docs/reference/frontend/tasks/` and need implementation steps
+- Need granular steps: Setup (create files) → Implementation (write code) → Test (verify) → Commit
+
+**Do NOT use for:**
+
+- Architecture planning (use EnterPlanMode)
+- General development planning
+- Feature scoping or estimation
+
+### implement
+
+Execute frontend implementation with TDD. Read all constraint files before coding, write failing test first, verify after each step.
+
+**Use when:**
+
+- User asks to "implement this", "implement the plan", "start implementation", "execute plan"
+- Have an implementation plan ready and need to execute it
+- Executing steps from `/frontend.plan` output
+- User says "start coding", "write the code", "begin implementation"
+- User asks to "use TDD", "write test first", "test-driven" for frontend code
+- User asks to "write tests", "add tests", "create tests"
+- Fixing UI bugs (write failing test that reproduces bug first)
+
+**TDD Iron Law:** No production code without a failing test first.
+
+---
+
+## Commands
+
+### /frontend.init
+
+Initialize frontend constraints file with project-specific configurations.
+
+```bash
+/frontend.init
+```
+
+Creates configuration documenting:
+
+- Tech stack (React, Vue, etc.)
+- Styling approach (Tailwind, CSS modules, etc.)
+- Component patterns
+- Testing requirements
+
+### /frontend.design
+
+Generate page/component design specs from PRD or requirements.
+
+```bash
+/frontend.design "User profile page"
+```
+
+Produces:
+
+- Component hierarchy
+- State management approach
+- API integration points
+- Responsive breakpoints
+
+### /frontend.tasks
+
+Break down a story into frontend tasks with progress tracking.
+
+```bash
+/frontend.tasks S-001
+```
+
+Creates atomic task list:
+
+- Each task is independently implementable
+- Clear acceptance criteria
+- Estimated complexity
+
+### /frontend.plan
+
+Create atomic implementation plan for a specific task.
+
+```bash
+/frontend.plan FE-001
+```
+
+Produces step-by-step implementation guide.
+
+---
+
+## Document Structure
+
+```txt
+docs/reference/frontend/
+├── constraints.md       # Project constraints
+├── design-system.md     # Extracted design system
+├── designs/
+│   └── profile-page.md  # Page design specs
+└── tasks/
+    └── FE-001.md        # Task definitions
+```
+
+---
+
+## Workflow
+
+1. **Extract** design system from existing code (`style-extraction`)
+2. **Design** pages/components from requirements (`design`)
+3. **Break down** into atomic tasks (`task-breakdown`)
+4. **Plan** each task implementation (`plan`)
+5. **Implement** with TDD approach (`implement`)

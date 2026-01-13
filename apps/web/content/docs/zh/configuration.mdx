@@ -1,0 +1,212 @@
+---
+title: 配置
+description: 使用 aico.json 配置文件配置 aico。
+---
+
+`aico.json` 文件是 aico 项目的配置文件。它在运行 `aico init` 时创建，用于跟踪已安装的员工、平台设置和自定义注册表。
+
+## 文件位置
+
+`aico.json` 文件应放置在项目根目录。
+
+```txt
+my-project/
+├── aico.json          # 配置文件
+├── .claude/           # Claude Code 平台文件
+│   ├── skills/
+│   └── commands/
+└── ...
+```
+
+## 配置选项
+
+### $schema
+
+可选。JSON Schema URL，用于编辑器自动补全和验证。
+
+```json
+{
+  "$schema": "https://the-aico.com/schema/config.json"
+}
+```
+
+### language
+
+可选。员工提示词和文档的默认语言。默认值为 `"en"`。
+
+```json
+{
+  "language": "zh"
+}
+```
+
+支持的值：
+
+- `"en"` - 英文（默认）
+- `"zh"` - 中文
+
+### defaultPlatform
+
+必填。默认的 AI 编程助手平台。
+
+```json
+{
+  "defaultPlatform": "claude-code"
+}
+```
+
+支持的值：
+
+- `"claude-code"` - Claude Code (Anthropic)
+- `"codex"` - Codex (OpenAI)
+
+### platforms
+
+必填。每个平台的路径配置。
+
+```json
+{
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    },
+    "codex": {
+      "skills": ".codex/skills",
+      "commands": "~/.codex/prompts"
+    }
+  }
+}
+```
+
+| 平台        | Skills 目录                 | Commands 目录                 |
+| ----------- | --------------------------- | ----------------------------- |
+| claude-code | `.claude/skills/`（项目级） | `.claude/commands/`（项目级） |
+| codex       | `.codex/skills/`（项目级）  | `~/.codex/prompts/`（全局）   |
+
+> **注意：** 你可以自定义这些路径以匹配你的项目结构。
+
+### employees
+
+自动生成。跟踪已安装的员工及其状态。
+
+```json
+{
+  "employees": {
+    "pm": {
+      "platforms": ["claude-code"],
+      "installedAt": "2024-01-15T10:30:00.000Z",
+      "version": "1.0.0",
+      "skills": ["init", "brainstorming", "prd-writing"],
+      "commands": ["init", "plan", "clarify"]
+    }
+  }
+}
+```
+
+| 字段          | 类型       | 描述                 |
+| ------------- | ---------- | -------------------- |
+| `platforms`   | `string[]` | 员工安装的平台       |
+| `installedAt` | `string`   | 安装时间（ISO 格式） |
+| `version`     | `string`   | 可选。已安装版本     |
+| `skills`      | `string[]` | 已安装的技能列表     |
+| `commands`    | `string[]` | 已安装的命令列表     |
+
+### skills
+
+自动生成。跟踪独立安装的技能（单独安装而非作为员工的一部分）。
+
+```json
+{
+  "skills": {
+    "@the-aico/pm/brainstorming": {
+      "version": "1.0.0",
+      "installedAt": "2024-01-15T10:30:00.000Z",
+      "source": "standalone",
+      "platforms": ["claude-code"]
+    }
+  }
+}
+```
+
+### registries
+
+可选。用于获取员工的自定义注册表 URL。
+
+```json
+{
+  "registries": {
+    "@the-aico": "https://the-aico.com/r/{name}.json",
+    "@my-company": "https://registry.my-company.com/{name}.json"
+  }
+}
+```
+
+`{name}` 占位符在获取时会被替换为员工名称。
+
+**高级配置：**
+
+你还可以为需要认证的注册表指定自定义请求头：
+
+```json
+{
+  "registries": {
+    "@private": {
+      "url": "https://private-registry.com/{name}.json",
+      "headers": {
+        "Authorization": "Bearer ${REGISTRY_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+## 完整示例
+
+以下是一个完整的 `aico.json` 文件示例：
+
+```json
+{
+  "$schema": "https://the-aico.com/schema/config.json",
+  "language": "zh",
+  "defaultPlatform": "claude-code",
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    },
+    "codex": {
+      "skills": ".codex/skills",
+      "commands": "~/.codex/prompts"
+    }
+  },
+  "employees": {
+    "pm": {
+      "platforms": ["claude-code"],
+      "installedAt": "2024-01-15T10:30:00.000Z",
+      "skills": ["init", "brainstorming", "prd-writing"],
+      "commands": ["init", "plan"]
+    },
+    "frontend": {
+      "platforms": ["claude-code"],
+      "installedAt": "2024-01-15T10:31:00.000Z",
+      "skills": ["init", "design", "implement"],
+      "commands": ["init", "design", "plan"]
+    }
+  },
+  "skills": {},
+  "registries": {
+    "@the-aico": "https://the-aico.com/r/{name}.json"
+  }
+}
+```
+
+## 最佳实践
+
+1. **提交到版本控制**：将 `aico.json` 包含在代码仓库中，以便团队成员可以同步相同的员工配置。
+
+2. **不要手动编辑员工状态**：`employees` 和 `skills` 部分由 CLI 管理。请使用 `aico add` 和 `aico remove` 命令。
+
+3. **使用环境变量存储密钥**：使用需要认证的私有注册表时，使用环境变量占位符如 `${REGISTRY_TOKEN}`。
+
+4. **保留 platforms 配置**：即使只使用一个平台，也不要删除 `platforms` 部分。这是 CLI 正常工作所必需的。

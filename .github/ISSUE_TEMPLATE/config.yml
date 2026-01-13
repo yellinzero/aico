@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://the-aico.com/docs
+    about: Check out the documentation for help
+  - name: Discussions
+    url: https://github.com/yellinzero/aico/discussions
+    about: Ask questions and discuss ideas

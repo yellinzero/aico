@@ -1,0 +1,5 @@
+I have a frontend story that needs to be broken down into specific development tasks.
+
+Story: As a user, I want to see my order statistics charts on the dashboard.
+
+Help me break this story into executable frontend tasks.

@@ -1,0 +1,4 @@
+The frontend task is complete. Please verify and accept Story S-001.
+
+Story file is at docs/reference/pm/stories/S-001.md
+Frontend tasks are at docs/reference/frontend/tasks/S-001-tasks.md

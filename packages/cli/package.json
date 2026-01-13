@@ -1,0 +1,76 @@
+{
+  "name": "@the-aico/cli",
+  "version": "1.0.0",
+  "description": "aico CLI - AI employee management tool",
+  "type": "module",
+  "bin": {
+    "aico": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yellinzero/aico.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://the-aico.com",
+  "bugs": {
+    "url": "https://github.com/yellinzero/aico/issues"
+  },
+  "author": {
+    "name": "yellin",
+    "url": "https://the-aico.com"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "build:registry": "node dist/index.js build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta",
+    "pub:next": "pnpm build && pnpm publish --no-git-checks --access public --tag next",
+    "pub:release": "pnpm build && pnpm publish --access public"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "diff": "^7.0.0",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.0",
+    "https-proxy-agent": "^7.0.0",
+    "js-yaml": "^4.1.1",
+    "kleur": "^4.1.5",
+    "node-fetch": "^3.3.2",
+    "ora": "^8.2.0",
+    "prompts": "^2.4.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/diff": "^6.0.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.10.5",
+    "@types/prompts": "^2.4.9",
+    "tsup": "^8.5.0",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "keywords": [
+    "aico",
+    "ai",
+    "employee",
+    "cli",
+    "claude-code",
+    "codex"
+  ],
+  "license": "Apache-2.0"
+}

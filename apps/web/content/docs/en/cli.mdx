@@ -1,0 +1,362 @@
+---
+title: CLI
+description: Use the aico CLI to manage AI employees in your project.
+---
+
+## Global Options
+
+```txt
+Usage: aico [options] [command]
+
+AI employee management tool - Build your AI team in seconds
+
+Options:
+  -V, --version        output version number
+  -v, --verbose        show detailed error information
+  --proxy <url>        use HTTP/HTTPS proxy for requests
+  -h, --help           display help for command
+```
+
+---
+
+## init
+
+Initialize aico configuration in your project.
+
+```bash
+aico init
+```
+
+**Options**
+
+```txt
+Usage: aico init [options]
+
+Initialize aico in your project
+
+Options:
+  -p, --default-platform <platform>  Default platform (claude-code, codex)
+  -f, --force                        Overwrite existing configuration (default: false)
+  -c, --cwd <cwd>                    Working directory (default: current directory)
+  -h, --help                         display help for command
+```
+
+---
+
+## add
+
+Add AI employees or skills to your project.
+
+```bash
+aico add [items...]
+```
+
+Running without arguments opens an interactive selection menu.
+
+**Options**
+
+```txt
+Usage: aico add [options] [items...]
+
+Add employees or skills to your project
+
+Arguments:
+  items                     Employee or skill names (e.g., pm, @the-aico/pm/brainstorming)
+
+Options:
+  -p, --platform <platform>  Target platform (can be used multiple times)
+  -o, --overwrite            Overwrite existing files (default: false)
+  -y, --yes                  Skip confirmation prompts (default: false)
+  --no-deps                  Skip dependency installation (default: false)
+  -c, --cwd <cwd>            Working directory (default: current directory)
+  -h, --help                 display help for command
+```
+
+**Examples**
+
+```bash
+# Add PM employee (shorthand)
+aico add pm
+
+# Add PM employee (full name)
+aico add @the-aico/pm
+
+# Add multiple employees
+aico add pm frontend
+
+# Add a single skill
+aico add @the-aico/pm/brainstorming
+
+# Add to specific platform
+aico add pm -p codex
+
+# Interactive mode
+aico add
+```
+
+> **Note:** You can use either the shorthand name (e.g., `pm`) or the full name (e.g., `@the-aico/pm`). The shorthand automatically expands to `@the-aico/{name}`.
+
+---
+
+## remove
+
+Remove installed employees or skills from your project.
+
+```bash
+aico remove [items...]
+```
+
+**Options**
+
+```txt
+Usage: aico remove [options] [items...]
+
+Remove employees or skills from your project
+
+Arguments:
+  items                      Employee or skill names to remove
+
+Options:
+  -p, --platform <platform>  Remove from specific platform only
+  -y, --yes                  Skip confirmation prompts (default: false)
+  -f, --force                Force remove (ignore dependency warnings) (default: false)
+  --dry-run                  Preview changes without removing (default: false)
+  -c, --cwd <cwd>            Working directory (default: current directory)
+  -h, --help                 display help for command
+```
+
+**Examples**
+
+```bash
+# Remove employee
+aico remove pm
+
+# Remove skill
+aico remove @the-aico/pm/brainstorming
+
+# Preview removal
+aico remove pm --dry-run
+```
+
+---
+
+## list
+
+List available or installed employees.
+
+```bash
+aico list [options]
+```
+
+**Options**
+
+```txt
+Usage: aico list [options]
+
+List available or installed employees
+
+Options:
+  -i, --installed    Show only installed employees (default: false)
+  -c, --cwd <cwd>    Working directory (default: current directory)
+  -h, --help         display help for command
+```
+
+**Examples**
+
+```bash
+# List available employees from registry
+aico list
+
+# List installed employees only
+aico list --installed
+```
+
+---
+
+## update
+
+Update installed skills to the latest versions.
+
+```bash
+aico update [skills...]
+```
+
+Running without arguments checks all installed skills for updates.
+
+**Options**
+
+```txt
+Usage: aico update [options] [skills...]
+
+Update installed skills to latest versions
+
+Arguments:
+  skills           Skill names to update (all if empty)
+
+Options:
+  --dry-run        Preview updates without applying (default: false)
+  -y, --yes        Skip confirmation (default: false)
+  -c, --cwd <cwd>  Working directory (default: current directory)
+  -h, --help       display help for command
+```
+
+---
+
+## search
+
+Search for employees and skills in the registry.
+
+```bash
+aico search <query>
+```
+
+**Options**
+
+```txt
+Usage: aico search [options] <query>
+
+Search for skills and employees
+
+Arguments:
+  query                    Search query
+
+Options:
+  -c, --category <category>  Filter by category (pm, frontend, backend)
+  -t, --type <type>          Filter by type (skill, employee)
+  --json                     Output as JSON
+  --limit <n>                Limit results (default: 10)
+  --cwd <cwd>                Working directory (default: current directory)
+  -h, --help                 display help for command
+```
+
+**Examples**
+
+```bash
+# Search for brainstorming-related content
+aico search brainstorm
+
+# Search only in pm category
+aico search story -c pm
+
+# Output as JSON
+aico search frontend --json
+```
+
+---
+
+## diff
+
+Check for updates against the registry and show differences.
+
+```bash
+aico diff [employee]
+```
+
+Running without arguments shows a summary for all installed employees.
+
+**Options**
+
+```txt
+Usage: aico diff [options] [employee]
+
+Check for updates against the registry
+
+Arguments:
+  employee         Employee name to check (checks all if not specified)
+
+Options:
+  -c, --cwd <cwd>  Working directory (default: current directory)
+  -h, --help       display help for command
+```
+
+**Examples**
+
+```bash
+# Check all employees for updates
+aico diff
+
+# Check specific employee with detailed diff
+aico diff pm
+```
+
+---
+
+## check
+
+Check environment and configuration status.
+
+```bash
+aico check
+```
+
+**Options**
+
+```txt
+Usage: aico check [options]
+
+Check environment and configuration
+
+Options:
+  --json           Output as JSON
+  --cwd <cwd>      Working directory (default: current directory)
+  -h, --help       display help for command
+```
+
+This command verifies:
+
+- Node.js version (requires >= 18, recommends >= 20)
+- Configuration file (`aico.json`) exists and is valid
+- Platform directories exist
+- Registry connectivity
+- Installed content count
+
+---
+
+## build
+
+Build registry JSON files from the employees directory. This command is used for publishing your own employees to a registry.
+
+```bash
+aico build
+```
+
+**Options**
+
+```txt
+Usage: aico build [options]
+
+Build registry from employees directory
+
+Options:
+  -e, --employees-dir <dir>  Employees source directory (default: "employees")
+  -o, --output-dir <dir>     Output directory (default: "registry")
+  -r, --registry <name>      Registry namespace (default: "@the-aico")
+  -v, --version <version>    Version number (default: "1.0.0")
+  -c, --cwd <cwd>            Working directory (default: current directory)
+  -h, --help                 display help for command
+```
+
+**Output Structure**
+
+```txt
+registry/
+├── index.json                    # Legacy employee index
+├── pm.json                       # Legacy PM employee data
+├── frontend.json                 # Legacy Frontend employee data
+├── backend.json                  # Legacy Backend employee data
+├── employees/
+│   ├── index.json                # Employee index
+│   ├── pm.json                   # PM employee data
+│   ├── frontend.json             # Frontend employee data
+│   └── backend.json              # Backend employee data
+└── skills/
+    ├── index.json                # Skills index
+    └── aico/
+        ├── pm/
+        │   ├── brainstorming.json
+        │   └── ...
+        ├── frontend/
+        │   └── ...
+        └── backend/
+            └── ...
+```

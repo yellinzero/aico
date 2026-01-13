@@ -1,0 +1,53 @@
+name: Release - Beta
+
+on:
+  pull_request:
+    types: [labeled]
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  prerelease:
+    if: |
+      github.repository_owner == 'yellinzero' &&
+      contains(github.event.pull_request.labels.*.name, '🚀 autorelease')
+    name: Build & Publish a beta release to NPM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Install NPM Dependencies
+        run: pnpm install
+
+      - name: Modify package.json version
+        run: |
+          cd packages/cli
+          node -e "
+            const pkg = require('./package.json');
+            pkg.version = pkg.version + '-beta.' + process.env.GITHUB_SHA.slice(0, 7);
+            require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
+          "
+
+      - name: Publish Beta to NPM
+        run: pnpm --filter @the-aico/cli pub:beta
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,6 @@
+I have a frontend task that needs an atomic implementation plan.
+
+Task: Implement user profile edit form
+Task file: docs/reference/frontend/tasks/user-profile.md
+
+Please create an atomic implementation plan with 2-5 minute steps, each with a verification command.

@@ -1,0 +1,3 @@
+I have a frontend task file at docs/reference/frontend/tasks/user-profile.md
+
+The task is to implement the user settings page. Please execute the implementation following the steps in the task file.

@@ -1,0 +1,1 @@
+Use the aico-backend-init skill to initialize the backend environment.

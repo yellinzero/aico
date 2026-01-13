@@ -1,0 +1,6 @@
+We have the product requirements and now need to break this feature into user stories:
+
+Feature: Developers can add AI employees to projects via CLI
+Target Users: Developers using Claude Code
+
+Please help me write user stories.

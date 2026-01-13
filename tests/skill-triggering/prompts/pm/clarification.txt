@@ -1,0 +1,10 @@
+I'm not sure about some aspects of this requirement and need clarification:
+
+"Users can add employees to projects"
+
+Questions:
+1. What is an employee? A skill package or a complete AI configuration?
+2. How do users add them? CLI or graphical interface?
+3. Where does the employee data come from? Local or cloud?
+
+Can you help me analyze these questions?

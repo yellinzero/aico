@@ -1,0 +1,3 @@
+Our project needs to establish a design system. Please reference this website's style: https://linear.app
+
+Help me extract its design style, including colors, typography, spacing, etc.

@@ -1,0 +1,1 @@
+Use the aico-frontend-init skill to initialize the frontend environment.

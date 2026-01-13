@@ -1,0 +1,199 @@
+---
+title: PM (Product Manager)
+description: Product research, requirement analysis, user story writing, and version planning.
+---
+
+## Profile
+
+|              |                 |
+| ------------ | --------------- |
+| **Role**     | Product Manager |
+| **Package**  | `@the-aico/pm`  |
+| **Skills**   | 8               |
+| **Commands** | 3               |
+
+Product research, requirement analysis, user story writing, and version planning. Transform vague ideas into actionable product specifications.
+
+## Installation
+
+```bash
+aico add @the-aico/pm
+```
+
+---
+
+## Skills
+
+### init
+
+Initialize PM environment by creating constitution document from template.
+
+**Use when:**
+
+- Running `/pm.init` command
+- User asks to "initialize PM", "setup product management", "create constitution"
+- Starting a new project and need to establish product constraints and domain info
+- Need to create `docs/reference/pm/constitution.md` for a new project
+
+### brainstorming
+
+Guide users through structured dialogue to transform vague ideas into clear, actionable product concepts.
+
+**Use when:**
+
+- User says "I have an idea", "I want to build", "let me think about"
+- User mentions "brainstorm", "explore ideas", "think through"
+- Requirements are vague, incomplete, or user seems unsure what they want
+- Need to explore problem space before jumping to solutions
+- Running `/pm.plan` but requirements are unclear or missing context
+- User asks "what should I build?", "how should this work?"
+
+**Approach:**
+
+- One question at a time
+- Multiple choice over open-ended questions
+- Explore 2-3 alternatives before deciding
+
+### clarification
+
+Resolve requirement ambiguities through structured questioning: one question at a time, with recommended options and reasoning.
+
+**Use when:**
+
+- Running `/pm.clarify` command
+- User says "unclear", "not sure what this means", "confused about"
+- User asks "what does X mean?", "how should X work?", "can you clarify?"
+- Requirements have conflicting or inconsistent details
+- Stories are missing acceptance criteria or have gaps
+- Need to fill information gaps before development can proceed
+
+### prd-writing
+
+Create comprehensive Product Requirements Documents (PRD) that define what to build and why.
+
+**Use when:**
+
+- User asks to "write a PRD", "create PRD", "write requirements document"
+- User mentions "requirements document", "product requirements", "product spec"
+- Running `/pm.plan` command to create version planning document
+- Starting a new product, major feature, or initiative that needs formal requirements
+- Need to document goals, scope, user stories, functional requirements, and success criteria
+
+### user-story-writing
+
+Transform requirements into well-structured User Stories using "As a [user], I want [goal], So that [benefit]" format.
+
+**Use when:**
+
+- User asks to "write user story", "create story", "add story"
+- User mentions "user story", "backlog item", "story"
+- Running `/pm.plan` and need to break PRD into implementable stories
+- Creating backlog items for development team
+- Need to formalize a requirement into standard story format
+- Converting feature request into actionable story with acceptance criteria
+
+### acceptance-criteria
+
+Define clear, testable acceptance criteria using Given/When/Then (Gherkin) format.
+
+**Use when:**
+
+- User asks for "acceptance criteria", "AC", "test criteria", "done criteria"
+- User asks "how do we know it's done?", "what counts as complete?"
+- User story needs testable success conditions
+- QA needs test scenarios or test cases
+- Running `/pm.plan` and need to add AC to stories
+- Reviewing story and AC is missing or vague
+
+### competitor-analysis
+
+Research and analyze competitors with structured output: feature comparison matrix, strengths/weaknesses analysis, and actionable recommendations.
+
+**Use when:**
+
+- User asks "what do competitors do?", "who are our competitors?"
+- User mentions competitor names or asks for product comparison
+- User asks for "competitor analysis", "market research", "competitive landscape"
+- Entering new market, feature area, or evaluating product direction
+- Need to understand competitive landscape before making product decisions
+- Writing PRD and need market context or differentiation strategy
+
+### story-acceptance
+
+Verify and close stories after frontend/backend tasks are completed. Check ALL related task files, update story acceptance criteria checkboxes.
+
+**Use when:**
+
+- Frontend or backend notifies "task completed, please verify"
+- User asks to "verify story", "accept story", "close story", "mark story done"
+- Need to check if a story can be marked as complete
+- User asks "is story X done?", "can we close story X?"
+
+---
+
+## Commands
+
+### /pm.init
+
+Initialize product constitution document with project constraints and domain information.
+
+```bash
+/pm.init
+```
+
+Creates `docs/reference/pm/constitution.md` with:
+
+- Product overview
+- Target users
+- Core value proposition
+- Technical constraints
+- Business constraints
+
+### /pm.plan
+
+Create or update product plan including PRD and user stories.
+
+```bash
+/pm.plan "Add user authentication feature"
+```
+
+Workflow:
+
+1. Requirements clarification
+2. PRD creation
+3. User story breakdown
+
+### /pm.clarify
+
+Clarify specific requirements by searching related documents and asking targeted questions.
+
+```bash
+/pm.clarify "What authentication methods should we support?"
+```
+
+---
+
+## Document Structure
+
+```txt
+docs/reference/pm/
+├── constitution.md      # Product constitution
+├── versions/
+│   ├── v0.1.md          # Version plans (PRDs)
+│   └── v0.2.md
+└── stories/
+    ├── S-001.md         # User stories
+    └── S-002.md
+```
+
+---
+
+## Working Principles
+
+| Aspect     | CEO (You)       | PM Employee          |
+| ---------- | --------------- | -------------------- |
+| Decisions  | Makes decisions | Provides options     |
+| Creativity | Deep thinking   | Structured execution |
+| Execution  | Directs work    | Does the work        |
+
+The PM employee focuses on execution while you retain decision-making authority.

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://the-aico.com/schema/employee.json",
+  "name": "frontend",
+  "role": "Frontend Engineer",
+  "description": "Full-stack frontend development: design system, page design, task breakdown, implementation with TDD",
+  "skills": [
+    {
+      "name": "init",
+      "files": [
+        {
+          "path": "skills/init/SKILL.md",
+          "type": "skill"
+        },
+        {
+          "path": "skills/init/references/design-system.template.md",
+          "type": "doc"
+        },
+        {
+          "path": "skills/init/references/constraints.template.md",
+          "type": "doc"
+        }
+      ]
+    },
+    {
+      "name": "style-extraction",
+      "files": [
+        {
+          "path": "skills/style-extraction/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "design",
+      "files": [
+        {
+          "path": "skills/design/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "task-breakdown",
+      "files": [
+        {
+          "path": "skills/task-breakdown/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "plan",
+      "files": [
+        {
+          "path": "skills/plan/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    },
+    {
+      "name": "implement",
+      "files": [
+        {
+          "path": "skills/implement/SKILL.md",
+          "type": "skill"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "name": "init",
+      "files": [
+        {
+          "path": "commands/init.md",
+          "type": "command"
+        }
+      ]
+    },
+    {
+      "name": "design",
+      "files": [
+        {
+          "path": "commands/design.md",
+          "type": "command"
+        }
+      ]
+    },
+    {
+      "name": "tasks",
+      "files": [
+        {
+          "path": "commands/tasks.md",
+          "type": "command"
+        }
+      ]
+    },
+    {
+      "name": "plan",
+      "files": [
+        {
+          "path": "commands/plan.md",
+          "type": "command"
+        }
+      ]
+    }
+  ],
+  "docs": [],
+  "dependencies": [
+    "@the-aico/_shared/code-review",
+    "@the-aico/_shared/subagent-driven",
+    "@the-aico/_shared/worktree"
+  ]
+}

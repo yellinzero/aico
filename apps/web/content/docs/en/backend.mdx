@@ -1,0 +1,162 @@
+---
+title: Backend Engineer
+description: Full-stack backend development with API design, database architecture, and TDD.
+---
+
+## Profile
+
+|              |                     |
+| ------------ | ------------------- |
+| **Role**     | Backend Engineer    |
+| **Package**  | `@the-aico/backend` |
+| **Skills**   | 4                   |
+| **Commands** | 3                   |
+
+Full-stack backend development: API design, database architecture, business logic implementation, and system design with TDD approach.
+
+## Installation
+
+```bash
+aico add @the-aico/backend
+```
+
+---
+
+## Skills
+
+### init
+
+Initialize backend environment by creating constraints document from template.
+
+**Use when:**
+
+- Running `/backend.init` command
+- User asks to "initialize backend", "setup backend environment"
+- Starting backend work and need to establish tech stack and conventions
+- Need to create `docs/reference/backend/constraints.md`
+
+### task-breakdown
+
+Break down PM story into backend tasks following layered architecture order: Data Models → Database → Repository → Service → API → Validation → Tests.
+
+**Use when:**
+
+- Running `/backend.tasks` command
+- User asks to "break down story for backend", "create backend tasks", "split into backend tasks"
+- Have story at `docs/reference/pm/stories/` and need organized task list
+- Need tasks ordered by architectural layers (not random order)
+- Starting backend work and want organized, layered task list
+
+### plan
+
+Create atomic implementation plan for a single backend task. Each step has TDD, exact code, and verification command.
+
+**Use when:**
+
+- Running `/backend.plan` command
+- User explicitly asks for "atomic steps", "step-by-step plan with verification"
+- Have a specific task from `docs/reference/backend/tasks/` and need implementation steps
+- Need granular TDD steps: Types → DB → Test (failing) → Implementation → Test (passing) → API
+
+**Do NOT use for:**
+
+- Architecture planning (use EnterPlanMode)
+- General development planning
+- Feature scoping or estimation
+
+### implement
+
+Execute backend implementation with TDD (Test-Driven Development). Write failing test first, then implement, verify each step.
+
+**Use when:**
+
+- User asks to "implement this backend task", "implement backend"
+- Have an implementation plan ready and need to execute it
+- Executing steps from `/backend.plan` output
+- User says "start coding backend", "write backend code"
+- User asks to "use TDD", "write test first", "test-driven" for backend code
+- Fixing backend bugs (write failing test that reproduces bug first)
+
+**TDD Iron Law:** No production code without a failing test first.
+
+---
+
+## Commands
+
+### /backend.init
+
+Initialize backend constraints file with project-specific configurations.
+
+```bash
+/backend.init
+```
+
+Creates configuration documenting:
+
+- Tech stack (Node.js, Python, Go, etc.)
+- Framework (Express, FastAPI, etc.)
+- Database (PostgreSQL, MongoDB, etc.)
+- API style (REST, GraphQL)
+- Authentication approach
+- Testing requirements
+
+### /backend.tasks
+
+Break down a story into backend tasks with progress tracking.
+
+```bash
+/backend.tasks S-001
+```
+
+Creates atomic task list:
+
+- Database schema changes
+- API endpoints
+- Business logic
+- Integration tests
+
+### /backend.plan
+
+Create atomic implementation plan for a specific task.
+
+```bash
+/backend.plan BE-001
+```
+
+Produces step-by-step implementation guide including:
+
+- Database migrations
+- API contracts
+- Error handling
+- Test cases
+
+---
+
+## Document Structure
+
+```txt
+docs/reference/backend/
+├── constraints.md       # Project constraints
+└── tasks/
+    └── BE-001.md        # Task definitions
+```
+
+---
+
+## Workflow
+
+1. **Initialize** project constraints (`init`)
+2. **Break down** stories into tasks (`task-breakdown`)
+3. **Plan** each task implementation (`plan`)
+4. **Implement** with TDD approach (`implement`)
+
+---
+
+## API Design Principles
+
+The backend employee follows these principles:
+
+- **Contract-first:** Define API contracts before implementation
+- **TDD:** Write tests before implementation code
+- **Incremental:** Small, reviewable changes
+- **Documented:** Auto-generate API documentation

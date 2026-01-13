@@ -1,0 +1,6 @@
+I have a backend task that needs an atomic implementation plan.
+
+Task: Implement user creation API
+Task file: docs/reference/backend/tasks/user-api.md
+
+Please create an atomic implementation plan with 2-5 minute steps, each with a verification command.

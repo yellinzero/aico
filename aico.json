@@ -1,0 +1,74 @@
+{
+  "$schema": "https://the-aico.com/schema/config.json",
+  "defaultPlatform": "claude-code",
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    },
+    "codex": {
+      "skills": ".codex/skills",
+      "commands": "~/.codex/prompts"
+    }
+  },
+  "employees": {
+    "pm": {
+      "platforms": ["codex"],
+      "installedAt": "2026-01-12T13:59:19.971Z",
+      "skills": [
+        "init",
+        "brainstorming",
+        "user-story-writing",
+        "prd-writing",
+        "clarification",
+        "acceptance-criteria",
+        "competitor-analysis",
+        "story-acceptance"
+      ],
+      "commands": ["init", "plan", "clarify"]
+    },
+    "frontend": {
+      "platforms": ["codex"],
+      "installedAt": "2026-01-12T13:59:20.584Z",
+      "skills": [
+        "init",
+        "style-extraction",
+        "design",
+        "task-breakdown",
+        "plan",
+        "implement"
+      ],
+      "commands": ["init", "design", "tasks", "plan"]
+    },
+    "backend": {
+      "platforms": ["codex"],
+      "installedAt": "2026-01-12T13:59:21.164Z",
+      "skills": ["init", "task-breakdown", "plan", "implement"],
+      "commands": ["init", "tasks", "plan"]
+    }
+  },
+  "skills": {},
+  "sharedSkills": {
+    "@the-aico/_shared/code-review": {
+      "version": "1.0.0",
+      "installedAt": "2026-01-12T13:59:13.458Z",
+      "platforms": ["claude-code", "codex"],
+      "usedBy": ["frontend", "backend"]
+    },
+    "@the-aico/_shared/subagent-driven": {
+      "version": "1.0.0",
+      "installedAt": "2026-01-12T13:59:13.459Z",
+      "platforms": ["claude-code", "codex"],
+      "usedBy": ["frontend", "backend"]
+    },
+    "@the-aico/_shared/worktree": {
+      "version": "1.0.0",
+      "installedAt": "2026-01-12T13:59:13.460Z",
+      "platforms": ["claude-code", "codex"],
+      "usedBy": ["frontend", "backend"]
+    }
+  },
+  "registries": {
+    "@the-aico": "file://./registry/{name}.json"
+  }
+}

@@ -1,0 +1,1 @@
+Use the aico-pm-init skill to initialize the PM environment.

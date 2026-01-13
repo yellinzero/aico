@@ -1,0 +1,9 @@
+I have a PRD for a login page and need help designing the page layout and interaction flow.
+
+PRD key points:
+- Email/password login
+- Remember me option
+- Forgot password link
+- Link to registration page
+
+Please help me design this page.

@@ -1,0 +1,122 @@
+---
+title: Installation
+description: How to install aico and add AI employees to your project.
+---
+
+## Prerequisites
+
+- Node.js 18.17 or higher (20+ recommended)
+- Claude Code or Codex CLI
+
+## Install CLI (Recommended)
+
+We recommend installing aico globally for the best experience:
+
+<CodeBlockCommand npm="npm install -g @the-aico/cli" />
+
+After installation, you can use the `aico` command directly:
+
+```bash
+aico --version
+```
+
+## Using without Installation
+
+If you prefer not to install globally, you can use your package manager's executor:
+
+| Package Manager | Command |
+|-----------------|---------|
+| npm | `npx @the-aico/cli <command>` |
+| pnpm | `pnpm dlx @the-aico/cli <command>` |
+| yarn | `yarn dlx @the-aico/cli <command>` |
+| bun | `bunx @the-aico/cli <command>` |
+
+For example: `npx @the-aico/cli list --remote`
+
+> **Note:** Global installation provides a cleaner command experience. Choose whichever method you prefer.
+
+## Quick Start
+
+Initialize aico in your project:
+
+```bash
+aico init
+```
+
+This creates an `aico.json` configuration file:
+
+```json
+{
+  "$schema": "https://the-aico.com/schema/config.json",
+  "defaultPlatform": "claude-code",
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    }
+  },
+  "employees": {},
+  "registries": {
+    "@the-aico": "https://the-aico.com/r/{name}.json"
+  }
+}
+```
+
+## Add an Employee
+
+Add an AI employee to your project:
+
+```bash
+aico add @the-aico/pm
+```
+
+This installs all skills and commands for the PM employee.
+
+## Add a Single Skill
+
+You can also install individual skills:
+
+```bash
+aico add @the-aico/pm/brainstorming
+```
+
+## Verify Installation
+
+List installed employees:
+
+```bash
+aico list
+```
+
+Output:
+
+```txt
+Installed employees:
+
+@the-aico/pm (v1.0.0)
+  ├── 8 skills
+  └── 3 commands
+
+Total: 1 employee, 8 skills, 3 commands
+```
+
+## Directory Structure
+
+After installation, your project will have:
+
+```txt
+your-project/
+├── .claude/
+│   ├── skills/
+│   │   └── aico-pm-brainstorming/
+│   │       └── SKILL.md
+│   └── commands/
+│       └── pm.plan.md
+└── aico.json
+```
+
+## Next Steps
+
+- Browse [available employees](/employees)
+- Learn the [CLI commands](/docs/cli)
+- Create your own [custom skills](/docs/creating-skills)

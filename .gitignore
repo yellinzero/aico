@@ -1,0 +1,61 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+out/
+registry/
+!packages/cli/src/registry
+
+# Testing
+coverage
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea
+.fleet
+.vscode
+
+# System files
+.DS_Store
+*.pem
+
+# Turbo
+.turbo
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Misc
+.notes
+*.local
+
+docs/reference/pm/stories
+docs/reference/pm/versions
+docs/reference/frontend/designs
+docs/reference/frontend/tasks
+docs/reference/backend/tasks
+
+.next
+
+.tmp
+
+# Test sandbox
+tests/.sandbox
+
+.playwright-mcp

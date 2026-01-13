@@ -1,0 +1,9 @@
+We've completed user research and now need to write a formal product requirements document.
+
+Product Overview:
+- Name: aico (AI Company)
+- Positioning: AI employee management framework
+- Core Feature: Add AI employees to projects via CLI
+- Target Users: Developers using Claude Code / Codex
+
+Please help me write the PRD.

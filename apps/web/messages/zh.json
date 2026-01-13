@@ -1,0 +1,223 @@
+{
+  "Metadata": {
+    "title": "AICO - AI 员工框架",
+    "description": "秒建 AI 团队，即刻开工。像管理员工一样管理 AI 协作者。"
+  },
+  "Navigation": {
+    "home": "首页",
+    "skills": "技能",
+    "employees": "员工",
+    "docs": "文档",
+    "search": "搜索..."
+  },
+  "HomePage": {
+    "hero": {
+      "title": "秒建 AI 团队，即刻开工",
+      "subtitle": "AI 员工框架 - 像管理员工一样管理 AI 协作者",
+      "getStarted": "快速开始",
+      "browseSkills": "浏览技能",
+      "viewOnGitHub": "在 GitHub 查看"
+    },
+    "quickStart": {
+      "title": "快速开始",
+      "description": "一条命令初始化项目并添加 AI 员工"
+    },
+    "features": {
+      "skills": {
+        "title": "技能",
+        "description": "预置的 AI 能力，适用于常见任务"
+      },
+      "employees": {
+        "title": "员工",
+        "description": "开箱即用的 AI 团队成员，具有专业技能"
+      },
+      "cli": {
+        "title": "命令行",
+        "description": "简洁的命令行界面，轻松管理 AI 团队"
+      },
+      "openSource": {
+        "title": "开源",
+        "description": "完全开源，免费使用。"
+      }
+    },
+    "employeesPreview": {
+      "skills": "个技能",
+      "commands": "个命令"
+    }
+  },
+  "SkillsPage": {
+    "title": "技能",
+    "description": "浏览可用的 AI 技能，一键添加到你的项目中",
+    "searchPlaceholder": "搜索技能...",
+    "filter": {
+      "all": "全部",
+      "pm": "产品",
+      "frontend": "前端",
+      "backend": "后端",
+      "shared": "共享"
+    },
+    "usedBy": "被使用",
+    "install": "安装",
+    "viewDetails": "查看详情",
+    "noResults": "没有找到技能。",
+    "skills": {
+      "pm": {
+        "init": {
+          "description": "通过模板创建产品宪法文档，初始化产品经理工作环境。"
+        },
+        "brainstorming": {
+          "description": "通过结构化对话引导用户将模糊想法转化为清晰可执行的产品概念。"
+        },
+        "clarification": {
+          "description": "通过结构化提问和推荐选项解决需求中的歧义。"
+        },
+        "user-story-writing": {
+          "description": "将需求转化为结构化的用户故事，包含 Given/When/Then 验收标准。"
+        },
+        "prd-writing": {
+          "description": "创建完整的产品需求文档，定义要构建什么以及为什么。"
+        },
+        "acceptance-criteria": {
+          "description": "使用 Given/When/Then (Gherkin) 格式定义清晰可测试的验收标准。"
+        },
+        "competitor-analysis": {
+          "description": "研究分析竞争对手，提供功能对比和可执行建议。"
+        },
+        "story-acceptance": {
+          "description": "在前后端任务完成后验证并关闭用户故事。"
+        }
+      },
+      "frontend": {
+        "init": {
+          "description": "通过模板创建设计系统和约束文档，初始化前端工作环境。"
+        },
+        "style-extraction": {
+          "description": "从参考网站或截图中提取设计令牌，创建项目设计系统。"
+        },
+        "design": {
+          "description": "将 PRD 或故事转化为完整的页面/组件设计，包含 ASCII 布局和规格。"
+        },
+        "task-breakdown": {
+          "description": "按照 UI 开发顺序将产品故事拆解为前端任务。"
+        },
+        "plan": {
+          "description": "为单个前端任务创建原子级实现计划，包含精确代码和验证步骤。"
+        },
+        "implement": {
+          "description": "使用 TDD 执行前端实现：先写失败测试，再实现功能。"
+        }
+      },
+      "backend": {
+        "init": {
+          "description": "通过模板创建约束文档，初始化后端工作环境。"
+        },
+        "task-breakdown": {
+          "description": "按照分层架构顺序将产品故事拆解为后端任务。"
+        },
+        "plan": {
+          "description": "为单个后端任务创建原子级实现计划，包含 TDD 和验证步骤。"
+        },
+        "implement": {
+          "description": "使用 TDD 执行后端实现：先写失败测试，再实现功能。"
+        }
+      },
+      "shared": {
+        "code-review": {
+          "description": "请求结构化代码审查，检查正确性、安全性、性能和可读性问题。"
+        },
+        "subagent-driven": {
+          "description": "通过为每个任务分派子代理并进行两阶段审查来执行实现计划。"
+        },
+        "worktree": {
+          "description": "为功能开发创建隔离的 git worktree，并验证基线测试。"
+        }
+      }
+    }
+  },
+  "EmployeesPage": {
+    "title": "员工",
+    "description": "浏览可用的 AI 员工，一键添加到你的团队中",
+    "skills": "个技能",
+    "commands": "个命令",
+    "install": "安装",
+    "noResults": "没有找到员工。",
+    "pm": {
+      "role": "产品经理",
+      "description": "产品研究、需求分析、用户故事编写、版本规划"
+    },
+    "frontend": {
+      "role": "前端工程师",
+      "description": "全栈前端开发：设计系统、页面设计、任务拆解、功能实现"
+    },
+    "backend": {
+      "role": "后端工程师",
+      "description": "全栈后端开发：API 设计、数据库、业务逻辑、TDD、系统架构"
+    }
+  },
+  "DocsPage": {
+    "title": "文档",
+    "gettingStarted": "快速开始",
+    "cli": "CLI 参考",
+    "creatingSkills": "创建技能"
+  },
+  "Docs": {
+    "title": "aico 文档",
+    "description": "aico 是一个 AI 员工框架，让你像管理员工一样管理 AI 协作者。",
+    "toc": "目录",
+    "previous": "上一篇",
+    "next": "下一篇",
+    "whatIsAico": "什么是 aico？",
+    "whatIsAicoDesc": "aico (AI Company) 提供了一种全新的方式来组织和使用 AI 能力。通过将 AI 能力打包成「员工」，你可以快速组建专业的 AI 团队。",
+    "quickStart": "快速开始",
+    "quickStartDesc": "只需三步，即可开始使用 aico：",
+    "initializeProject": "初始化项目",
+    "addEmployee": "添加 AI 员工",
+    "startUsing": "开始使用",
+    "startUsingDesc": "在 Claude Code 中使用技能和命令",
+    "nextSteps": "下一步",
+    "gettingStartedGuide": "快速开始指南",
+    "cliReference": "CLI 命令参考",
+    "browseSkills": "浏览 Skills",
+    "browseEmployees": "浏览 Employees"
+  },
+  "Common": {
+    "copy": "复制",
+    "copied": "已复制！",
+    "search": "搜索",
+    "loading": "加载中...",
+    "error": "错误",
+    "notFound": "未找到",
+    "backToHome": "返回首页"
+  },
+  "CommandMenu": {
+    "searchPlaceholder": "搜索文档...",
+    "searchShort": "搜索...",
+    "noResults": "没有找到结果",
+    "goToPage": "跳转到页面",
+    "pages": "页面",
+    "gettingStarted": "开始使用",
+    "employees": "员工",
+    "home": "首页",
+    "docs": "文档",
+    "skills": "技能",
+    "introduction": "介绍",
+    "installation": "安装",
+    "cli": "CLI",
+    "productManager": "产品经理",
+    "frontendEngineer": "前端工程师",
+    "backendEngineer": "后端工程师"
+  },
+  "Footer": {
+    "tagline": "AI 员工框架 - 秒建 AI 团队。",
+    "documentation": "文档",
+    "introduction": "介绍",
+    "gettingStarted": "快速开始",
+    "cliReference": "CLI 参考",
+    "registry": "资源",
+    "skills": "技能",
+    "employees": "员工",
+    "community": "社区",
+    "github": "GitHub",
+    "copyright": "© {year} AICO. 保留所有权利。"
+  }
+}

@@ -1,0 +1,7 @@
+I have a backend story that needs to be broken down into tasks.
+
+Story: As an admin, I want to be able to bulk import user data.
+
+It needs to support CSV format, show progress, and handle error records.
+
+Help me break this into backend development tasks.

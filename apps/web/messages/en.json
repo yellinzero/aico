@@ -1,0 +1,223 @@
+{
+  "Metadata": {
+    "title": "AICO - AI Employee Framework",
+    "description": "Build AI teams in seconds, start working immediately. Manage AI collaborators like managing employees."
+  },
+  "Navigation": {
+    "home": "Home",
+    "skills": "Skills",
+    "employees": "Employees",
+    "docs": "Docs",
+    "search": "Search..."
+  },
+  "HomePage": {
+    "hero": {
+      "title": "Build AI Teams in Seconds",
+      "subtitle": "AI Employee Framework - Manage AI collaborators like managing employees",
+      "getStarted": "Get Started",
+      "browseSkills": "Browse Skills",
+      "viewOnGitHub": "View on GitHub"
+    },
+    "quickStart": {
+      "title": "Quick Start",
+      "description": "Initialize your project and add AI employees in one command"
+    },
+    "features": {
+      "skills": {
+        "title": "Skills",
+        "description": "Pre-built AI capabilities for common tasks"
+      },
+      "employees": {
+        "title": "Employees",
+        "description": "Ready-to-use AI team members with specialized skills"
+      },
+      "cli": {
+        "title": "CLI",
+        "description": "Simple command-line interface for managing your AI team"
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "Completely open source and free to use."
+      }
+    },
+    "employeesPreview": {
+      "skills": "skills",
+      "commands": "commands"
+    }
+  },
+  "SkillsPage": {
+    "title": "Skills",
+    "description": "Browse available AI skills and add them to your project with one click",
+    "searchPlaceholder": "Search skills...",
+    "filter": {
+      "all": "All",
+      "pm": "PM",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "shared": "Shared"
+    },
+    "usedBy": "Used by",
+    "install": "Install",
+    "viewDetails": "View Details",
+    "noResults": "No skills found.",
+    "skills": {
+      "pm": {
+        "init": {
+          "description": "Initialize PM environment by creating constitution document from template."
+        },
+        "brainstorming": {
+          "description": "Guide users through structured dialogue to transform vague ideas into clear, actionable product concepts."
+        },
+        "clarification": {
+          "description": "Resolve requirement ambiguities through structured questioning with recommended options."
+        },
+        "user-story-writing": {
+          "description": "Transform requirements into well-structured User Stories with Given/When/Then acceptance criteria."
+        },
+        "prd-writing": {
+          "description": "Create comprehensive Product Requirements Documents defining what to build and why."
+        },
+        "acceptance-criteria": {
+          "description": "Define clear, testable acceptance criteria using Given/When/Then (Gherkin) format."
+        },
+        "competitor-analysis": {
+          "description": "Research and analyze competitors with feature comparison and actionable recommendations."
+        },
+        "story-acceptance": {
+          "description": "Verify and close stories after frontend/backend tasks are completed."
+        }
+      },
+      "frontend": {
+        "init": {
+          "description": "Initialize frontend environment by creating design system and constraints documents."
+        },
+        "style-extraction": {
+          "description": "Extract design tokens from reference website or screenshot to create project design system."
+        },
+        "design": {
+          "description": "Transform PRD or story into complete page/component designs with ASCII layouts and specs."
+        },
+        "task-breakdown": {
+          "description": "Break down PM story into frontend tasks following UI development order."
+        },
+        "plan": {
+          "description": "Create atomic implementation plan for a single frontend task with exact code and verification."
+        },
+        "implement": {
+          "description": "Execute frontend implementation with TDD. Write failing test first, then implement."
+        }
+      },
+      "backend": {
+        "init": {
+          "description": "Initialize backend environment by creating constraints document from template."
+        },
+        "task-breakdown": {
+          "description": "Break down PM story into backend tasks following layered architecture order."
+        },
+        "plan": {
+          "description": "Create atomic implementation plan for a single backend task with TDD and verification."
+        },
+        "implement": {
+          "description": "Execute backend implementation with TDD. Write failing test first, then implement."
+        }
+      },
+      "shared": {
+        "code-review": {
+          "description": "Request structured code review to catch correctness, security, performance, and readability issues."
+        },
+        "subagent-driven": {
+          "description": "Execute implementation plan by dispatching fresh subagent per task with two-stage review."
+        },
+        "worktree": {
+          "description": "Create isolated git worktree for feature development with baseline test verification."
+        }
+      }
+    }
+  },
+  "EmployeesPage": {
+    "title": "Employees",
+    "description": "Browse available AI employees and add them to your team with one click",
+    "skills": "skills",
+    "commands": "commands",
+    "install": "Install",
+    "noResults": "No employees found.",
+    "pm": {
+      "role": "Product Manager",
+      "description": "Product research, requirement analysis, user story writing, and version planning"
+    },
+    "frontend": {
+      "role": "Frontend Engineer",
+      "description": "Full-stack frontend development: design system, page design, task breakdown, implementation"
+    },
+    "backend": {
+      "role": "Backend Engineer",
+      "description": "Full-stack backend development: API design, database, business logic, TDD, and system architecture"
+    }
+  },
+  "DocsPage": {
+    "title": "Documentation",
+    "gettingStarted": "Getting Started",
+    "cli": "CLI Reference",
+    "creatingSkills": "Creating Skills"
+  },
+  "Docs": {
+    "title": "aico Documentation",
+    "description": "aico is an AI employee framework that lets you manage AI collaborators like managing employees.",
+    "toc": "On this page",
+    "previous": "Previous",
+    "next": "Next",
+    "whatIsAico": "What is aico?",
+    "whatIsAicoDesc": "aico (AI Company) provides a new way to organize and use AI capabilities. By packaging AI capabilities as \"employees\", you can quickly build a professional AI team.",
+    "quickStart": "Quick Start",
+    "quickStartDesc": "Get started with aico in just three steps:",
+    "initializeProject": "Initialize project",
+    "addEmployee": "Add AI employee",
+    "startUsing": "Start using",
+    "startUsingDesc": "Use skills and commands in Claude Code",
+    "nextSteps": "Next Steps",
+    "gettingStartedGuide": "Getting Started Guide",
+    "cliReference": "CLI Reference",
+    "browseSkills": "Browse Skills",
+    "browseEmployees": "Browse Employees"
+  },
+  "Common": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Not Found",
+    "backToHome": "Back to Home"
+  },
+  "CommandMenu": {
+    "searchPlaceholder": "Search documentation...",
+    "searchShort": "Search...",
+    "noResults": "No results found.",
+    "goToPage": "Go to Page",
+    "pages": "Pages",
+    "gettingStarted": "Getting Started",
+    "employees": "Employees",
+    "home": "Home",
+    "docs": "Docs",
+    "skills": "Skills",
+    "introduction": "Introduction",
+    "installation": "Installation",
+    "cli": "CLI",
+    "productManager": "Product Manager",
+    "frontendEngineer": "Frontend Engineer",
+    "backendEngineer": "Backend Engineer"
+  },
+  "Footer": {
+    "tagline": "AI Employee Framework - Build AI teams in seconds.",
+    "documentation": "Documentation",
+    "introduction": "Introduction",
+    "gettingStarted": "Getting Started",
+    "cliReference": "CLI Reference",
+    "registry": "Registry",
+    "skills": "Skills",
+    "employees": "Employees",
+    "community": "Community",
+    "github": "GitHub",
+    "copyright": "© {year} AICO. All rights reserved."
+  }
+}

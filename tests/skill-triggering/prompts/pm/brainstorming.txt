@@ -1,0 +1,4 @@
+I have a vague idea about building a tool to help developers manage AI collaboration.
+I'm not sure exactly how to approach it. Can you help me clarify my thoughts?
+
+The main issue is that when using Claude Code, I have to repeatedly explain the same instructions and workflows every time, which is tedious.

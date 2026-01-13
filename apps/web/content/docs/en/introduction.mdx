@@ -1,0 +1,55 @@
+---
+title: Introduction
+description: aico is an AI employee framework that lets you manage AI collaborators like managing employees. Open source and extensible.
+---
+
+**aico is how you build your AI team.**
+
+Traditional AI assistants work well until you need specialized workflows. You end up writing custom prompts, repeating instructions, and losing context between sessions.
+
+This is what aico aims to solve. It is built around the following principles:
+
+- **Employees, Not Prompts:** AI collaborators with pre-built skills, commands, and domain expertise.
+- **Skills Over Instructions:** Reusable capabilities that trigger automatically based on context.
+- **Open Source:** Everything is transparent and customizable.
+- **Platform Agnostic:** Works with Claude Code, Codex, and other AI coding assistants.
+
+## Employees
+
+aico introduces the concept of "AI employees" - packages of skills, commands, and documentation that extend AI coding assistants.
+
+Each employee has a specific role:
+
+- **PM (Product Manager):** Product requirements, user stories, brainstorming
+- **Frontend Engineer:** UI/UX implementation, component design, styling
+- **Backend Engineer:** API development, database design, system architecture
+
+## Skills
+
+Skills are the core capabilities of employees. They trigger automatically based on context or can be invoked manually.
+
+_When you say "I have a product idea...", the PM's brainstorming skill automatically activates, guiding you through structured ideation._
+
+## Commands
+
+Commands are shortcuts for common workflows. They're invoked with a slash prefix like `/pm.plan` or `/frontend.design`.
+
+_Commands let you trigger complex workflows with a single action._
+
+## Getting Started
+
+```bash
+# Install CLI globally (recommended)
+npm install -g @the-aico/cli
+
+# Initialize your project
+aico init
+
+# Add an AI employee (shorthand)
+aico add pm
+
+# Or use full name
+aico add @the-aico/pm
+```
+
+That's it. Your AI assistant now has PM capabilities including brainstorming, requirements analysis, and user story writing.

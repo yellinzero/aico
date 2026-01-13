@@ -1,0 +1,362 @@
+---
+title: CLI
+description: 使用 aico CLI 管理项目中的 AI 员工。
+---
+
+## 全局选项
+
+```txt
+用法: aico [选项] [命令]
+
+AI 员工管理工具 - 秒速构建你的 AI 团队
+
+选项:
+  -V, --version        显示版本号
+  -v, --verbose        显示详细错误信息
+  --proxy <url>        使用 HTTP/HTTPS 代理
+  -h, --help           显示帮助信息
+```
+
+---
+
+## init
+
+在项目中初始化 aico 配置。
+
+```bash
+aico init
+```
+
+**选项**
+
+```txt
+用法: aico init [选项]
+
+在项目中初始化 aico
+
+选项:
+  -p, --default-platform <platform>  默认平台 (claude-code, codex)
+  -f, --force                        覆盖现有配置 (默认: false)
+  -c, --cwd <cwd>                    工作目录 (默认: 当前目录)
+  -h, --help                         显示帮助信息
+```
+
+---
+
+## add
+
+将 AI 员工或技能添加到项目。
+
+```bash
+aico add [items...]
+```
+
+不带参数运行会打开交互式选择菜单。
+
+**选项**
+
+```txt
+用法: aico add [选项] [items...]
+
+将员工或技能添加到项目
+
+参数:
+  items                     员工或技能名称 (如 pm, @the-aico/pm/brainstorming)
+
+选项:
+  -p, --platform <platform>  目标平台 (可多次使用)
+  -o, --overwrite            覆盖现有文件 (默认: false)
+  -y, --yes                  跳过确认提示 (默认: false)
+  --no-deps                  跳过依赖安装 (默认: false)
+  -c, --cwd <cwd>            工作目录 (默认: 当前目录)
+  -h, --help                 显示帮助信息
+```
+
+**示例**
+
+```bash
+# 添加 PM 员工（简写）
+aico add pm
+
+# 添加 PM 员工（完整名称）
+aico add @the-aico/pm
+
+# 添加多个员工
+aico add pm frontend
+
+# 添加单个技能
+aico add @the-aico/pm/brainstorming
+
+# 添加到指定平台
+aico add pm -p codex
+
+# 交互模式
+aico add
+```
+
+> **提示：** 你可以使用简写名称（如 `pm`）或完整名称（如 `@the-aico/pm`）。简写会自动展开为 `@the-aico/{name}`。
+
+---
+
+## remove
+
+从项目中删除已安装的员工或技能。
+
+```bash
+aico remove [items...]
+```
+
+**选项**
+
+```txt
+用法: aico remove [选项] [items...]
+
+从项目中删除员工或技能
+
+参数:
+  items                      要删除的员工或技能名称
+
+选项:
+  -p, --platform <platform>  仅从指定平台删除
+  -y, --yes                  跳过确认提示 (默认: false)
+  -f, --force                强制删除 (忽略依赖警告) (默认: false)
+  --dry-run                  预览更改但不实际删除 (默认: false)
+  -c, --cwd <cwd>            工作目录 (默认: 当前目录)
+  -h, --help                 显示帮助信息
+```
+
+**示例**
+
+```bash
+# 删除员工
+aico remove pm
+
+# 删除技能
+aico remove @the-aico/pm/brainstorming
+
+# 预览删除
+aico remove pm --dry-run
+```
+
+---
+
+## list
+
+列出可用或已安装的员工。
+
+```bash
+aico list [选项]
+```
+
+**选项**
+
+```txt
+用法: aico list [选项]
+
+列出可用或已安装的员工
+
+选项:
+  -i, --installed    仅显示已安装的员工 (默认: false)
+  -c, --cwd <cwd>    工作目录 (默认: 当前目录)
+  -h, --help         显示帮助信息
+```
+
+**示例**
+
+```bash
+# 列出注册表中可用的员工
+aico list
+
+# 仅列出已安装的员工
+aico list --installed
+```
+
+---
+
+## update
+
+将已安装的技能更新到最新版本。
+
+```bash
+aico update [skills...]
+```
+
+不带参数运行会检查所有已安装技能的更新。
+
+**选项**
+
+```txt
+用法: aico update [选项] [skills...]
+
+将已安装技能更新到最新版本
+
+参数:
+  skills           要更新的技能名称 (不指定则更新全部)
+
+选项:
+  --dry-run        预览更新但不实际应用 (默认: false)
+  -y, --yes        跳过确认 (默认: false)
+  -c, --cwd <cwd>  工作目录 (默认: 当前目录)
+  -h, --help       显示帮助信息
+```
+
+---
+
+## search
+
+在注册表中搜索员工和技能。
+
+```bash
+aico search <query>
+```
+
+**选项**
+
+```txt
+用法: aico search [选项] <query>
+
+搜索技能和员工
+
+参数:
+  query                    搜索关键词
+
+选项:
+  -c, --category <category>  按类别过滤 (pm, frontend, backend)
+  -t, --type <type>          按类型过滤 (skill, employee)
+  --json                     以 JSON 格式输出
+  --limit <n>                限制结果数量 (默认: 10)
+  --cwd <cwd>                工作目录 (默认: 当前目录)
+  -h, --help                 显示帮助信息
+```
+
+**示例**
+
+```bash
+# 搜索与头脑风暴相关的内容
+aico search brainstorm
+
+# 只在 pm 类别中搜索
+aico search story -c pm
+
+# 以 JSON 格式输出
+aico search frontend --json
+```
+
+---
+
+## diff
+
+检查注册表更新并显示差异。
+
+```bash
+aico diff [employee]
+```
+
+不带参数运行会显示所有已安装员工的摘要。
+
+**选项**
+
+```txt
+用法: aico diff [选项] [employee]
+
+检查注册表更新
+
+参数:
+  employee         要检查的员工名称 (不指定则检查全部)
+
+选项:
+  -c, --cwd <cwd>  工作目录 (默认: 当前目录)
+  -h, --help       显示帮助信息
+```
+
+**示例**
+
+```bash
+# 检查所有员工的更新
+aico diff
+
+# 检查指定员工并显示详细差异
+aico diff pm
+```
+
+---
+
+## check
+
+检查环境和配置状态。
+
+```bash
+aico check
+```
+
+**选项**
+
+```txt
+用法: aico check [选项]
+
+检查环境和配置
+
+选项:
+  --json           以 JSON 格式输出
+  --cwd <cwd>      工作目录 (默认: 当前目录)
+  -h, --help       显示帮助信息
+```
+
+此命令验证：
+
+- Node.js 版本 (要求 >= 18, 推荐 >= 20)
+- 配置文件 (`aico.json`) 存在且有效
+- 平台目录存在
+- 注册表连接性
+- 已安装内容数量
+
+---
+
+## build
+
+从 employees 目录构建注册表 JSON 文件。此命令用于将你自己的员工发布到注册表。
+
+```bash
+aico build
+```
+
+**选项**
+
+```txt
+用法: aico build [选项]
+
+从 employees 目录构建注册表
+
+选项:
+  -e, --employees-dir <dir>  员工源目录 (默认: "employees")
+  -o, --output-dir <dir>     输出目录 (默认: "registry")
+  -r, --registry <name>      注册表命名空间 (默认: "@the-aico")
+  -v, --version <version>    版本号 (默认: "1.0.0")
+  -c, --cwd <cwd>            工作目录 (默认: 当前目录)
+  -h, --help                 显示帮助信息
+```
+
+**输出结构**
+
+```txt
+registry/
+├── index.json                    # 旧版员工索引
+├── pm.json                       # 旧版 PM 员工数据
+├── frontend.json                 # 旧版前端员工数据
+├── backend.json                  # 旧版后端员工数据
+├── employees/
+│   ├── index.json                # 员工索引
+│   ├── pm.json                   # PM 员工数据
+│   ├── frontend.json             # 前端员工数据
+│   └── backend.json              # 后端员工数据
+└── skills/
+    ├── index.json                # 技能索引
+    └── aico/
+        ├── pm/
+        │   ├── brainstorming.json
+        │   └── ...
+        ├── frontend/
+        │   └── ...
+        └── backend/
+            └── ...
+```

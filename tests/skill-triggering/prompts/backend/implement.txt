@@ -1,0 +1,3 @@
+I have a backend task file at docs/reference/backend/tasks/auth-api.md
+
+Please execute the implementation following the task file, using TDD approach.

@@ -1,0 +1,212 @@
+---
+title: Configuration
+description: Configure aico with the aico.json configuration file.
+---
+
+The `aico.json` file is the configuration file for your aico project. It is created when you run `aico init` and tracks your installed employees, platform settings, and custom registries.
+
+## File Location
+
+The `aico.json` file should be placed in the root of your project directory.
+
+```txt
+my-project/
+├── aico.json          # Configuration file
+├── .claude/           # Claude Code platform files
+│   ├── skills/
+│   └── commands/
+└── ...
+```
+
+## Configuration Options
+
+### $schema
+
+Optional. URL to the JSON schema for editor autocompletion and validation.
+
+```json
+{
+  "$schema": "https://the-aico.com/schema/config.json"
+}
+```
+
+### language
+
+Optional. Default language for employee prompts and documentation. Defaults to `"en"`.
+
+```json
+{
+  "language": "zh"
+}
+```
+
+Supported values:
+
+- `"en"` - English (default)
+- `"zh"` - Chinese
+
+### defaultPlatform
+
+Required. The default AI coding assistant platform.
+
+```json
+{
+  "defaultPlatform": "claude-code"
+}
+```
+
+Supported values:
+
+- `"claude-code"` - Claude Code (Anthropic)
+- `"codex"` - Codex (OpenAI)
+
+### platforms
+
+Required. Path configuration for each platform.
+
+```json
+{
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    },
+    "codex": {
+      "skills": ".codex/skills",
+      "commands": "~/.codex/prompts"
+    }
+  }
+}
+```
+
+| Platform    | Skills Directory            | Commands Directory            |
+| ----------- | --------------------------- | ----------------------------- |
+| claude-code | `.claude/skills/` (project) | `.claude/commands/` (project) |
+| codex       | `.codex/skills/` (project)  | `~/.codex/prompts/` (global)  |
+
+> **Note:** You can customize these paths to match your project structure.
+
+### employees
+
+Auto-generated. Tracks installed employees and their state.
+
+```json
+{
+  "employees": {
+    "pm": {
+      "platforms": ["claude-code"],
+      "installedAt": "2024-01-15T10:30:00.000Z",
+      "version": "1.0.0",
+      "skills": ["init", "brainstorming", "prd-writing"],
+      "commands": ["init", "plan", "clarify"]
+    }
+  }
+}
+```
+
+| Field         | Type       | Description                               |
+| ------------- | ---------- | ----------------------------------------- |
+| `platforms`   | `string[]` | Platforms where the employee is installed |
+| `installedAt` | `string`   | ISO timestamp of installation             |
+| `version`     | `string`   | Optional. Installed version               |
+| `skills`      | `string[]` | List of installed skills                  |
+| `commands`    | `string[]` | List of installed commands                |
+
+### skills
+
+Auto-generated. Tracks standalone skills (skills installed individually, not as part of an employee).
+
+```json
+{
+  "skills": {
+    "@the-aico/pm/brainstorming": {
+      "version": "1.0.0",
+      "installedAt": "2024-01-15T10:30:00.000Z",
+      "source": "standalone",
+      "platforms": ["claude-code"]
+    }
+  }
+}
+```
+
+### registries
+
+Optional. Custom registry URLs for fetching employees.
+
+```json
+{
+  "registries": {
+    "@the-aico": "https://the-aico.com/r/{name}.json",
+    "@my-company": "https://registry.my-company.com/{name}.json"
+  }
+}
+```
+
+The `{name}` placeholder is replaced with the employee name when fetching.
+
+**Advanced Configuration:**
+
+You can also specify custom headers for authenticated registries:
+
+```json
+{
+  "registries": {
+    "@private": {
+      "url": "https://private-registry.com/{name}.json",
+      "headers": {
+        "Authorization": "Bearer ${REGISTRY_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+## Example Configuration
+
+Here's a complete example of an `aico.json` file:
+
+```json
+{
+  "$schema": "https://the-aico.com/schema/config.json",
+  "language": "en",
+  "defaultPlatform": "claude-code",
+  "platforms": {
+    "claude-code": {
+      "skills": ".claude/skills",
+      "commands": ".claude/commands"
+    },
+    "codex": {
+      "skills": ".codex/skills",
+      "commands": "~/.codex/prompts"
+    }
+  },
+  "employees": {
+    "pm": {
+      "platforms": ["claude-code"],
+      "installedAt": "2024-01-15T10:30:00.000Z",
+      "skills": ["init", "brainstorming", "prd-writing"],
+      "commands": ["init", "plan"]
+    },
+    "frontend": {
+      "platforms": ["claude-code"],
+      "installedAt": "2024-01-15T10:31:00.000Z",
+      "skills": ["init", "design", "implement"],
+      "commands": ["init", "design", "plan"]
+    }
+  },
+  "skills": {},
+  "registries": {
+    "@the-aico": "https://the-aico.com/r/{name}.json"
+  }
+}
+```
+
+## Best Practices
+
+1. **Commit to version control**: Include `aico.json` in your repository so team members can sync the same employee configuration.
+
+2. **Don't manually edit employee state**: The `employees` and `skills` sections are managed by the CLI. Use `aico add` and `aico remove` commands instead.
+
+3. **Use environment variables for secrets**: When using private registries with authentication, use environment variable placeholders like `${REGISTRY_TOKEN}`.
+
+4. **Keep platforms section**: Don't remove the `platforms` section even if you only use one platform. It's required for the CLI to function properly.
