@@ -23,16 +23,16 @@ aico list
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `aico init` | Initialize aico in your project |
-| `aico add <employee>` | Add an AI employee |
-| `aico remove <employee>` | Remove an AI employee |
-| `aico list` | List available/installed employees |
-| `aico update` | Update installed employees |
-| `aico search <query>` | Search for employees/skills |
-| `aico diff` | Check for updates |
-| `aico check` | Verify installation |
+| Command                  | Description                        |
+| ------------------------ | ---------------------------------- |
+| `aico init`              | Initialize aico in your project    |
+| `aico add <employee>`    | Add an AI employee                 |
+| `aico remove <employee>` | Remove an AI employee              |
+| `aico list`              | List available/installed employees |
+| `aico update`            | Update installed employees         |
+| `aico search <query>`    | Search for employees/skills        |
+| `aico diff`              | Check for updates                  |
+| `aico check`             | Verify installation                |
 
 ## Documentation
 

@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+# Run lint-staged for staged files
+pnpm exec lint-staged
+
+# Type check
+echo "🔷 Running TypeScript type check..."
+pnpm --filter @the-aico/cli exec tsc --noEmit || exit 1
+pnpm --filter @the-aico/web exec tsc --noEmit || exit 1
+
+# Tests
+echo "🧪 Running tests..."
+pnpm test || exit 1
+
+echo "✅ Pre-commit checks passed!"
