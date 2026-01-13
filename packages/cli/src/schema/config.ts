@@ -93,14 +93,14 @@ export const DEFAULT_PLATFORMS: Record<Platform, PlatformPaths> = {
     skills: '.claude/skills',
     commands: '.claude/commands',
   },
-  // Codex 平台配置：
-  // - skills: 项目目录 .codex/skills/（Codex 原生支持项目级 skills）
-  // - commands (prompts): 全局 ~/.codex/prompts/（一次安装所有项目可用）
-  // 调用方式：/prompts:aico.{employee}.{command}
-  // 用户可在 aico.json 中覆盖路径
+  // Codex platform configuration:
+  // - skills: project directory .codex/skills/ (Codex natively supports project-level skills)
+  // - commands (prompts): global ~/.codex/prompts/ (install once, available for all projects)
+  // Invocation: /prompts:aico.{employee}.{command}
+  // Users can override paths in aico.json
   codex: {
     skills: '.codex/skills',
-    commands: '~/.codex/prompts', // Codex custom prompts (全局)
+    commands: '~/.codex/prompts', // Codex custom prompts (global)
   },
 };
 

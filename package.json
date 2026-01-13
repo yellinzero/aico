@@ -13,13 +13,16 @@
     "format:check": "prettier --check .",
     "release": "changeset version",
     "pub:beta": "pnpm --filter @the-aico/cli pub:beta",
-    "pub:release": "pnpm --filter @the-aico/cli pub:release"
+    "pub:release": "pnpm --filter @the-aico/cli pub:release",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
     "@changesets/cli": "^2.29.8",
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.52.0"
@@ -27,5 +30,14 @@
   "engines": {
     "node": ">=18.17.0"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@9.15.0",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,yml,yaml,css}": [
+      "prettier --write"
+    ]
+  }
 }
