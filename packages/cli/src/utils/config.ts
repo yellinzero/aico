@@ -64,7 +64,6 @@ export async function writeConfig(cwd: string, config: Config): Promise<void> {
 export async function updateEmployees(
   cwd: string,
   employeeName: string,
-  platforms: Platform[],
   skills?: string[],
   commands?: string[]
 ): Promise<void> {
@@ -74,7 +73,6 @@ export async function updateEmployees(
   }
 
   config.employees[employeeName] = {
-    platforms,
     installedAt: new Date().toISOString(),
     skills,
     commands,
@@ -142,7 +140,6 @@ export async function updateSkill(
   cwd: string,
   skillFullName: string,
   version: string,
-  platforms: Platform[],
   source: 'standalone' | 'employee' = 'standalone'
 ): Promise<void> {
   const config = await getConfig(cwd);
@@ -159,7 +156,6 @@ export async function updateSkill(
     version,
     installedAt: new Date().toISOString(),
     source,
-    platforms,
   };
 
   await writeConfig(cwd, config);
@@ -239,8 +235,7 @@ export async function addSharedSkillReference(
   cwd: string,
   sharedSkillFullName: string,
   employeeName: string,
-  version: string,
-  platforms: Platform[]
+  version: string
 ): Promise<{ isNew: boolean }> {
   const config = await getConfig(cwd);
   if (!config) {
@@ -259,9 +254,6 @@ export async function addSharedSkillReference(
     if (!existing.usedBy.includes(employeeName)) {
       existing.usedBy.push(employeeName);
     }
-    // Merge platforms
-    const allPlatforms = new Set([...existing.platforms, ...platforms]);
-    existing.platforms = Array.from(allPlatforms) as Platform[];
     await writeConfig(cwd, config);
     return { isNew: false };
   }
@@ -270,7 +262,6 @@ export async function addSharedSkillReference(
   config.sharedSkills[sharedSkillFullName] = {
     version,
     installedAt: new Date().toISOString(),
-    platforms,
     usedBy: [employeeName],
   };
 

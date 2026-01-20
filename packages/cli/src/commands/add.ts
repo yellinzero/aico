@@ -263,8 +263,7 @@ async function addEmployee(
           cwd,
           depFullName,
           employee.name,
-          '1.0.0', // TODO: get version from skill
-          platforms
+          '1.0.0' // TODO: get version from skill
         );
       }
     }
@@ -272,13 +271,7 @@ async function addEmployee(
     // Update config with skills and commands list
     const skillNames = employee.skills.map((sk) => sk.name);
     const commandNames = employee.commands.map((c) => c.name);
-    await updateEmployees(
-      cwd,
-      employee.name,
-      platforms,
-      skillNames,
-      commandNames
-    );
+    await updateEmployees(cwd, employee.name, skillNames, commandNames);
 
     s.succeed(`Added ${employee.name} (${employee.role})`);
 
@@ -434,7 +427,7 @@ async function addSingleSkill(
     }
 
     // Update config
-    await updateSkill(cwd, fullName, skill.version, platforms, 'standalone');
+    await updateSkill(cwd, fullName, skill.version, 'standalone');
 
     s.succeed(`Added skill ${skill.fullName}`);
     logger.dim(`  Version: ${skill.version}`);

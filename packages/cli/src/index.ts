@@ -9,7 +9,7 @@ import { diff } from './commands/diff.js';
 import { search } from './commands/search.js';
 import { check } from './commands/check.js';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 // Store global options for access in error handler
 let globalVerbose = false;

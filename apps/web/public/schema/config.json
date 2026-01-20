@@ -43,16 +43,8 @@
       "description": "Installed employees state",
       "additionalProperties": {
         "type": "object",
-        "required": ["platforms", "installedAt"],
+        "required": ["installedAt"],
         "properties": {
-          "platforms": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": ["claude-code", "codex"]
-            },
-            "description": "Platforms this employee is installed on"
-          },
           "installedAt": {
             "type": "string",
             "format": "date-time",
@@ -84,7 +76,7 @@
       "description": "Standalone installed skills",
       "additionalProperties": {
         "type": "object",
-        "required": ["version", "installedAt", "source", "platforms"],
+        "required": ["version", "installedAt", "source"],
         "properties": {
           "version": {
             "type": "string",
@@ -99,13 +91,6 @@
             "type": "string",
             "enum": ["standalone", "employee"],
             "description": "Installation source"
-          },
-          "platforms": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": ["claude-code", "codex"]
-            }
           }
         }
       }
@@ -115,7 +100,7 @@
       "description": "Shared skills with reference tracking",
       "additionalProperties": {
         "type": "object",
-        "required": ["version", "installedAt", "platforms", "usedBy"],
+        "required": ["version", "installedAt", "usedBy"],
         "properties": {
           "version": {
             "type": "string",
@@ -125,13 +110,6 @@
             "type": "string",
             "format": "date-time",
             "description": "Installation timestamp"
-          },
-          "platforms": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": ["claude-code", "codex"]
-            }
           },
           "usedBy": {
             "type": "array",
