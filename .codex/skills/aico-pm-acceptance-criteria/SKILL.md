@@ -16,6 +16,12 @@ description: |
 
 # Acceptance Criteria
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+1. **READ STORY FIRST**: Always read the story file from `docs/reference/pm/stories/` before writing criteria
+2. **USE GIVEN/WHEN/THEN**: All criteria must follow this format
+3. **UPDATE STORY FILE**: Add criteria to existing story file, don't create new files
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.

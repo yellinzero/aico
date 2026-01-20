@@ -15,6 +15,28 @@ description: |
 
 # PRD Writing
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+**BEFORE doing anything, you MUST:**
+
+1. **CHECK EXISTING FILES**:
+   - Look in `docs/reference/pm/versions/` directory
+   - If version file already exists, READ it first and ask user if they want to update it
+   - DO NOT create duplicate version files
+
+2. **ALWAYS USE THIS SKILL**:
+   - When user says "write PRD", "create PRD", "write requirements" → USE THIS SKILL
+   - DO NOT write PRD files directly without using this skill
+   - This skill ensures proper format and validation
+
+3. **ALWAYS SAVE TO CORRECT PATH**:
+   - Path: `docs/reference/pm/versions/{version-name}.md`
+   - NO exceptions, NO other locations
+
+4. **READ CONSTITUTION FIRST**:
+   - ALWAYS read `docs/reference/pm/constitution.md` before writing PRD
+   - Use constraints and domain info from constitution
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.

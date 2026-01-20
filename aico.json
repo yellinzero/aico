@@ -13,8 +13,8 @@
   },
   "employees": {
     "pm": {
-      "platforms": ["claude-code"],
-      "installedAt": "2026-01-20T13:07:15.522Z",
+      "platforms": ["codex"],
+      "installedAt": "2026-01-20T13:36:12.201Z",
       "skills": [
         "init",
         "brainstorming",
@@ -28,8 +28,8 @@
       "commands": ["init", "plan", "clarify"]
     },
     "frontend": {
-      "platforms": ["claude-code"],
-      "installedAt": "2026-01-20T13:07:15.023Z",
+      "platforms": ["codex"],
+      "installedAt": "2026-01-20T13:36:11.500Z",
       "skills": [
         "init",
         "style-extraction",
@@ -41,8 +41,8 @@
       "commands": ["init", "design", "tasks", "plan"]
     },
     "backend": {
-      "platforms": ["claude-code"],
-      "installedAt": "2026-01-20T13:07:15.935Z",
+      "platforms": ["codex"],
+      "installedAt": "2026-01-20T13:36:12.610Z",
       "skills": ["init", "task-breakdown", "plan", "implement"],
       "commands": ["init", "tasks", "plan"]
     }

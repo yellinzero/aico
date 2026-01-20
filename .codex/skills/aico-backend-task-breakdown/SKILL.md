@@ -1,22 +1,53 @@
 ---
 name: aico-backend-task-breakdown
 description: |
-  Break down PM story into backend tasks following LAYERED ARCHITECTURE order: Data Models → Database → Repository → Service → API → Validation → Tests.
+  Break down PM story into independent backend task files following LAYERED ARCHITECTURE order: Types → Database → Repository → Service → API → Tests.
 
-  UNIQUE VALUE: Ensures proper dependency order and separation of concerns. Tasks are ordered by architectural layers, not random order.
+  UNIQUE VALUE: Creates independent task files (story-{name}-{n}-{task}.md) for each task. Tasks are ordered by backend architecture layers.
 
   Use this skill when:
   - Running /backend.tasks command
-  - User asks to "break down story for backend", "create backend tasks", "split into backend tasks"
-  - Have story at docs/reference/pm/stories/ and need organized task list
-  - Need tasks ordered by architectural layers (not random order)
-  - Starting backend work and want organized, layered task list
+  - User asks to "break down story", "create backend tasks", "split into tasks"
+  - Have story at docs/reference/pm/stories/ and need organized task files
+  - Need tasks ordered by backend architecture layers (not random order)
+  - Starting backend work and want organized task list
 
-  Layer order is CRITICAL: Types/Entities → Migrations → Repository → Service → API → Validation → Tests
-  Output: ALWAYS write to docs/reference/backend/tasks/{story-name}.md
+  Task order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests
+  Output: Create multiple files in docs/reference/backend/tasks/ with story- prefix
 ---
 
 # Task Breakdown
+
+## ⚠️ CRITICAL RULES - READ FIRST
+
+**BEFORE doing anything, you MUST:**
+
+1. **CHECK EXISTING TASKS FIRST**:
+   - ALWAYS check if task files with `story-{story-name}-*` already exist
+   - If exists: READ them and continue from current progress
+   - If not exists: Create new task breakdown
+   - **NEVER re-break down existing tasks**
+
+2. **FILE NAMING**:
+   - Pattern: `story-{story-name}-{number}-{task-name}.md`
+   - Example: `story-user-profile-1-setup-component.md`
+   - `{number}`: Sequential number (1, 2, 3...)
+   - `{task-name}`: Short kebab-case description
+
+3. **ONE TASK PER FILE**:
+   - Each file = one complete task
+   - Each task = independently testable
+   - Clear scope and acceptance criteria
+
+4. **ALWAYS SAVE TO CORRECT PATH**:
+   - Path: `docs/reference/backend/tasks/story-{story-name}-{n}-{task}.md`
+   - NO exceptions, NO other locations
+
+5. **READ CONTEXT FIRST**:
+   - Read story from `docs/reference/pm/stories/`
+   - Read design from `docs/reference/backend/designs/` if exists
+   - Read design system from `docs/reference/backend/design-system.md`
+   - Read constraints from `docs/reference/backend/constraints.md`
 
 ## Language Configuration
 
@@ -25,91 +56,160 @@ Before generating any content, check `aico.json` in project root for `language` 
 ## Process
 
 1. **Read story/PRD**: Load from `docs/reference/pm/stories/` or `docs/reference/pm/versions/`
-2. **Identify data entities**: What domain objects are needed
-3. **Identify API endpoints**: What routes are needed
-4. **Identify business logic**: What services are needed
-5. **Break into tasks**: Follow layered architecture order
-6. **Save output**: ALWAYS write to `docs/reference/backend/tasks/{story-name}.md`
+2. **Read design** (if exists): Load from `docs/reference/backend/designs/`
+3. **Read constraints**: Load design system and technical constraints
+4. **Identify components**: What UI elements are needed
+5. **Identify interactions**: What logic and events are needed
+6. **Break into tasks**: Independently testable, single responsibility
+7. **Order by dependencies**: Setup → Static UI → Dynamic → Tests
+8. **Generate files**: Create one file per task with story- prefix
+9. **Update Story file**: Add "Related Tasks" section to story file with task list
+10. **Summary**: Show created files and next steps
 
-## Layered Architecture Order
-
-```
-1. Data Models (types, entities, DTOs)
-      ↓
-2. Database (migrations, schema)
-      ↓
-3. Repository Layer (data access)
-      ↓
-4. Service Layer (business logic)
-      ↓
-5. API Layer (controllers, routes)
-      ↓
-6. Validation & Error Handling
-      ↓
-7. Tests (unit, integration, API)
-```
-
-## Task File Template
+## Task File Format
 
 ```markdown
-# [Story Name] - Backend Tasks
+# Task: [Task Name]
 
-> Project: [project-name]
-> Created: YYYY-MM-DD
-> Last Updated: YYYY-MM-DD
-> Source: docs/reference/pm/stories/[story].md
-> Status: in_progress
+> **File**: `story-{story-name}-{number}-{task-name}.md`
+> **Type**: feature | improvement
+> **Source**: story:{story-name}
+> **Story**: docs/reference/pm/stories/{story-id}.md
+> **Design**: docs/reference/backend/designs/{design-name}.md
+> **Created**: YYYY-MM-DD
+> **Status**: pending
 
-## Progress
+## Description
 
-| #   | Task                       | Status     | Notes |
-| --- | -------------------------- | ---------- | ----- |
-| 1   | Define data models         | ⏳ pending |       |
-| 2   | Create database migrations | ⏳ pending |       |
-| 3   | Implement repository layer | ⏳ pending |       |
+[Clear description of what this task achieves]
 
-## Tasks
+## Context
 
-### Task 1: Define data models
+- Part of [Story Name] story
+- Depends on: [Previous task if any]
+- Design reference: [Link to design if applicable]
+- Should follow design system tokens
 
-**Status**: ⏳ pending
-**Goal**: Create types for domain entities
-**Scope**: Entity types, DTOs, validation schemas
-**Acceptance Criteria**:
+## Acceptance Criteria
 
-- [ ] Types match business requirements
-- [ ] No type errors
-      **Dependencies**: None
+- [ ] Criterion 1
+- [ ] Criterion 2
+- [ ] Criterion 3
+
+## Scope
+
+**Files to create/modify:**
+
+- Create: `src/components/...`
+- Modify: `src/pages/...`
+
+**Key components:**
+
+- Component A
+- Component B
+
+## Implementation Steps
+
+> Note: Detailed steps can be added using `/backend.plan` command
+
+### Step 1: [Brief description]
+
+**Files**: ...
+**Action**: ...
+**Verify**: ...
+
+---
+
+## Notes
+
+[Any additional notes, considerations, or technical decisions]
+
+## Related Tasks
+
+- Depends on: story-{story-name}-{prev-number}-{prev-task}
+- Blocks: story-{story-name}-{next-number}-{next-task}
 ```
 
 ## Task Types
 
-| Type       | Examples                       |
-| ---------- | ------------------------------ |
-| Data Model | Define entities, DTOs, schemas |
-| Database   | Migrations, indexes, seeds     |
-| Repository | Data access layer              |
-| Service    | Business logic                 |
-| API        | Controllers, routes            |
-| Validation | Input validation               |
-| Testing    | Unit, integration, API tests   |
+| Type        | Examples                                |
+| ----------- | --------------------------------------- |
+| Setup       | Create component structure, setup state |
+| UI          | Implement section/component layout      |
+| Logic       | Add form validation, API integration    |
+| Interaction | Implement hover, click, animations      |
+| Testing     | Unit tests, integration tests           |
 
 ## Granularity Rules
 
 - Each task = independently testable
 - Each task = single responsibility
 - Each task = clear scope (not too big, not too small)
+- Each task = 1-4 hours of work
+
+## Ordering Rules
+
+1. **Setup tasks first** - Component structure, routing
+2. **Static UI before dynamic** - Layout before logic
+3. **Core functionality before edge cases** - Happy path first
+4. **Tests after implementation** - Each feature gets tests
+
+## Updating Story File
+
+After generating task files, **ALWAYS** update the story file to add the "Related Tasks" section:
+
+```markdown
+## Related Tasks
+
+### Backend Tasks
+
+- [ ] docs/reference/backend/tasks/story-user-profile-1-types.md
+- [ ] docs/reference/backend/tasks/story-user-profile-2-database.md
+- [ ] docs/reference/backend/tasks/story-user-profile-3-repository.md
+- [ ] docs/reference/backend/tasks/story-user-profile-4-service.md
+- [ ] docs/reference/backend/tasks/story-user-profile-5-api.md
+- [ ] docs/reference/backend/tasks/story-user-profile-6-tests.md
+```
+
+**Key points:**
+
+- Add this section at the end of the story file (before any existing notes)
+- Use `- [ ]` checkboxes for all tasks (they will be checked when tasks complete)
+- List tasks in execution order (Types → DB → Repository → Service → API → Tests)
+- Keep the section organized by frontend/backend if both exist
+
+## Output Example
+
+After breaking down "user-profile" story:
+
+```
+Created 5 task files:
+
+✓ docs/reference/backend/tasks/story-user-profile-1-setup-component.md
+✓ docs/reference/backend/tasks/story-user-profile-2-implement-header.md
+✓ docs/reference/backend/tasks/story-user-profile-3-implement-avatar.md
+✓ docs/reference/backend/tasks/story-user-profile-4-implement-bio.md
+✓ docs/reference/backend/tasks/story-user-profile-5-add-tests.md
+
+Next steps:
+1. Review task files
+2. Use /backend.plan to add detailed steps to each task
+3. Use aico-backend-implement to execute tasks
+```
 
 ## Key Rules
 
-- ALWAYS follow layered architecture order
-- MUST include test tasks for each layer
-- ALWAYS note dependencies between tasks
-- MUST save to `docs/reference/backend/tasks/` directory
+- ALWAYS create separate files for each task
+- MUST use `story-{story-name}-{number}-{task-name}.md` naming
+- ALWAYS include test tasks at the end
+- MUST note dependencies between tasks
+- Keep tasks focused - not too big, not too small
+- Each task file is self-contained and complete
 
 ## Common Mistakes
 
-- ❌ Tasks too large (entire API) → ✅ Break into layers
-- ❌ Skip data model first → ✅ Types before implementation
-- ❌ Skip repository layer → ✅ Separate data access
-- ❌ Forget validation → ✅ Always include validation task
+- ❌ Tasks too large (full page) → ✅ Break into sections
+- ❌ Tasks too small (add one button) → ✅ Group related work
+- ❌ Skip dependencies → ✅ Note which tasks depend on others
+- ❌ Forget testing → ✅ Always include test tasks
+- ❌ Vague task names → ✅ Use descriptive names in filename
