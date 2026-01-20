@@ -226,36 +226,6 @@ export async function isSkillInstalled(
   return false;
 }
 
-/**
- * Get all installed skill fullNames
- */
-export async function getInstalledSkills(cwd: string): Promise<string[]> {
-  const config = await getConfig(cwd);
-  if (!config) {
-    return [];
-  }
-
-  const skills = new Set<string>();
-
-  // Add standalone skills
-  if (config.skills) {
-    for (const skillName of Object.keys(config.skills)) {
-      skills.add(skillName);
-    }
-  }
-
-  // Add skills from employees
-  for (const empState of Object.values(config.employees)) {
-    if (empState.skills) {
-      for (const skillName of empState.skills) {
-        skills.add(skillName);
-      }
-    }
-  }
-
-  return Array.from(skills);
-}
-
 // ============================================================================
 // Shared Skill Management
 // ============================================================================

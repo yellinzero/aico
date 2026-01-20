@@ -1,23 +1,24 @@
 ---
 name: aico-backend-implement
 description: |
-  Execute backend implementation with TDD (Test-Driven Development). Write failing test first, then implement, verify each step.
+  Execute backend task implementation with TDD. Read task file, execute implementation steps, verify each step, update status.
 
   Use this skill when:
-  - User asks to "implement this backend task", "implement backend"
-  - Have an implementation plan ready and need to execute it
-  - Executing steps from /backend.plan output
-  - User says "start coding backend", "write backend code"
+  - User asks to "implement this task", "implement the plan", "start implementation", "execute plan"
+  - Have a task file (story- or standalone- prefix) ready to execute
+  - User says "start coding", "write the code", "begin implementation"
   - User asks to "use TDD", "write test first", "test-driven" for backend code
-  - Fixing backend bugs (write failing test that reproduces bug first)
+  - User asks to "write tests", "add tests", "create tests"
+  - Fixing UI bugs (write failing test that reproduces bug first)
 
   TDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
   TDD Cycle: RED (write failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR
 
   Prerequisites:
-  - MUST have task file in docs/reference/backend/tasks/ (use /backend.tasks first if not exists)
-  - MUST read constraints.md before writing any code.
-  Flow: Check Task File → Read Constraints → TDD Cycle (RED→GREEN→REFACTOR) → Verify Each → Run All Tests → Update Task Status → Notify PM
+  - MUST have task file in docs/reference/backend/tasks/ (story- or standalone- prefix)
+  - MUST read design-system.md, constraints.md, and design spec before writing any code
+
+  Flow: Read Task File → Read Constraints → Execute Steps → Verify Each → Test → Update Task Status
 ---
 
 # Implement
@@ -28,69 +29,117 @@ Before generating any content, check `aico.json` in project root for `language` 
 
 ## Process
 
-0. **Check task file EXISTS** (MANDATORY):
-   - Look for `docs/reference/backend/tasks/{story-id}.md`
-   - If NOT exists → STOP and tell user: "Please run /backend.tasks first to break down the story"
-   - If exists → proceed to step 1
+0. **Read task file** (MANDATORY):
+   - Look for task file in `docs/reference/backend/tasks/`
+   - Accept either:
+     - `story-{story-name}-{number}-{task-name}.md`
+     - `standalone-{task-name}.md`
+   - If NOT exists → STOP and ask user which task to implement
 
-1. **Read constraints FIRST**: Load `docs/reference/backend/constraints.md`
-2. **Execute each step in order**:
-   - If test step: write failing test, verify it fails
-   - If impl step: write code, verify test passes
-   - Run verification command
+1. **Read constraints FIRST** (before any code):
+   - `docs/reference/backend/design-system.md` - Colors, typography, spacing
+   - `docs/reference/backend/constraints.md` - Tech stack, patterns
+   - If task references design: `docs/reference/backend/designs/{name}.md`
+
+2. **Execute implementation steps**:
+   - Read "Implementation Steps" section from task file
+   - Execute each step in order
+   - Run verification command after each step
    - If fail → fix before proceeding
+   - If pass → continue to next step
+
 3. **After all steps**:
-   - Run full test suite
-   - Run type check
-   - Run linter
-4. **Update task status** in `docs/reference/backend/tasks/{story}.md`
-5. **Notify PM for acceptance** - Notify PM to verify (PM checks all related tasks and updates Story status)
-6. **Report completion** (user decides when to commit)
+   - Run unit tests
+   - Run build check
+
+4. **Update task status**:
+   - Mark acceptance criteria checkboxes: `- [ ]` → `- [x]`
+   - Change Status from `pending` to `completed`
+
+5. **Notify completion**:
+   - Show task file path
+   - Show completion status
+   - **Check related Story** (if task is from story breakdown):
+     - Read `> **Story**:` field from task file
+     - If Story exists, check story file at `docs/reference/pm/stories/`
+     - Update Story's Related Tasks section: mark this task as `- [x]`
+     - Count total vs completed tasks for this story
+     - If all story tasks completed, show: "✅ All tasks completed! Story {story-name} is ready for acceptance. Please notify PM to verify."
+     - If partial completion, show: "⏳ Story {story-name} progress: X/Y tasks completed"
+
+## Task File Format
+
+The implement skill reads task files in this format:
+
+```markdown
+# Task: [Task Name]
+
+> **File**: `story-{name}-{n}-{task}.md` or `standalone-{task}.md`
+> **Status**: pending | in_progress | completed
+
+## Description
+
+...
+
+## Acceptance Criteria
+
+- [ ] Criterion 1
+- [ ] Criterion 2
+
+## Implementation Steps
+
+### Step 1: [Action]
+
+**Files**: ...
+**Action**: ...
+**Verify**: ...
+
+### Step 2: [Action]
+
+...
+```
 
 ## Execution Flow
 
 ```
-Check Task File → Read Constraints → Execute Steps (TDD) → Verify Each → Run All Tests → Mark Complete → Notify PM
-```
-
-## TDD Integration
-
-```
-Step N: Write failing test
-    ↓ Verify: test fails ❌
-Step N+1: Implement code
-    ↓ Verify: test passes ✅
+Read Task File
+     ↓
+Read Constraints (design-system.md, constraints.md, designs/)
+     ↓
+Execute Step 1 → Verify → Pass? → Continue
+                      ↓
+                     Fail → Fix → Retry
+     ↓
+Execute Step 2 → Verify → Pass? → Continue
+     ↓
+     ...
+     ↓
+Run Unit Tests
+     ↓
+Run Build Check
+     ↓
+Update Task File (mark AC completed, update status)
+     ↓
+Show Completion Summary
 ```
 
 ## Step Execution Rules
 
-### Rule 1: Follow Constraints
+### Rule 1: Follow Constraints Exactly
 
-```typescript
-// ❌ Wrong: Ignore constraints
-const password = user.password; // plaintext
+```tsx
+// ❌ Wrong: Ignore design system
+<button className="bg-blue-500 text-white">
 
-// ✅ Right: Follow security constraints
-const passwordHash = await bcrypt.hash(password, 10);
+// ✅ Right: Use design tokens
+<button className="bg-primary text-primary-foreground">
 ```
 
 ### Rule 2: Verify Before Proceeding
 
-Each step has a Verify section - MUST run it and confirm expected output.
+Each step has a Verify section - MUST run it and confirm expected output before moving on.
 
-### Rule 3: Test First (TDD)
-
-```markdown
-// ❌ Wrong order
-Step 1: Implement createUser method
-Step 2: Write test for createUser
-
-// ✅ Correct order
-Step 1: Write failing test for createUser
-Step 2: Implement createUser method
-```
-
-### Rule 4: No Skipping
+### Rule 3: No Skipping
 
 - Execute ALL steps in order
 - Do NOT combine steps
@@ -98,38 +147,68 @@ Step 2: Implement createUser method
 
 ## Post-Implementation Checklist
 
-1. **Run full test suite**: `npm test`
-2. **Run type check**: `npx tsc --noEmit`
-3. **Run linter**: `npm run lint`
-4. **Update task status** in tasks file
-5. **Notify PM**: Tell PM backend tasks are complete, request acceptance
-6. **Report completion** - user decides when to commit
+1. **Run tests**: `npm test [component]`
+2. **Run build**: `npm run build`
+3. **Update task file**:
+   - Mark AC checkboxes: `- [x]`
+   - Update Status: `completed`
+4. **Show completion summary** to user
 
 ## Error Handling
 
-| Error Type   | Action               |
-| ------------ | -------------------- |
-| Test failure | Debug, fix, re-run   |
-| Type error   | Fix types, re-verify |
-| Lint error   | Fix style issues     |
+| Error Type           | Action                                 |
+| -------------------- | -------------------------------------- |
+| TypeScript error     | Fix type issues, re-verify             |
+| Test failure         | Debug test, fix implementation or test |
+| Build failure        | Check imports, fix errors              |
+| Constraint violation | Re-read constraints, align code        |
+
+## Updating Task File
+
+After successful implementation, update the task file:
+
+### 1. Mark Acceptance Criteria as Completed
+
+```markdown
+## Acceptance Criteria
+
+- [x] Logo displays correctly ← Changed from [ ]
+- [x] Title uses correct typography ← Changed from [ ]
+- [x] Header is responsive ← Changed from [ ]
+- [x] Tests pass ← Changed from [ ]
+```
+
+### 2. Update Status
+
+```markdown
+> **Status**: completed ← Changed from pending
+```
+
+### 3. Add Completion Notes (optional)
+
+```markdown
+## Notes
+
+- Implemented on YYYY-MM-DD
+- All tests passing
+- Used design tokens from design-system.md
+```
 
 ## Key Rules
 
-- ALWAYS read constraints before writing any code
-- MUST follow TDD: test first, then implementation
-- ALWAYS run verification for each step
-- MUST run full test suite before marking complete
-- MUST notify PM after completing all tasks (PM handles story verification)
-- Let user decide when to commit
+- ALWAYS read task file first
+- ALWAYS read all constraint files before writing any code
+- MUST run verification command for each step
+- ALWAYS run tests before marking task complete
+- MUST update task file (mark AC, update status)
 
 ## Common Mistakes
 
-- ❌ Implement without task file → ✅ ALWAYS run /backend.tasks first to break down story
+- ❌ Start without reading task file → ✅ ALWAYS read task file first
 - ❌ Skip reading constraints → ✅ ALWAYS read before coding
-- ❌ Write code before test → ✅ TDD: test first
 - ❌ Skip verification → ✅ Run verify command for each step
-- ❌ Skip full test suite → ✅ Run all tests before complete
-- ❌ Directly update story status → ✅ Notify PM, let PM verify and update story
+- ❌ Skip tests → ✅ Run tests before marking complete
+- ❌ Forget to update task file → ✅ Update AC and status
 
 ---
 
@@ -151,68 +230,107 @@ RED → Verify Fails → GREEN → Verify Passes → REFACTOR → Repeat
 
 #### 1. RED - Write Failing Test
 
-Write ONE minimal test showing expected behavior:
-
 ```typescript
-test('createUser hashes password before storing', async () => {
-  const user = await userService.createUser({
-    email: 'test@example.com',
-    password: 'plaintext123',
-  });
-
-  expect(user.passwordHash).not.toBe('plaintext123');
-  expect(await bcrypt.compare('plaintext123', user.passwordHash)).toBe(true);
-});
+test('Button shows loading state when clicked', async () => {
+  render(<SubmitButton onClick={mockSubmit} />)
+  await userEvent.click(screen.getByRole('button'))
+  expect(screen.getByRole('button')).toBeDisabled()
+  expect(screen.getByTestId('spinner')).toBeInTheDocument()
+})
 ```
 
 #### 2. Verify RED - Watch It Fail
 
-**MANDATORY. Never skip.**
-
 ```bash
-npm test path/to/test.ts
+npm test -- --watch ComponentName
 ```
 
 #### 3. GREEN - Write Minimal Code
 
-Write simplest code to pass the test. **Don't add features not in test.**
+Write simplest code to pass the test. Don't add features not in test.
 
 #### 4. Verify GREEN - Watch It Pass
-
-```bash
-npm test path/to/test.ts
-```
 
 #### 5. REFACTOR - Clean Up
 
 Only after green. Keep tests passing.
 
-### Test Types
+### Testing Library Query Priority
 
-| Type        | Purpose         | Example                          |
-| ----------- | --------------- | -------------------------------- |
-| Unit        | Single function | `authService.validatePassword()` |
-| Integration | With real DB    | `userRepository.create()`        |
-| API         | HTTP endpoints  | `POST /auth/register`            |
+1. `getByRole` - accessible by everyone
+2. `getByLabelText` - form fields
+3. `getByText` - non-interactive elements
+4. `getByTestId` - last resort
+
+### Test Coverage Requirements
+
+| Component Type | Required Tests                   |
+| -------------- | -------------------------------- |
+| UI Component   | Render, props, variants          |
+| Form           | Validation, submit, error states |
+| Interactive    | User events, callbacks           |
+| Data Display   | Loading, error, empty states     |
 
 ### TDD Red Flags - STOP and Start Over
 
 - Code before test
 - Test passes immediately
-- Can't explain why test failed
-- Rationalizing "just this once"
+- Testing implementation details
+- `querySelector` everywhere
 
 ---
 
+## Example Workflow
+
+```bash
+# User: "Implement story-user-profile-2-header"
+
+1. ✓ Read task: docs/reference/backend/tasks/story-user-profile-2-header.md
+2. ✓ Read constraints:
+   - design-system.md
+   - constraints.md
+   - designs/user-profile.md
+
+3. ✓ Execute Step 1: Create component file
+   → Run: npm run typecheck
+   → ✓ Pass
+
+4. ✓ Execute Step 2: Implement header layout
+   → Run: npm run dev
+   → ✓ Pass
+
+5. ✓ Execute Step 3: Add responsive styles
+   → Run: npm run dev (test at different breakpoints)
+   → ✓ Pass
+
+6. ✓ Execute Step 4: Add unit tests
+   → Run: npm test LoginHeader
+   → ✓ 3 tests passed
+
+7. ✓ Run full test suite
+   → Run: npm test
+   → ✓ All tests passed
+
+8. ✓ Run build
+   → Run: npm run build
+   → ✓ Build successful
+
+9. ✓ Update task file:
+   - Marked all AC as completed
+   - Status: completed
+
+10. ✓ Task completed!
+```
+
 ## Iron Law
 
-**NO CODE WITHOUT APPROVED PLAN**
+**NO CODE WITHOUT TASK FILE**
 
 This rule is non-negotiable. Before writing code:
 
-1. Task breakdown must exist and be approved
+1. Task file must exist
 2. Acceptance criteria must be defined
-3. Dependencies must be identified and available
+3. Implementation steps must be clear
 
 ### Rationalization Defense
 

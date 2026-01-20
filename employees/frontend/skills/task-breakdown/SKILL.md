@@ -1,19 +1,19 @@
 ---
 name: aico-frontend-task-breakdown
 description: |
-  Break down PM story into frontend tasks following UI DEVELOPMENT order: Setup → Static UI → Dynamic Logic → Interactions → Testing.
+  Break down PM story into independent frontend task files following UI DEVELOPMENT order: Setup → Static UI → Dynamic Logic → Interactions → Testing.
 
-  UNIQUE VALUE: Ensures proper dependency order. Tasks are ordered by UI development layers, not random order.
+  UNIQUE VALUE: Creates independent task files (story-{name}-{n}-{task}.md) for each task. Tasks are ordered by UI development layers.
 
   Use this skill when:
   - Running /frontend.tasks command
   - User asks to "break down story", "create frontend tasks", "split into tasks"
-  - Have story at docs/reference/pm/stories/ and need organized task list
+  - Have story at docs/reference/pm/stories/ and need organized task files
   - Need tasks ordered by UI development layers (not random order)
   - Starting frontend work and want organized task list
 
   Task order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests
-  Output: ALWAYS write to docs/reference/frontend/tasks/{story-name}.md
+  Output: Create multiple files in docs/reference/frontend/tasks/ with story- prefix
 ---
 
 # Task Breakdown
@@ -23,24 +23,24 @@ description: |
 **BEFORE doing anything, you MUST:**
 
 1. **CHECK EXISTING TASKS FIRST**:
-   - ALWAYS check if `docs/reference/frontend/tasks/{story-name}.md` already exists
-   - If exists: READ it and continue from current progress
+   - ALWAYS check if task files with `story-{story-name}-*` already exist
+   - If exists: READ them and continue from current progress
    - If not exists: Create new task breakdown
    - **NEVER re-break down existing tasks**
 
-2. **UPDATE PROGRESS TABLE**:
-   - When completing a task, ALWAYS update the Progress table
-   - Mark task status: ⏳ pending → 🔄 in_progress → ✅ completed
-   - Update the "Last Updated" date
+2. **FILE NAMING**:
+   - Pattern: `story-{story-name}-{number}-{task-name}.md`
+   - Example: `story-user-profile-1-setup-component.md`
+   - `{number}`: Sequential number (1, 2, 3...)
+   - `{task-name}`: Short kebab-case description
 
-3. **MARK ACCEPTANCE CRITERIA AS COMPLETED**:
-   - When a task is done, check ALL acceptance criteria
-   - Change `- [ ]` to `- [x]` for each completed criterion
-   - Only mark task as ✅ completed when ALL criteria are checked
-   - Example: `- [ ] Criterion 1` → `- [x] Criterion 1`
+3. **ONE TASK PER FILE**:
+   - Each file = one complete task
+   - Each task = independently testable
+   - Clear scope and acceptance criteria
 
 4. **ALWAYS SAVE TO CORRECT PATH**:
-   - Path: `docs/reference/frontend/tasks/{story-name}.md`
+   - Path: `docs/reference/frontend/tasks/story-{story-name}-{n}-{task}.md`
    - NO exceptions, NO other locations
 
 5. **READ CONTEXT FIRST**:
@@ -57,44 +57,77 @@ Before generating any content, check `aico.json` in project root for `language` 
 
 1. **Read story/PRD**: Load from `docs/reference/pm/stories/` or `docs/reference/pm/versions/`
 2. **Read design** (if exists): Load from `docs/reference/frontend/designs/`
-3. **Identify components**: What UI elements are needed
-4. **Identify interactions**: What logic and events are needed
-5. **Break into tasks**: Independently testable, single responsibility
-6. **Order by dependencies**: Setup → Static UI → Dynamic → Tests
-7. **Save output**: ALWAYS write to `docs/reference/frontend/tasks/{story-name}.md`
+3. **Read constraints**: Load design system and technical constraints
+4. **Identify components**: What UI elements are needed
+5. **Identify interactions**: What logic and events are needed
+6. **Break into tasks**: Independently testable, single responsibility
+7. **Order by dependencies**: Setup → Static UI → Dynamic → Tests
+8. **Generate files**: Create one file per task with story- prefix
+9. **Update Story file**: Add "Related Tasks" section to story file with task list
+10. **Summary**: Show created files and next steps
 
-## Task File Template
+## Task File Format
 
 ```markdown
-# [Story Name] - Frontend Tasks
+# Task: [Task Name]
 
-> Project: [project-name]
-> Created: YYYY-MM-DD
-> Last Updated: YYYY-MM-DD
-> Source: docs/reference/pm/stories/[story].md
-> Design: docs/reference/frontend/designs/[name].md
-> Status: in_progress
+> **File**: `story-{story-name}-{number}-{task-name}.md`
+> **Type**: feature | improvement
+> **Source**: story:{story-name}
+> **Story**: docs/reference/pm/stories/{story-id}.md
+> **Design**: docs/reference/frontend/designs/{design-name}.md
+> **Created**: YYYY-MM-DD
+> **Status**: pending
 
-## Progress
+## Description
 
-| Task                         | Status         | Notes |
-| ---------------------------- | -------------- | ----- |
-| 1. Setup component structure | ✅ completed   |       |
-| 2. Implement header section  | 🔄 in_progress |       |
-| 3. Implement content section | ⏳ pending     |       |
+[Clear description of what this task achieves]
 
-## Tasks
+## Context
 
-### Task 1: [Task Name]
+- Part of [Story Name] story
+- Depends on: [Previous task if any]
+- Design reference: [Link to design if applicable]
+- Should follow design system tokens
 
-**Status**: ⏳ pending
-**Goal**: What this task achieves
-**Scope**: Files to create/modify
-**Acceptance Criteria**:
+## Acceptance Criteria
 
 - [ ] Criterion 1
 - [ ] Criterion 2
-      **Dependencies**: Task X (if any)
+- [ ] Criterion 3
+
+## Scope
+
+**Files to create/modify:**
+
+- Create: `src/components/...`
+- Modify: `src/pages/...`
+
+**Key components:**
+
+- Component A
+- Component B
+
+## Implementation Steps
+
+> Note: Detailed steps can be added using `/frontend.plan` command
+
+### Step 1: [Brief description]
+
+**Files**: ...
+**Action**: ...
+**Verify**: ...
+
+---
+
+## Notes
+
+[Any additional notes, considerations, or technical decisions]
+
+## Related Tasks
+
+- Depends on: story-{story-name}-{prev-number}-{prev-task}
+- Blocks: story-{story-name}-{next-number}-{next-task}
 ```
 
 ## Task Types
@@ -112,20 +145,65 @@ Before generating any content, check `aico.json` in project root for `language` 
 - Each task = independently testable
 - Each task = single responsibility
 - Each task = clear scope (not too big, not too small)
+- Each task = 1-4 hours of work
 
 ## Ordering Rules
 
-1. Setup tasks first
-2. Static UI before dynamic
-3. Core functionality before edge cases
-4. Tests after implementation
+1. **Setup tasks first** - Component structure, routing
+2. **Static UI before dynamic** - Layout before logic
+3. **Core functionality before edge cases** - Happy path first
+4. **Tests after implementation** - Each feature gets tests
+
+## Updating Story File
+
+After generating task files, **ALWAYS** update the story file to add the "Related Tasks" section:
+
+```markdown
+## Related Tasks
+
+### Frontend Tasks
+
+- [ ] docs/reference/frontend/tasks/story-user-profile-1-setup-component.md
+- [ ] docs/reference/frontend/tasks/story-user-profile-2-implement-header.md
+- [ ] docs/reference/frontend/tasks/story-user-profile-3-implement-avatar.md
+- [ ] docs/reference/frontend/tasks/story-user-profile-4-implement-bio.md
+- [ ] docs/reference/frontend/tasks/story-user-profile-5-add-tests.md
+```
+
+**Key points:**
+
+- Add this section at the end of the story file (before any existing notes)
+- Use `- [ ]` checkboxes for all tasks (they will be checked when tasks complete)
+- List tasks in execution order (Setup → UI → Logic → Tests)
+- Keep the section organized by frontend/backend if both exist
+
+## Output Example
+
+After breaking down "user-profile" story:
+
+```
+Created 5 task files:
+
+✓ docs/reference/frontend/tasks/story-user-profile-1-setup-component.md
+✓ docs/reference/frontend/tasks/story-user-profile-2-implement-header.md
+✓ docs/reference/frontend/tasks/story-user-profile-3-implement-avatar.md
+✓ docs/reference/frontend/tasks/story-user-profile-4-implement-bio.md
+✓ docs/reference/frontend/tasks/story-user-profile-5-add-tests.md
+
+Next steps:
+1. Review task files
+2. Use /frontend.plan to add detailed steps to each task
+3. Use aico-frontend-implement to execute tasks
+```
 
 ## Key Rules
 
+- ALWAYS create separate files for each task
+- MUST use `story-{story-name}-{number}-{task-name}.md` naming
 - ALWAYS include test tasks at the end
 - MUST note dependencies between tasks
-- ALWAYS save to `docs/reference/frontend/tasks/` directory
 - Keep tasks focused - not too big, not too small
+- Each task file is self-contained and complete
 
 ## Common Mistakes
 
@@ -133,3 +211,4 @@ Before generating any content, check `aico.json` in project root for `language` 
 - ❌ Tasks too small (add one button) → ✅ Group related work
 - ❌ Skip dependencies → ✅ Note which tasks depend on others
 - ❌ Forget testing → ✅ Always include test tasks
+- ❌ Vague task names → ✅ Use descriptive names in filename

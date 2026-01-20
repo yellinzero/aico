@@ -41,10 +41,9 @@ Convert a single backend task into atomic 2-5 minute implementation steps.
      - Exact action to take
      - Verification command
 
-4. **Present plan**
-   - Show step-by-step implementation plan
-   - Include TDD steps (test first)
-   - Include verification for each step
+4. **Save plan to file**
+   - Save to `docs/reference/backend/plans/{story}-task-{number}.md`
+   - Present summary and next steps to user
 
 ## Output
 
@@ -69,5 +68,7 @@ Convert a single backend task into atomic 2-5 minute implementation steps.
 
 ...
 
-Ready to implement? Use the implement skill to execute this plan.
+**Note**: The plan is saved to `docs/reference/backend/plans/{story}-task-{number}.md`
+
+Ready to implement? Review the plan file, then use the `aico-backend-implement` skill to execute this plan.
 ```

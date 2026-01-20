@@ -11,7 +11,9 @@ Convert a single task into atomic implementation steps (2-5 minutes each).
 1. Read the specified task from task list
 2. Read related design and constraints
 3. Create atomic step-by-step plan
-4. Each step has verification command
+4. Save plan to `docs/reference/frontend/plans/` directory
+5. Each step has verification command
+6. Present summary and next steps to user
 
 ## Prerequisites
 
@@ -45,12 +47,14 @@ Convert a single task into atomic implementation steps (2-5 minutes each).
 │ - Break into atomic steps        │
 │ - Add verification for each      │
 │ - Include exact code             │
+│ - Save to plans/ directory       │
 └───────────┬───────────────────────┘
             │
             ▼
 ┌───────────────────────────────────┐
-│ Present plan to user             │
-│ Ready for implementation         │
+│ Present summary to user          │
+│ - Plan file location             │
+│ - Next steps for execution       │
 └───────────┴───────────────────────┘
 ```
 
@@ -118,46 +122,42 @@ Expected: No errors
 
 ...
 
----
-
-## Step 5: Commit
-
-```bash
-git add src/components/Profile/ProfileHeader.tsx
-git commit -m "feat(profile): add ProfileHeader component"
 ```
 
-````
+**Note**: The plan will be saved to `docs/reference/frontend/plans/{story}-task-{number}.md`
+
+```
 
 ## Step Granularity
 
 Each step = 2-5 minutes of work:
 
-| Good | Bad |
-|------|-----|
+| Good                     | Bad                     |
+| ------------------------ | ----------------------- |
 | Create file with imports | Create entire component |
-| Add component skeleton | Implement all features |
-| Implement one section | Implement all sections |
-| Write one test | Write all tests |
+| Add component skeleton   | Implement all features  |
+| Implement one section    | Implement all sections  |
+| Write one test           | Write all tests         |
 
 ## After Planning
 
-After receiving the plan:
+After the plan is created and saved:
 
-1. **Review** - Confirm plan makes sense
-2. **Execute** - Use `aico-frontend-implement` skill to execute step by step
-3. **Verify** - Each step must pass verification before continuing
-4. **Complete** - Update task status when all steps done
+1. **Review** - Review the saved plan file
+2. **Confirm** - Confirm the approach is correct
+3. **Execute** - Use `aico-frontend-implement` skill to execute step by step
+4. **Verify** - Each step must pass verification before continuing
+5. **Complete** - Update task status and commit when all steps done
 
 ## Example
 
 ```bash
 /frontend.plan user-profile 2
-````
+```
 
-Outputs plan for "Implement header section" task with:
+Creates a plan file at `docs/reference/frontend/plans/user-profile-task-2.md` with:
 
 - 5 atomic steps
 - Exact code for each step
 - Verification command for each
-- Commit message at the end
+- Plan ready for review and execution

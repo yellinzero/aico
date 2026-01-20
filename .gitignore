@@ -45,11 +45,15 @@ tsconfig.tsbuildinfo
 .notes
 *.local
 
-docs/reference/pm/stories
-docs/reference/pm/versions
-docs/reference/frontend/designs
-docs/reference/frontend/tasks
-docs/reference/backend/tasks
+docs/reference/pm/**
+!docs/reference/pm/constitution.md
+
+docs/reference/frontend/**
+!docs/reference/frontend/constraints.md
+!docs/reference/frontend/design-system.md
+
+docs/reference/backend/**
+!docs/reference/backend/constraints.md
 
 .next
 
