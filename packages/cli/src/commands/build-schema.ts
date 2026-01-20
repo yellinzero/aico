@@ -53,16 +53,8 @@ const CONFIG_SCHEMA = {
       description: 'Installed employees state',
       additionalProperties: {
         type: 'object',
-        required: ['platforms', 'installedAt'],
+        required: ['installedAt'],
         properties: {
-          platforms: {
-            type: 'array',
-            items: {
-              type: 'string',
-              enum: ['claude-code', 'codex'],
-            },
-            description: 'Platforms this employee is installed on',
-          },
           installedAt: {
             type: 'string',
             format: 'date-time',
@@ -90,7 +82,7 @@ const CONFIG_SCHEMA = {
       description: 'Standalone installed skills',
       additionalProperties: {
         type: 'object',
-        required: ['version', 'installedAt', 'source', 'platforms'],
+        required: ['version', 'installedAt', 'source'],
         properties: {
           version: {
             type: 'string',
@@ -106,13 +98,6 @@ const CONFIG_SCHEMA = {
             enum: ['standalone', 'employee'],
             description: 'Installation source',
           },
-          platforms: {
-            type: 'array',
-            items: {
-              type: 'string',
-              enum: ['claude-code', 'codex'],
-            },
-          },
         },
       },
     },
@@ -121,7 +106,7 @@ const CONFIG_SCHEMA = {
       description: 'Shared skills with reference tracking',
       additionalProperties: {
         type: 'object',
-        required: ['version', 'installedAt', 'platforms', 'usedBy'],
+        required: ['version', 'installedAt', 'usedBy'],
         properties: {
           version: {
             type: 'string',
@@ -131,13 +116,6 @@ const CONFIG_SCHEMA = {
             type: 'string',
             format: 'date-time',
             description: 'Installation timestamp',
-          },
-          platforms: {
-            type: 'array',
-            items: {
-              type: 'string',
-              enum: ['claude-code', 'codex'],
-            },
           },
           usedBy: {
             type: 'array',

@@ -20,7 +20,6 @@ export const platformPathsSchema = z.object({
 export type PlatformPaths = z.infer<typeof platformPathsSchema>;
 
 export const employeeStateSchema = z.object({
-  platforms: z.array(platformSchema),
   installedAt: z.string(),
   version: z.string().optional(),
   // Track installed skills and commands for update detection
@@ -35,7 +34,6 @@ export const skillStateSchema = z.object({
   version: z.string(),
   installedAt: z.string(),
   source: z.enum(['standalone', 'employee']), // standalone = single install, employee = part of employee
-  platforms: z.array(platformSchema),
 });
 
 export type SkillState = z.infer<typeof skillStateSchema>;
@@ -44,7 +42,6 @@ export type SkillState = z.infer<typeof skillStateSchema>;
 export const sharedSkillStateSchema = z.object({
   version: z.string(),
   installedAt: z.string(),
-  platforms: z.array(platformSchema),
   // Track which employees depend on this shared skill
   // When this array becomes empty, the shared skill can be removed
   usedBy: z.array(z.string()),

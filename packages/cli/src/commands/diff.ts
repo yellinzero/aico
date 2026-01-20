@@ -87,7 +87,7 @@ async function diffEmployee(
     return null;
   }
 
-  const platform = installedState.platforms[0] || config.defaultPlatform;
+  const platform = config.defaultPlatform;
   const adapter = adapters[platform];
   const { skillsDir, commandsDir } = resolvePlatformPaths(
     cwd,

@@ -35,11 +35,8 @@ async function runList(options: ListOptions): Promise<void> {
     logger.break();
 
     for (const [name, state] of employees) {
-      const platforms = state.platforms.join(', ');
       const date = new Date(state.installedAt).toLocaleDateString();
-      logger.log(
-        `  ${logger.highlight(name.padEnd(15))} ${platforms.padEnd(20)} ${date}`
-      );
+      logger.log(`  ${logger.highlight(name.padEnd(15))} ${date}`);
     }
   } else {
     // Show available employees from registry
@@ -81,10 +78,8 @@ async function runList(options: ListOptions): Promise<void> {
         return;
       }
 
-      for (const [name, state] of employees) {
-        logger.log(
-          `  ${logger.highlight(name.padEnd(15))} ${state.platforms.join(', ')}`
-        );
+      for (const [name] of employees) {
+        logger.log(`  ${logger.highlight(name)}`);
       }
     }
   }

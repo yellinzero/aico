@@ -91,26 +91,15 @@ async function removeEmployeeItem(
 
   // Determine target platforms
   let platforms: Platform[];
-  if (installedState) {
-    if (platformsOpt && platformsOpt.length > 0) {
-      platforms = platformsOpt.filter((p) =>
-        installedState.platforms.includes(p)
-      );
-      if (platforms.length === 0) {
-        logger.warn(
-          `Employee '${employeeName}' is not installed on specified platform(s). Skipping.`
-        );
-        return;
-      }
-    } else {
-      platforms = installedState.platforms as Platform[];
-    }
+  if (platformsOpt && platformsOpt.length > 0) {
+    // User specified platforms
+    platforms = platformsOpt;
   } else {
-    if (platformsOpt && platformsOpt.length > 0) {
-      platforms = platformsOpt;
-    } else {
-      platforms = Object.keys(config.platforms) as Platform[];
-    }
+    // Remove from all configured platforms
+    platforms = Object.keys(config.platforms) as Platform[];
+  }
+
+  if (!installedState) {
     logger.dim(
       `Employee '${employeeName}' not in config, will attempt to remove files from: ${platforms.join(', ')}`
     );
@@ -242,26 +231,12 @@ async function removeSkillItem(
 
   // Determine target platforms
   let platforms: Platform[];
-  if (installedState) {
-    if (platformsOpt && platformsOpt.length > 0) {
-      platforms = platformsOpt.filter((p) =>
-        installedState.platforms.includes(p)
-      );
-      if (platforms.length === 0) {
-        logger.warn(
-          `Skill '${skillFullName}' is not installed on specified platform(s). Skipping.`
-        );
-        return;
-      }
-    } else {
-      platforms = installedState.platforms as Platform[];
-    }
+  if (platformsOpt && platformsOpt.length > 0) {
+    // User specified platforms
+    platforms = platformsOpt;
   } else {
-    if (platformsOpt && platformsOpt.length > 0) {
-      platforms = platformsOpt;
-    } else {
-      platforms = [config.defaultPlatform];
-    }
+    // Remove from all configured platforms
+    platforms = Object.keys(config.platforms) as Platform[];
   }
 
   // Confirm removal
