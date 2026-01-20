@@ -16,6 +16,28 @@ description: |
 
 # User Story Writing
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+**BEFORE doing anything, you MUST:**
+
+1. **CHECK EXISTING FILES**:
+   - Look in `docs/reference/pm/stories/` directory
+   - If story file already exists, READ it first and ask user if they want to update it
+   - DO NOT create duplicate story files
+
+2. **ALWAYS USE THIS SKILL**:
+   - When user says "write story", "create story", "add story" → USE THIS SKILL
+   - DO NOT write story files directly without using this skill
+   - This skill ensures proper format and validation
+
+3. **ALWAYS SAVE TO CORRECT PATH**:
+   - Path: `docs/reference/pm/stories/{story-name}.md`
+   - NO exceptions, NO other locations
+
+4. **READ CONTEXT FIRST**:
+   - Read `docs/reference/pm/constitution.md` for product context
+   - Read related version file from `docs/reference/pm/versions/` if exists
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.

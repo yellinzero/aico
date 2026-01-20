@@ -8,7 +8,7 @@ Create or update product plans for requirements, managing versions and stories.
 
 ## What This Command Does
 
-1. Check PM context in `docs/reference/pm/context.md`
+1. Check PM constitution in `docs/reference/pm/constitution.md`
 2. Scan existing docs to understand current product state
 3. Based on user's requirement:
    - Create new version plan if needed
@@ -55,7 +55,7 @@ If no description provided, command will ask for it.
 
 ```
 docs/reference/pm/
-├── context.md           # Product context (from /pm.init)
+├── constitution.md      # Product constitution (from /pm.init)
 ├── versions/
 │   ├── v0.1.md          # Version plan
 │   └── v0.2.md

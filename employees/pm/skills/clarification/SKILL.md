@@ -19,6 +19,12 @@ description: |
 
 # Requirement Clarification
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+1. **SEARCH FIRST**: Always search `docs/reference/pm/` for related documents before asking questions
+2. **ONE QUESTION AT A TIME**: Max 5 questions per session
+3. **UPDATE DOCUMENTS**: After clarification, update the relevant story/version files
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.

@@ -16,6 +16,13 @@ description: |
 
 # Design
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+1. **CHECK EXISTING DESIGNS**: Always check `docs/reference/frontend/designs/` first
+2. **READ DESIGN SYSTEM**: Must read `docs/reference/frontend/design-system.md` before designing
+3. **READ CONSTRAINTS**: Must read `docs/reference/frontend/constraints.md` for tech stack
+4. **SAVE TO CORRECT PATH**: `docs/reference/frontend/designs/{name}.md`
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.

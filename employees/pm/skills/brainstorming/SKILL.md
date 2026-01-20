@@ -16,6 +16,12 @@ description: |
 
 # Brainstorming
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+1. **READ CONSTITUTION**: Always read `docs/reference/pm/constitution.md` first for product context
+2. **ONE QUESTION AT A TIME**: Never ask multiple questions in one message
+3. **USE MULTIPLE CHOICE**: Prefer AskUserQuestion tool with 2-4 options
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.
