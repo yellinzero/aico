@@ -1,138 +1,137 @@
-# [PRODUCT_NAME] 产品宪章
+# [PRODUCT_NAME] Product Constitution
 
 > Project: [PROJECT_NAME]
 > Created: [CREATED_DATE]
 > Last Updated: [UPDATED_DATE]
 
-本文档为所有产品管理活动提供共享约束和领域信息。
+This document provides shared constraints and domain information for all product management activities.
 
 ---
 
-## 产品概述
+## Product Overview
 
-### 基本信息
+### Basic Information
 
-| 项目           | 内容                   |
-| -------------- | ---------------------- |
-| **产品名称**   | [PRODUCT_NAME]         |
-| **一句话定义** | [ONE_LINE_DESCRIPTION] |
-| **Slogan**     | [SLOGAN]               |
-| **当前版本**   | v1.0.0                 |
+| Item                    | Content                |
+| ----------------------- | ---------------------- |
+| **Product Name**        | [PRODUCT_NAME]         |
+| **One-line Definition** | [ONE_LINE_DESCRIPTION] |
+| **Slogan**              | [SLOGAN]               |
 
-### 目标用户
+### Target Users
 
-| 用户类型     | 描述                         |
-| ------------ | ---------------------------- |
-| **主要用户** | [PRIMARY_USER_DESCRIPTION]   |
-| **次要用户** | [SECONDARY_USER_DESCRIPTION] |
+| User Type           | Description                  |
+| ------------------- | ---------------------------- |
+| **Primary Users**   | [PRIMARY_USER_DESCRIPTION]   |
+| **Secondary Users** | [SECONDARY_USER_DESCRIPTION] |
 
-### 核心价值主张
+### Core Value Proposition
 
 [CORE_VALUE_PROPOSITION]
 
 ---
 
-## 领域信息
+## Domain Information
 
-### 行业/市场背景
+### Industry/Market Context
 
 [INDUSTRY_CONTEXT]
 
-### 核心术语
+### Core Terminology
 
-| 术语         | 定义           |
+| Term         | Definition     |
 | ------------ | -------------- |
 | **[TERM_1]** | [DEFINITION_1] |
 | **[TERM_2]** | [DEFINITION_2] |
 
-### 合规要求
+### Compliance Requirements
 
-- [ ] 无特殊合规要求
+- [ ] No special compliance requirements
 - [ ] GDPR
 - [ ] SOC 2
-- [ ] 其他: [SPECIFY]
+- [ ] Other: [SPECIFY]
 
 ---
 
-## 技术约束
+## Technical Constraints
 
-| 约束         | 说明              |
-| ------------ | ----------------- |
-| **语言**     | [LANGUAGE]        |
-| **运行环境** | [RUNTIME]         |
-| **主要框架** | [FRAMEWORK]       |
-| **包管理**   | [PACKAGE_MANAGER] |
-
----
-
-## 业务约束
-
-| 约束类型 | 说明                   |
-| -------- | ---------------------- |
-| **预算** | [BUDGET_CONSTRAINTS]   |
-| **时间** | [TIMELINE_CONSTRAINTS] |
-| **资源** | [RESOURCE_CONSTRAINTS] |
+| Constraint          | Description       |
+| ------------------- | ----------------- |
+| **Language**        | [LANGUAGE]        |
+| **Runtime**         | [RUNTIME]         |
+| **Main Framework**  | [FRAMEWORK]       |
+| **Package Manager** | [PACKAGE_MANAGER] |
 
 ---
 
-## 标准规范
+## Business Constraints
 
-### 文档语言
+| Constraint Type | Description            |
+| --------------- | ---------------------- |
+| **Budget**      | [BUDGET_CONSTRAINTS]   |
+| **Timeline**    | [TIMELINE_CONSTRAINTS] |
+| **Resources**   | [RESOURCE_CONSTRAINTS] |
 
-- [ ] 中文
+---
+
+## Standards
+
+### Documentation Language
+
+- [ ] Chinese
 - [ ] English
-- [ ] 双语
+- [ ] Bilingual
 
-### 命名规范
+### Naming Conventions
 
-| 类型     | 规范       | 示例           |
-| -------- | ---------- | -------------- |
-| 版本号   | 语义化版本 | v1.0.0, v1.1.0 |
-| 故事编号 | S-XXX      | S-001, S-002   |
-| 任务编号 | T-XXX      | T-001, T-002   |
+| Type           | Convention       | Example        |
+| -------------- | ---------------- | -------------- |
+| Version Number | Semantic Version | v1.0.0, v1.1.0 |
+| Story ID       | S-XXX            | S-001, S-002   |
+| Task ID        | T-XXX            | T-001, T-002   |
 
-### 版本规范
+### Versioning
 
-- 遵循语义化版本（SemVer）
-- 格式：`v{major}.{minor}.{patch}`
-- Major: 重大变更，不兼容
-- Minor: 新功能，向后兼容
-- Patch: Bug 修复
+- Follow Semantic Versioning (SemVer)
+- Format: `v{major}.{minor}.{patch}`
+- Major: Breaking changes, not backward compatible
+- Minor: New features, backward compatible
+- Patch: Bug fixes
 
 ---
 
-## 项目结构
+## Project Structure
 
 ```
 docs/reference/
 ├── pm/
-│   ├── constitution.md     # 本文档
-│   ├── versions/           # 版本规划
+│   ├── constitution.md     # This document
+│   ├── versions/           # Version plans
 │   │   └── v1.0.0.md
-│   └── stories/            # 用户故事
+│   └── stories/            # User stories
 │       ├── S-001.md
 │       └── ...
 ├── frontend/
-│   ├── design-system.md    # 设计系统
-│   ├── constraints.md      # 前端约束
-│   ├── designs/            # 页面设计
-│   └── tasks/              # 前端任务
+│   ├── design-system.md    # Design system
+│   ├── constraints.md      # Frontend constraints
+│   ├── designs/            # Page designs
+│   └── tasks/              # Frontend tasks
 └── backend/
-    ├── constraints.md      # 后端约束
-    └── tasks/              # 后端任务
+    ├── constraints.md      # Backend constraints
+    └── tasks/              # Backend tasks
 ```
 
 ---
 
-## Git 规范
+## Git Conventions
 
-### 提交信息
+### Commit Messages
 
-- 使用 Conventional Commits
-- 格式：`type(scope): subject`
-- 类型：feat, fix, docs, style, refactor, test, chore
+- Use Conventional Commits
+- Format: `type(scope): subject`
+- Types: feat, fix, docs, style, refactor, test, chore
 
-### 分支命名
+### Branch Naming
 
 ```
 feature/[feature-name]

@@ -6,7 +6,6 @@ import { remove } from './commands/remove.js';
 import { list } from './commands/list.js';
 import { build } from './commands/build.js';
 import { diff } from './commands/diff.js';
-import { update } from './commands/update.js';
 import { search } from './commands/search.js';
 import { check } from './commands/check.js';
 
@@ -35,7 +34,6 @@ async function main(): Promise<void> {
   program.addCommand(init);
   program.addCommand(add);
   program.addCommand(remove);
-  program.addCommand(update);
   program.addCommand(list);
   program.addCommand(diff);
   program.addCommand(build);

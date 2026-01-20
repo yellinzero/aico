@@ -1,6 +1,6 @@
 {
   "name": "@the-aico/cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "aico CLI - AI employee management tool",
   "type": "module",
   "bin": {
@@ -31,7 +31,7 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "build:registry": "node dist/index.js build",
+    "build:registry": "node dist/index.js build -c ../..",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
