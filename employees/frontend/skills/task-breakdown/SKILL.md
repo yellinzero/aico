@@ -18,6 +18,37 @@ description: |
 
 # Task Breakdown
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+**BEFORE doing anything, you MUST:**
+
+1. **CHECK EXISTING TASKS FIRST**:
+   - ALWAYS check if `docs/reference/frontend/tasks/{story-name}.md` already exists
+   - If exists: READ it and continue from current progress
+   - If not exists: Create new task breakdown
+   - **NEVER re-break down existing tasks**
+
+2. **UPDATE PROGRESS TABLE**:
+   - When completing a task, ALWAYS update the Progress table
+   - Mark task status: ⏳ pending → 🔄 in_progress → ✅ completed
+   - Update the "Last Updated" date
+
+3. **MARK ACCEPTANCE CRITERIA AS COMPLETED**:
+   - When a task is done, check ALL acceptance criteria
+   - Change `- [ ]` to `- [x]` for each completed criterion
+   - Only mark task as ✅ completed when ALL criteria are checked
+   - Example: `- [ ] Criterion 1` → `- [x] Criterion 1`
+
+4. **ALWAYS SAVE TO CORRECT PATH**:
+   - Path: `docs/reference/frontend/tasks/{story-name}.md`
+   - NO exceptions, NO other locations
+
+5. **READ CONTEXT FIRST**:
+   - Read story from `docs/reference/pm/stories/`
+   - Read design from `docs/reference/frontend/designs/` if exists
+   - Read design system from `docs/reference/frontend/design-system.md`
+   - Read constraints from `docs/reference/frontend/constraints.md`
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.

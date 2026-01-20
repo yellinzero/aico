@@ -34,9 +34,9 @@ aico supports multiple AI employees by providing employee-specific skills, comma
 
 | Employee     | Role              | Skills | Commands | Description                                    |
 | ------------ | ----------------- | ------ | -------- | ---------------------------------------------- |
-| **pm**       | Product Manager   | 7      | 3        | Product requirements and user story management |
-| **frontend** | Frontend Engineer | 8      | 4        | UI/UX implementation and frontend development  |
-| **backend**  | Backend Engineer  | 5      | 3        | API and backend system development             |
+| **pm**       | Product Manager   | 8      | 3        | Product requirements and user story management |
+| **frontend** | Frontend Engineer | 6      | 4        | UI/UX implementation and frontend development  |
+| **backend**  | Backend Engineer  | 4      | 3        | API and backend system development             |
 
 ### Shared Skills (`_shared`)
 

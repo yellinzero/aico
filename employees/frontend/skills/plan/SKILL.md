@@ -22,6 +22,13 @@ description: |
 
 # Plan
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+1. **READ TASK FILE**: Must read task file from `docs/reference/frontend/tasks/` first
+2. **READ DESIGN SYSTEM**: Must read `docs/reference/frontend/design-system.md` for design tokens
+3. **READ CONSTRAINTS**: Must read `docs/reference/frontend/constraints.md` for tech stack
+4. **ONE TASK AT A TIME**: Plan for ONE specific task, not the entire story
+
 ## Language Configuration
 
 Before generating any content, check `aico.json` in project root for `language` field to determine the output language. If not set, default to English.
@@ -30,14 +37,15 @@ Before generating any content, check `aico.json` in project root for `language` 
 
 1. **Read task**: Get task details from `docs/reference/frontend/tasks/{story}.md`
 2. **Read design**: Load related design from `docs/reference/frontend/designs/`
-3. **Read constraints**: Load `docs/reference/frontend/constraints.md`
-4. **Break into atomic steps**:
+3. **Read design system**: Load `docs/reference/frontend/design-system.md` for design tokens
+4. **Read constraints**: Load `docs/reference/frontend/constraints.md`
+5. **Break into atomic steps**:
    - Start with file creation/setup
    - One section/feature per step
    - Include verification for each step
    - End with commit
-5. **Keep steps atomic**: One action per step
-6. **Present plan to user** (do not save to file)
+6. **Keep steps atomic**: One action per step
+7. **Present plan to user** (do not save to file)
 
 ## Plan Format
 
