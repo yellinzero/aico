@@ -1,24 +1,23 @@
 ---
 name: aico-backend-implement
 description: |
-  Execute backend task implementation with TDD. Read task file, execute implementation steps, verify each step, update status.
+  Execute backend task implementation with TDD. Read task file, execute steps, verify each, update status.
 
   Use this skill when:
-  - User asks to "implement this task", "implement the plan", "start implementation", "execute plan"
-  - Have a task file (story- or standalone- prefix) ready to execute
-  - User says "start coding", "write the code", "begin implementation"
-  - User asks to "use TDD", "write test first", "test-driven" for backend code
+  - User asks to "implement task/plan", "start implementation", "execute plan", or "start coding"
+  - Have task file (story-* or standalone-*) ready to execute
+  - User asks to "use TDD", "write test first", or "test-driven"
   - User asks to "write tests", "add tests", "create tests"
-  - Fixing UI bugs (write failing test that reproduces bug first)
+  - Fixing bugs (write failing test first)
 
   TDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
-  TDD Cycle: RED (write failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR
+  TDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR
 
   Prerequisites:
-  - MUST have task file in docs/reference/backend/tasks/ (story- or standalone- prefix)
-  - MUST read design-system.md, constraints.md, and design spec before writing any code
+  - Task file in docs/reference/backend/tasks/ (story-* or standalone-*)
+  - Read constraints.md and design spec before coding
 
-  Flow: Read Task File → Read Constraints → Execute Steps → Verify Each → Test → Update Task Status
+  Flow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status
 ---
 
 # Implement

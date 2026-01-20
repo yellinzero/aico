@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://the-aico.com/schema/config.json",
+  "title": "aico Configuration",
+  "description": "Configuration file schema for aico.json",
+  "type": "object",
+  "required": ["defaultPlatform", "platforms"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "language": {
+      "type": "string",
+      "description": "Default language for documentation",
+      "default": "en"
+    },
+    "defaultPlatform": {
+      "type": "string",
+      "enum": ["claude-code", "codex"],
+      "description": "Default platform for installation"
+    },
+    "platforms": {
+      "type": "object",
+      "description": "Platform-specific path configurations",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["skills", "commands"],
+        "properties": {
+          "skills": {
+            "type": "string",
+            "description": "Path to skills directory"
+          },
+          "commands": {
+            "type": "string",
+            "description": "Path to commands directory"
+          }
+        }
+      }
+    },
+    "employees": {
+      "type": "object",
+      "description": "Installed employees state",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["installedAt"],
+        "properties": {
+          "installedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Installation timestamp"
+          },
+          "version": {
+            "type": "string",
+            "description": "Installed version"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Installed skill names"
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Installed command names"
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "description": "Standalone installed skills",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["version", "installedAt", "source"],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Skill version"
+          },
+          "installedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Installation timestamp"
+          },
+          "source": {
+            "type": "string",
+            "enum": ["standalone", "employee"],
+            "description": "Installation source"
+          }
+        }
+      }
+    },
+    "sharedSkills": {
+      "type": "object",
+      "description": "Shared skills with reference tracking",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["version", "installedAt", "usedBy"],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Skill version"
+          },
+          "installedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Installation timestamp"
+          },
+          "usedBy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Employees that depend on this shared skill"
+          }
+        }
+      }
+    },
+    "registries": {
+      "type": "object",
+      "description": "Custom registry configurations",
+      "propertyNames": {
+        "pattern": "^@"
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Registry URL with {name} placeholder"
+          },
+          {
+            "type": "object",
+            "required": ["url"],
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "Registry URL with {name} placeholder"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Custom HTTP headers"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
