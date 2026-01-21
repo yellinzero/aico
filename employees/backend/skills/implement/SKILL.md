@@ -31,9 +31,11 @@ Before generating any content, check `aico.json` in project root for `language` 
 0. **Read task file** (MANDATORY):
    - Look for task file in `docs/reference/backend/tasks/`
    - Accept either:
-     - `story-{story-name}-{number}-{task-name}.md`
-     - `standalone-{task-name}.md`
-   - If NOT exists → STOP and ask user which task to implement
+     - **Story-based**: `story-{story-name}.md` with task number
+     - **Standalone**: `standalone-{task-name}.md` with task number
+   - User must specify task number (e.g., "implement story-user-api Task 1" or "implement standalone-fix-auth Task 1")
+   - Both formats contain multiple tasks, just different naming
+   - If NOT exists or task number not specified → STOP and ask user which task to implement
 
 1. **Read constraints FIRST** (before any code):
    - `docs/reference/backend/design-system.md` - Colors, typography, spacing
@@ -41,7 +43,7 @@ Before generating any content, check `aico.json` in project root for `language` 
    - If task references design: `docs/reference/backend/designs/{name}.md`
 
 2. **Execute implementation steps**:
-   - Read "Implementation Steps" section from task file
+   - Read "Implementation Steps" section from task
    - Execute each step in order
    - Run verification command after each step
    - If fail → fix before proceeding
@@ -52,51 +54,93 @@ Before generating any content, check `aico.json` in project root for `language` 
    - Run build check
 
 4. **Update task status**:
+   - Update the specific task section in the file
    - Mark acceptance criteria checkboxes: `- [ ]` → `- [x]`
    - Change Status from `pending` to `completed`
+   - Update "Progress" section at bottom of file
+   - Both story-based and standalone files use the same format
 
 5. **Notify completion**:
-   - Show task file path
+   - Show task file path and task number
    - Show completion status
-   - **Check related Story** (if task is from story breakdown):
-     - Read `> **Story**:` field from task file
+   - **Check related Story** (story-based only):
+     - Read `> **Story**:` field from file header
      - If Story exists, check story file at `docs/reference/pm/stories/`
      - Update Story's Related Tasks section: mark this task as `- [x]`
-     - Count total vs completed tasks for this story
-     - If all story tasks completed, show: "✅ All tasks completed! Story {story-name} is ready for acceptance. Please notify PM to verify."
-     - If partial completion, show: "⏳ Story {story-name} progress: X/Y tasks completed"
+     - Count total vs completed tasks
+     - If all tasks completed, show: "✅ All tasks completed! Story {story-name} is ready for acceptance."
+     - If partial completion, show: "⏳ Progress: X/Y tasks completed"
 
 ## Task File Format
 
-The implement skill reads task files in this format:
+Both story-based and standalone tasks use the same file structure - the only difference is the filename:
+
+- **Story-based**: `story-{story-name}.md` (from PM story breakdown)
+- **Standalone**: `standalone-{task-name}.md` (from plan/ad-hoc requirements)
+
+**Unified File Structure:**
 
 ```markdown
-# Task: [Task Name]
+# Story Tasks: User API
 
-> **File**: `story-{name}-{n}-{task}.md` or `standalone-{task}.md`
+# (or for standalone: # Standalone Tasks: Fix Auth Issues)
+
+> **Story**: docs/reference/pm/stories/user-api.md (story-based only)
+> **Role**: backend
+> **Created**: YYYY-MM-DD
+> **Updated**: YYYY-MM-DD
+
+---
+
+## Task 1: Define Types
+
 > **Status**: pending | in_progress | completed
+> **Type**: setup
+> **Depends on**: -
 
-## Description
+### Description
 
 ...
 
-## Acceptance Criteria
+### Acceptance Criteria
 
 - [ ] Criterion 1
 - [ ] Criterion 2
 
-## Implementation Steps
+### Implementation Steps
 
-### Step 1: [Action]
+#### Step 1: [Action]
 
 **Files**: ...
 **Action**: ...
 **Verify**: ...
 
-### Step 2: [Action]
+---
+
+## Task 2: Database Schema
+
+> **Status**: pending
+> **Type**: feature
+> **Depends on**: Task 1
 
 ...
+
+---
+
+## Progress
+
+- Total tasks: 6
+- Completed: 0
+- In progress: 0
+- Pending: 6
+
+**Next task**: Task 1: Define Types
 ```
+
+**Usage Examples:**
+
+- Story-based: `implement story-user-api Task 1`
+- Standalone: `implement standalone-fix-auth Task 1`
 
 ## Execution Flow
 
@@ -164,33 +208,45 @@ Each step has a Verify section - MUST run it and confirm expected output before 
 
 ## Updating Task File
 
-After successful implementation, update the task file:
+After successful implementation, update the task file. Both story-based and standalone files use the same format, so the update process is identical:
 
-### 1. Mark Acceptance Criteria as Completed
-
-```markdown
-## Acceptance Criteria
-
-- [x] Logo displays correctly ← Changed from [ ]
-- [x] Title uses correct typography ← Changed from [ ]
-- [x] Header is responsive ← Changed from [ ]
-- [x] Tests pass ← Changed from [ ]
-```
-
-### 2. Update Status
+**1. Mark Task's Acceptance Criteria as Completed**
 
 ```markdown
+## Task 1: Define Types
+
 > **Status**: completed ← Changed from pending
+
+### Acceptance Criteria
+
+- [x] Types defined correctly ← Changed from [ ]
+- [x] Exported from index ← Changed from [ ]
+- [x] No type errors ← Changed from [ ]
 ```
 
-### 3. Add Completion Notes (optional)
+**2. Update Progress Section**
 
 ```markdown
-## Notes
+## Progress
 
-- Implemented on YYYY-MM-DD
-- All tests passing
-- Used design tokens from design-system.md
+- Total tasks: 6
+- Completed: 1 ← Changed from 0
+- In progress: 0
+- Pending: 5 ← Changed from 6
+
+**Next task**: Task 2: Database Schema ← Update this
+```
+
+**3. Update Story File Checkboxes (story-based only)**
+
+If this is a story-based task, update the PM story file at `docs/reference/pm/stories/`:
+
+```markdown
+### Backend Tasks
+
+- [x] Task 1: Define Types ← Changed from [ ]
+- [ ] Task 2: Database Schema
+- [ ] Task 3: Repository Layer
 ```
 
 ## Key Rules
