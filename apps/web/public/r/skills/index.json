@@ -1,42 +1,6 @@
 [
   {
     "name": "init",
-    "namespace": "@the-aico/backend",
-    "fullName": "@the-aico/backend/init",
-    "version": "1.0.0",
-    "description": "Initialize backend environment by creating constraints document from template.\n\nUse this skill when:\n- Running /backend.init command\n- User asks to \"initialize backend\", \"setup backend environment\"\n- Starting backend work and need to establish tech stack and conventions\n- Need to create docs/reference/backend/constraints.md\n",
-    "category": "backend",
-    "tags": []
-  },
-  {
-    "name": "task-breakdown",
-    "namespace": "@the-aico/backend",
-    "fullName": "@the-aico/backend/task-breakdown",
-    "version": "1.0.0",
-    "description": "Break down PM story into organized tasks in a single file following LAYERED ARCHITECTURE order: Types → Database → Repository → Service → API → Tests.\n\nUNIQUE VALUE: Creates single task file (story-{name}.md) containing all tasks for a story. Tasks are ordered by backend architecture layers.\n\nUse this skill when:\n- Running /backend.tasks command\n- User asks to \"break down story\", \"create backend tasks\", \"split into tasks\"\n- Have story at docs/reference/pm/stories/ and need organized task breakdown\n- Need tasks ordered by backend architecture layers (not random order)\n- Starting backend work and want organized task list\n\nTask order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests\nOutput: Create single file docs/reference/backend/tasks/story-{name}.md with all tasks\n",
-    "category": "backend",
-    "tags": []
-  },
-  {
-    "name": "plan",
-    "namespace": "@the-aico/backend",
-    "fullName": "@the-aico/backend/plan",
-    "version": "1.0.0",
-    "description": "Create or enhance backend tasks with detailed implementation steps. Supports TWO modes:\n\nMODE A: Enhance existing task (add detailed steps to task in file)\nMODE B: Create new standalone task file (can contain single or multiple tasks)\n\nIMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.\nFor architecture planning or feature scoping, use EnterPlanMode instead.\n\nUse this skill when:\n- Running /backend.plan command\n- User asks for \"atomic steps\", \"step-by-step plan with verification\"\n- Have a specific task and need implementation steps\n- User wants to create a standalone task file (not from story)\n- Need granular steps: Types → DB → Repository → Service → API → Tests\n\nDO NOT use for:\n- Architecture planning (use EnterPlanMode)\n- General development planning\n- Feature scoping or estimation\n\nOutput:\n- MODE A: Update specific task section in file with Implementation Steps\n- MODE B: Create new standalone-{name}.md file with one or multiple tasks\n",
-    "category": "backend",
-    "tags": []
-  },
-  {
-    "name": "implement",
-    "namespace": "@the-aico/backend",
-    "fullName": "@the-aico/backend/implement",
-    "version": "1.0.0",
-    "description": "Execute backend task implementation with TDD. Read task file, execute steps, verify each, update status.\n\nUse this skill when:\n- User asks to \"implement task/plan\", \"start implementation\", \"execute plan\", or \"start coding\"\n- Have task file (story-* or standalone-*) ready to execute\n- User asks to \"use TDD\", \"write test first\", or \"test-driven\"\n- User asks to \"write tests\", \"add tests\", \"create tests\"\n- Fixing bugs (write failing test first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- Task file in docs/reference/backend/tasks/ (story-* or standalone-*)\n- Read constraints.md and design spec before coding\n\nFlow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status\n",
-    "category": "backend",
-    "tags": []
-  },
-  {
-    "name": "init",
     "namespace": "@the-aico/pm",
     "fullName": "@the-aico/pm/init",
     "version": "1.0.0",
@@ -109,6 +73,42 @@
   },
   {
     "name": "init",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/init",
+    "version": "1.0.0",
+    "description": "Initialize backend environment by creating constraints document from template.\n\nUse this skill when:\n- Running /backend.init command\n- User asks to \"initialize backend\", \"setup backend environment\"\n- Starting backend work and need to establish tech stack and conventions\n- Need to create docs/reference/backend/constraints.md\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "task-breakdown",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/task-breakdown",
+    "version": "1.0.0",
+    "description": "Break down PM story into organized tasks in a single file following LAYERED ARCHITECTURE order: Types → Database → Repository → Service → API → Tests.\n\nUNIQUE VALUE: Creates single task file (story-{name}.md) containing all tasks for a story. Tasks are ordered by backend architecture layers.\n\nUse this skill when:\n- Running /backend.tasks command\n- User asks to \"break down story\", \"create backend tasks\", \"split into tasks\"\n- Have story at docs/reference/pm/stories/ and need organized task breakdown\n- Need tasks ordered by backend architecture layers (not random order)\n- Starting backend work and want organized task list\n\nTask order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests\nOutput: Create single file docs/reference/backend/tasks/story-{name}.md with all tasks\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "plan",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/plan",
+    "version": "1.0.0",
+    "description": "Create or enhance backend tasks with detailed implementation steps. Supports TWO modes:\n\nMODE A: Enhance existing task (add detailed steps to task in file)\nMODE B: Create new standalone task file (can contain single or multiple tasks)\n\nIMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.\nFor architecture planning or feature scoping, use EnterPlanMode instead.\n\nUse this skill when:\n- Running /backend.plan command\n- User asks for \"atomic steps\", \"step-by-step plan with verification\"\n- Have a specific task and need implementation steps\n- User wants to create a standalone task file (not from story)\n- Need granular steps: Types → DB → Repository → Service → API → Tests\n\nDO NOT use for:\n- Architecture planning (use EnterPlanMode)\n- General development planning\n- Feature scoping or estimation\n\nOutput:\n- MODE A: Update specific task section in file with Implementation Steps\n- MODE B: Create new standalone-{name}.md file with one or multiple tasks\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "implement",
+    "namespace": "@the-aico/backend",
+    "fullName": "@the-aico/backend/implement",
+    "version": "1.0.0",
+    "description": "Execute backend task implementation with TDD. Read task file, execute steps, verify each, update status.\n\nUse this skill when:\n- User asks to \"implement task/plan\", \"start implementation\", \"execute plan\", or \"start coding\"\n- Have task file (story-* or standalone-*) ready to execute\n- User asks to \"use TDD\", \"write test first\", or \"test-driven\"\n- User asks to \"write tests\", \"add tests\", \"create tests\"\n- Fixing bugs (write failing test first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- Task file in docs/reference/backend/tasks/ (story-* or standalone-*)\n- Read constraints.md and design spec before coding\n\nFlow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status\n",
+    "category": "backend",
+    "tags": []
+  },
+  {
+    "name": "init",
     "namespace": "@the-aico/frontend",
     "fullName": "@the-aico/frontend/init",
     "version": "1.0.0",
@@ -171,20 +171,20 @@
     "tags": []
   },
   {
-    "name": "subagent-driven",
-    "namespace": "@the-aico/_shared",
-    "fullName": "@the-aico/_shared/subagent-driven",
-    "version": "1.0.0",
-    "description": "Execute implementation plan by dispatching fresh subagent per task. Each task gets: Implementer → Spec Review → Quality Review. Two-stage review ensures both correctness and quality.\n\nUse this skill when:\n- Have implementation plan with multiple independent tasks\n- Want automated execution with quality gates after each task\n- Tasks are mostly independent (not tightly coupled)\n- User asks to \"execute the plan\", \"run the tasks\", \"auto implement\"\n\nPrerequisites: Must have plan from aico-*-plan or aico-*-task-breakdown skill.\nProcess: For each task: Dispatch Implementer → Spec Review (passes?) → Quality Review (passes?) → Next task\nReview order: ALWAYS spec compliance first, THEN code quality.\n",
-    "category": "general",
-    "tags": []
-  },
-  {
     "name": "worktree",
     "namespace": "@the-aico/_shared",
     "fullName": "@the-aico/_shared/worktree",
     "version": "1.0.0",
     "description": "Create isolated git worktree for feature development. Handles directory selection, gitignore verification, project setup, and baseline test verification.\n\nUse this skill when:\n- Starting feature work that needs isolation from current workspace\n- Before executing implementation plans on a new branch\n- Want to work on multiple branches/features simultaneously\n- User asks to \"create worktree\", \"isolate this work\", \"separate branch\"\n- Need clean baseline before starting major changes\n\nSafety: ALWAYS verify worktree directory is gitignored before creating.\nProcess: Check directory → Verify ignored → Create worktree → Run setup → Verify baseline tests\n",
+    "category": "general",
+    "tags": []
+  },
+  {
+    "name": "subagent-driven",
+    "namespace": "@the-aico/_shared",
+    "fullName": "@the-aico/_shared/subagent-driven",
+    "version": "1.0.0",
+    "description": "Execute implementation plan by dispatching fresh subagent per task. Each task gets: Implementer → Spec Review → Quality Review. Two-stage review ensures both correctness and quality.\n\nUse this skill when:\n- Have implementation plan with multiple independent tasks\n- Want automated execution with quality gates after each task\n- Tasks are mostly independent (not tightly coupled)\n- User asks to \"execute the plan\", \"run the tasks\", \"auto implement\"\n\nPrerequisites: Must have plan from aico-*-plan or aico-*-task-breakdown skill.\nProcess: For each task: Dispatch Implementer → Spec Review (passes?) → Quality Review (passes?) → Next task\nReview order: ALWAYS spec compliance first, THEN code quality.\n",
     "category": "general",
     "tags": []
   }

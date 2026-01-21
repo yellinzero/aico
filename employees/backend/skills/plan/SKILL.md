@@ -210,58 +210,15 @@ Each step = ONE atomic action:
 
 ## Standalone Task File Template
 
-For MODE B, use this complete template:
+For MODE B, see [Task File Template](../task-breakdown/references/task-file-template.md) for complete structure.
 
-```markdown
-# Task: [Task Name]
+Use the same format as story-based tasks, just with:
 
-> **File**: `standalone-{task-name}.md`
-> **Type**: feature | bugfix | improvement
-> **Source**: standalone
-> **Created**: YYYY-MM-DD
-> **Status**: pending
+- Filename: `standalone-{requirement-name}.md`
+- Header: `# Standalone Tasks: [Requirement Name]`
+- No `> **Story**: ...` line
 
-## Description
-
-[Clear, concise description of what needs to be done]
-
-## Context
-
-- Standalone task (not part of a story)
-- [Any relevant background or motivation]
-- [References to related components or files]
-
-## Acceptance Criteria
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Tests pass
-
-## Scope
-
-**Files to create/modify:**
-
-- Modify: `src/components/LoginButton.tsx`
-
-**Key changes:**
-
-- Update hover state styles
-- Ensure accessibility
-
-## Implementation Steps
-
-[Detailed atomic steps as described above]
-
----
-
-## Notes
-
-[Any additional technical notes or considerations]
-
-## Related Tasks
-
-- Related to: [If any]
-```
+**Note**: For simple requirements, file may contain only 1 task. For complex requirements, break into multiple tasks.
 
 ## Key Rules
 

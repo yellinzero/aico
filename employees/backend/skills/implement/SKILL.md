@@ -73,74 +73,17 @@ Before generating any content, check `aico.json` in project root for `language` 
 
 ## Task File Format
 
+See [Task File Template](../task-breakdown/references/task-file-template.md) for complete structure.
+
 Both story-based and standalone tasks use the same file structure - the only difference is the filename:
 
 - **Story-based**: `story-{story-name}.md` (from PM story breakdown)
 - **Standalone**: `standalone-{task-name}.md` (from plan/ad-hoc requirements)
 
-**Unified File Structure:**
-
-```markdown
-# Story Tasks: User API
-
-# (or for standalone: # Standalone Tasks: Fix Auth Issues)
-
-> **Story**: docs/reference/pm/stories/user-api.md (story-based only)
-> **Role**: backend
-> **Created**: YYYY-MM-DD
-> **Updated**: YYYY-MM-DD
-
----
-
-## Task 1: Define Types
-
-> **Status**: pending | in_progress | completed
-> **Type**: setup
-> **Depends on**: -
-
-### Description
-
-...
-
-### Acceptance Criteria
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-### Implementation Steps
-
-#### Step 1: [Action]
-
-**Files**: ...
-**Action**: ...
-**Verify**: ...
-
----
-
-## Task 2: Database Schema
-
-> **Status**: pending
-> **Type**: feature
-> **Depends on**: Task 1
-
-...
-
----
-
-## Progress
-
-- Total tasks: 6
-- Completed: 0
-- In progress: 0
-- Pending: 6
-
-**Next task**: Task 1: Define Types
-```
-
 **Usage Examples:**
 
-- Story-based: `implement story-user-api Task 1`
-- Standalone: `implement standalone-fix-auth Task 1`
+- `implement story-user-api Task 1`
+- `implement standalone-fix-auth Task 1`
 
 ## Execution Flow
 
