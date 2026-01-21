@@ -1,24 +1,23 @@
 ---
 name: aico-frontend-implement
 description: |
-  Execute frontend implementation with TDD. Read all constraint files before coding, write failing test first, verify after each step.
+  Execute frontend task implementation with TDD. Read task file, execute steps, verify each, update status.
 
   Use this skill when:
-  - User asks to "implement this", "implement the plan", "start implementation", "execute plan"
-  - Have an implementation plan ready and need to execute it
-  - Executing steps from /frontend.plan output
-  - User says "start coding", "write the code", "begin implementation"
-  - User asks to "use TDD", "write test first", "test-driven" for frontend code
+  - User asks to "implement task/plan", "start implementation", "execute plan", or "start coding"
+  - Have task file (story-* or standalone-*) ready to execute
+  - User asks to "use TDD", "write test first", or "test-driven"
   - User asks to "write tests", "add tests", "create tests"
-  - Fixing UI bugs (write failing test that reproduces bug first)
+  - Fixing UI bugs (write failing test first)
 
   TDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
-  TDD Cycle: RED (write failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR
+  TDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR
 
   Prerequisites:
-  - MUST have task file in docs/reference/frontend/tasks/ (use /frontend.tasks first if not exists)
-  - MUST read design-system.md, constraints.md, and design spec before writing any code.
-  Flow: Check Task File → Read Constraints → TDD Cycle (RED→GREEN→REFACTOR) → Verify Each → Test → Update Task Status → Notify PM
+  - Task file in docs/reference/frontend/tasks/ (story-* or standalone-*)
+  - Read design-system.md, constraints.md, design spec before coding
+
+  Flow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status
 ---
 
 # Implement
@@ -29,31 +28,85 @@ Before generating any content, check `aico.json` in project root for `language` 
 
 ## Process
 
-0. **Check task file EXISTS** (MANDATORY):
-   - Look for `docs/reference/frontend/tasks/{story-id}.md`
-   - If NOT exists → STOP and tell user: "Please run /frontend.tasks first to break down the story"
-   - If exists → proceed to step 1
+0. **Read task file** (MANDATORY):
+   - Look for task file in `docs/reference/frontend/tasks/`
+   - Accept either:
+     - **Story-based**: `story-{story-name}.md` with task number
+     - **Standalone**: `standalone-{task-name}.md` with task number
+   - User must specify task number (e.g., "implement story-user-profile Task 1" or "implement standalone-fix-login Task 1")
+   - Both formats contain multiple tasks, just different naming
+   - If NOT exists or task number not specified → STOP and ask user which task to implement
 
 1. **Read constraints FIRST** (before any code):
    - `docs/reference/frontend/design-system.md` - Colors, typography, spacing
    - `docs/reference/frontend/constraints.md` - Tech stack, patterns
-   - `docs/reference/frontend/designs/{name}.md` - Component specs
-2. **Execute each step in order**:
-   - Run the action
-   - Run verification command
+   - If task references design: `docs/reference/frontend/designs/{name}.md`
+
+2. **Execute implementation steps**:
+   - Read "Implementation Steps" section from task
+   - Execute each step in order
+   - Run verification command after each step
    - If fail → fix before proceeding
    - If pass → continue to next step
+
 3. **After all steps**:
    - Run unit tests
    - Run build check
-4. **Update task status** in `docs/reference/frontend/tasks/{story}.md`
-5. **Notify PM for acceptance** - Notify PM to verify (PM checks all related tasks and updates Story status)
-6. **Commit changes** (user decides when to commit)
+
+4. **Update task status**:
+   - Update the specific task section in the file
+   - Mark acceptance criteria checkboxes: `- [ ]` → `- [x]`
+   - Change Status from `pending` to `completed`
+   - Update "Progress" section at bottom of file
+   - Both story-based and standalone files use the same format
+
+5. **Notify completion**:
+   - Show task file path and task number
+   - Show completion status
+   - **Check related Story** (story-based only):
+     - Read `> **Story**:` field from file header
+     - If Story exists, check story file at `docs/reference/pm/stories/`
+     - Update Story's Related Tasks section: mark this task as `- [x]`
+     - Count total vs completed tasks
+     - If all tasks completed, show: "✅ All tasks completed! Story {story-name} is ready for acceptance."
+     - If partial completion, show: "⏳ Progress: X/Y tasks completed"
+
+## Task File Format
+
+See [Task File Template](../task-breakdown/references/task-file-template.md) for complete structure.
+
+Both story-based and standalone tasks use the same file structure - the only difference is the filename:
+
+- **Story-based**: `story-{story-name}.md` (from PM story breakdown)
+- **Standalone**: `standalone-{task-name}.md` (from plan/ad-hoc requirements)
+
+**Usage Examples:**
+
+- `implement story-user-profile Task 1`
+- `implement standalone-fix-login Task 1`
 
 ## Execution Flow
 
 ```
-Check Task File → Read Constraints → Execute Steps → Verify Each → Test → Mark Complete → Notify PM → Commit
+Read Task File
+     ↓
+Read Constraints (design-system.md, constraints.md, designs/)
+     ↓
+Execute Step 1 → Verify → Pass? → Continue
+                      ↓
+                     Fail → Fix → Retry
+     ↓
+Execute Step 2 → Verify → Pass? → Continue
+     ↓
+     ...
+     ↓
+Run Unit Tests
+     ↓
+Run Build Check
+     ↓
+Update Task File (mark AC completed, update status)
+     ↓
+Show Completion Summary
 ```
 
 ## Step Execution Rules
@@ -82,9 +135,10 @@ Each step has a Verify section - MUST run it and confirm expected output before 
 
 1. **Run tests**: `npm test [component]`
 2. **Run build**: `npm run build`
-3. **Update task status** in tasks file
-4. **Notify PM**: Tell PM frontend tasks are complete, request acceptance
-5. **Commit** (user decides when): `git commit -m "feat([scope]): [description]"`
+3. **Update task file**:
+   - Mark AC checkboxes: `- [x]`
+   - Update Status: `completed`
+4. **Show completion summary** to user
 
 ## Error Handling
 
@@ -95,23 +149,64 @@ Each step has a Verify section - MUST run it and confirm expected output before 
 | Build failure        | Check imports, fix errors              |
 | Constraint violation | Re-read constraints, align code        |
 
+## Updating Task File
+
+After successful implementation, update the task file. Both story-based and standalone use the same update process:
+
+**1. Mark Task's Acceptance Criteria as Completed**
+
+```markdown
+## Task 1: Setup Component
+
+> **Status**: completed ← Changed from pending
+
+### Acceptance Criteria
+
+- [x] Logo displays correctly ← Changed from [ ]
+- [x] Title uses correct typography ← Changed from [ ]
+- [x] Header is responsive ← Changed from [ ]
+```
+
+**2. Update Progress Section**
+
+```markdown
+## Progress
+
+- Total tasks: 5
+- Completed: 1 ← Changed from 0
+- In progress: 0
+- Pending: 4 ← Changed from 5
+
+**Next task**: Task 2: Implement Header ← Update this
+```
+
+**3. Update Story File Checkboxes (story-based only)**
+
+If this is a story-based task, update the PM story file at `docs/reference/pm/stories/`:
+
+```markdown
+### Frontend Tasks
+
+- [x] Task 1: Setup Component ← Changed from [ ]
+- [ ] Task 2: Implement Header
+- [ ] Task 3: Add Tests
+```
+
 ## Key Rules
 
+- ALWAYS read task file first
 - ALWAYS read all constraint files before writing any code
 - MUST run verification command for each step
 - ALWAYS run tests before marking task complete
-- MUST update task status in tasks/{story}.md
-- MUST notify PM after completing all tasks (PM handles story verification)
-- Let user decide when to commit
+- MUST update task file (mark AC, update status)
 
 ## Common Mistakes
 
-- ❌ Implement without task file → ✅ ALWAYS run /frontend.tasks first to break down story
+- ❌ Start without reading task file → ✅ ALWAYS read task file first
 - ❌ Skip reading constraints → ✅ ALWAYS read before coding
 - ❌ Skip verification → ✅ Run verify command for each step
 - ❌ Skip tests → ✅ Run tests before marking complete
-- ❌ Forget to update task status → ✅ Update tasks/{story}.md
-- ❌ Directly update story status → ✅ Notify PM, let PM verify and update story
+- ❌ Forget to update task file → ✅ Update AC and status
 
 ---
 
@@ -183,15 +278,60 @@ Only after green. Keep tests passing.
 
 ---
 
+## Example Workflow
+
+```bash
+# User: "Implement story-user-profile Task 1"
+# (Works the same for standalone: "Implement standalone-fix-login Task 1")
+
+1. ✓ Read task file: docs/reference/frontend/tasks/story-user-profile.md
+   - Extract Task 1 section from the file
+2. ✓ Read constraints:
+   - design-system.md
+   - constraints.md
+   - designs/user-profile.md (if referenced)
+
+3. ✓ Execute Step 1: Create component file
+   → Run: npm run typecheck
+   → ✓ Pass
+
+4. ✓ Execute Step 2: Implement layout
+   → Run: npm run dev
+   → ✓ Pass
+
+5. ✓ Execute Step 3: Add tests
+   → Run: npm test Component
+   → ✓ 3 tests passed
+
+6. ✓ Run full test suite
+   → Run: npm test
+   → ✓ All tests passed
+
+7. ✓ Run build
+   → Run: npm run build
+   → ✓ Build successful
+
+8. ✓ Update task file:
+   - Updated Task 1 section
+   - Marked all AC as completed
+   - Status: completed
+   - Updated Progress: 1/5 completed
+
+9. ✓ Update Story file (story-based only):
+   - Marked Task 1 checkbox in PM story file
+
+10. ✓ Task completed! Progress: 1/5 tasks
+```
+
 ## Iron Law
 
-**NO CODE WITHOUT APPROVED PLAN**
+**NO CODE WITHOUT TASK FILE**
 
 This rule is non-negotiable. Before writing code:
 
-1. Task breakdown must exist and be approved
+1. Task file must exist
 2. Acceptance criteria must be defined
-3. Dependencies must be identified and available
+3. Implementation steps must be clear
 
 ### Rationalization Defense
 
