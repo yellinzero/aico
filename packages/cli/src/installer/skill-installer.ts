@@ -84,6 +84,9 @@ export async function installSkill(
   for (const file of skill.files) {
     const filePath = path.join(skillDir, file.path);
 
+    // Ensure parent directory exists (for files in subdirectories like references/)
+    await fs.ensureDir(path.dirname(filePath));
+
     // Update frontmatter name to match directory name
     let content = file.content;
     if (file.path === 'SKILL.md' || file.path.endsWith('/SKILL.md')) {
@@ -91,6 +94,11 @@ export async function installSkill(
     }
 
     await fs.writeFile(filePath, content, 'utf-8');
+
+    // Make scripts executable
+    if (file.type === 'script') {
+      await fs.chmod(filePath, 0o755);
+    }
   }
 
   return {

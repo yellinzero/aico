@@ -164,15 +164,30 @@ async function installEmployeeToPlatform(
 
     // Write skill files
     for (const file of skill.files) {
-      const filePath = path.join(skillDir, path.basename(file.path));
+      // Extract relative path (remove "skills/{skillName}/" prefix from employee.json)
+      // e.g., "skills/init/references/design-system.template.md" -> "references/design-system.template.md"
+      const skillPrefix = `skills/${skill.name}/`;
+      const relativePath = file.path.startsWith(skillPrefix)
+        ? file.path.substring(skillPrefix.length)
+        : path.basename(file.path);
+
+      const filePath = path.join(skillDir, relativePath);
+
+      // Ensure parent directory exists (for files in subdirectories like references/)
+      await fs.ensureDir(path.dirname(filePath));
 
       // Update frontmatter name to match directory name
       let content = file.content;
-      if (file.path.endsWith('SKILL.md')) {
+      if (relativePath.endsWith('SKILL.md')) {
         content = updateSkillName(content, skillDirName);
       }
 
       await fs.writeFile(filePath, content, 'utf-8');
+
+      // Make scripts executable
+      if (file.type === 'script') {
+        await fs.chmod(filePath, 0o755);
+      }
     }
     skillsInstalled++;
   }

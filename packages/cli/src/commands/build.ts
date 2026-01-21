@@ -218,9 +218,23 @@ async function runBuild(options: BuildOptions): Promise<void> {
               }
             }
 
+            // Preserve directory structure relative to skill directory
+            // e.g., "skills/init/references/design-system.template.md" -> "references/design-system.template.md"
+            const skillPrefix = `skills/${skill.name}/`;
+            const relativePath = file.path.startsWith(skillPrefix)
+              ? file.path.substring(skillPrefix.length)
+              : path.basename(file.path);
+
+            // Map employee file types to skill file types
+            // 'doc' and 'command' from employee.json become 'reference' in skill registry
+            const skillFileType =
+              file.type === 'doc' || file.type === 'command'
+                ? 'reference'
+                : file.type;
+
             skillFiles.push({
-              path: path.basename(file.path),
-              type: file.type === 'skill' ? 'skill' : 'reference',
+              path: relativePath,
+              type: skillFileType,
               content,
             });
           } else {

@@ -31,9 +31,11 @@ Before generating any content, check `aico.json` in project root for `language` 
 0. **Read task file** (MANDATORY):
    - Look for task file in `docs/reference/frontend/tasks/`
    - Accept either:
-     - `story-{story-name}-{number}-{task-name}.md`
-     - `standalone-{task-name}.md`
-   - If NOT exists → STOP and ask user which task to implement
+     - **Story-based**: `story-{story-name}.md` with task number
+     - **Standalone**: `standalone-{task-name}.md` with task number
+   - User must specify task number (e.g., "implement story-user-profile Task 1" or "implement standalone-fix-login Task 1")
+   - Both formats contain multiple tasks, just different naming
+   - If NOT exists or task number not specified → STOP and ask user which task to implement
 
 1. **Read constraints FIRST** (before any code):
    - `docs/reference/frontend/design-system.md` - Colors, typography, spacing
@@ -41,7 +43,7 @@ Before generating any content, check `aico.json` in project root for `language` 
    - If task references design: `docs/reference/frontend/designs/{name}.md`
 
 2. **Execute implementation steps**:
-   - Read "Implementation Steps" section from task file
+   - Read "Implementation Steps" section from task
    - Execute each step in order
    - Run verification command after each step
    - If fail → fix before proceeding
@@ -52,51 +54,36 @@ Before generating any content, check `aico.json` in project root for `language` 
    - Run build check
 
 4. **Update task status**:
+   - Update the specific task section in the file
    - Mark acceptance criteria checkboxes: `- [ ]` → `- [x]`
    - Change Status from `pending` to `completed`
+   - Update "Progress" section at bottom of file
+   - Both story-based and standalone files use the same format
 
 5. **Notify completion**:
-   - Show task file path
+   - Show task file path and task number
    - Show completion status
-   - **Check related Story** (if task is from story breakdown):
-     - Read `> **Story**:` field from task file
+   - **Check related Story** (story-based only):
+     - Read `> **Story**:` field from file header
      - If Story exists, check story file at `docs/reference/pm/stories/`
      - Update Story's Related Tasks section: mark this task as `- [x]`
-     - Count total vs completed tasks for this story
-     - If all story tasks completed, show: "✅ All tasks completed! Story {story-name} is ready for acceptance. Please notify PM to verify."
-     - If partial completion, show: "⏳ Story {story-name} progress: X/Y tasks completed"
+     - Count total vs completed tasks
+     - If all tasks completed, show: "✅ All tasks completed! Story {story-name} is ready for acceptance."
+     - If partial completion, show: "⏳ Progress: X/Y tasks completed"
 
 ## Task File Format
 
-The implement skill reads task files in this format:
+See [Task File Template](../task-breakdown/references/task-file-template.md) for complete structure.
 
-```markdown
-# Task: [Task Name]
+Both story-based and standalone tasks use the same file structure - the only difference is the filename:
 
-> **File**: `story-{name}-{n}-{task}.md` or `standalone-{task}.md`
-> **Status**: pending | in_progress | completed
+- **Story-based**: `story-{story-name}.md` (from PM story breakdown)
+- **Standalone**: `standalone-{task-name}.md` (from plan/ad-hoc requirements)
 
-## Description
+**Usage Examples:**
 
-...
-
-## Acceptance Criteria
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-## Implementation Steps
-
-### Step 1: [Action]
-
-**Files**: ...
-**Action**: ...
-**Verify**: ...
-
-### Step 2: [Action]
-
-...
-```
+- `implement story-user-profile Task 1`
+- `implement standalone-fix-login Task 1`
 
 ## Execution Flow
 
@@ -164,33 +151,45 @@ Each step has a Verify section - MUST run it and confirm expected output before 
 
 ## Updating Task File
 
-After successful implementation, update the task file:
+After successful implementation, update the task file. Both story-based and standalone use the same update process:
 
-### 1. Mark Acceptance Criteria as Completed
+**1. Mark Task's Acceptance Criteria as Completed**
 
 ```markdown
-## Acceptance Criteria
+## Task 1: Setup Component
+
+> **Status**: completed ← Changed from pending
+
+### Acceptance Criteria
 
 - [x] Logo displays correctly ← Changed from [ ]
 - [x] Title uses correct typography ← Changed from [ ]
 - [x] Header is responsive ← Changed from [ ]
-- [x] Tests pass ← Changed from [ ]
 ```
 
-### 2. Update Status
+**2. Update Progress Section**
 
 ```markdown
-> **Status**: completed ← Changed from pending
+## Progress
+
+- Total tasks: 5
+- Completed: 1 ← Changed from 0
+- In progress: 0
+- Pending: 4 ← Changed from 5
+
+**Next task**: Task 2: Implement Header ← Update this
 ```
 
-### 3. Add Completion Notes (optional)
+**3. Update Story File Checkboxes (story-based only)**
+
+If this is a story-based task, update the PM story file at `docs/reference/pm/stories/`:
 
 ```markdown
-## Notes
+### Frontend Tasks
 
-- Implemented on YYYY-MM-DD
-- All tests passing
-- Used design tokens from design-system.md
+- [x] Task 1: Setup Component ← Changed from [ ]
+- [ ] Task 2: Implement Header
+- [ ] Task 3: Add Tests
 ```
 
 ## Key Rules
@@ -282,43 +281,46 @@ Only after green. Keep tests passing.
 ## Example Workflow
 
 ```bash
-# User: "Implement story-user-profile-2-header"
+# User: "Implement story-user-profile Task 1"
+# (Works the same for standalone: "Implement standalone-fix-login Task 1")
 
-1. ✓ Read task: docs/reference/frontend/tasks/story-user-profile-2-header.md
+1. ✓ Read task file: docs/reference/frontend/tasks/story-user-profile.md
+   - Extract Task 1 section from the file
 2. ✓ Read constraints:
    - design-system.md
    - constraints.md
-   - designs/user-profile.md
+   - designs/user-profile.md (if referenced)
 
 3. ✓ Execute Step 1: Create component file
    → Run: npm run typecheck
    → ✓ Pass
 
-4. ✓ Execute Step 2: Implement header layout
+4. ✓ Execute Step 2: Implement layout
    → Run: npm run dev
    → ✓ Pass
 
-5. ✓ Execute Step 3: Add responsive styles
-   → Run: npm run dev (test at different breakpoints)
-   → ✓ Pass
-
-6. ✓ Execute Step 4: Add unit tests
-   → Run: npm test LoginHeader
+5. ✓ Execute Step 3: Add tests
+   → Run: npm test Component
    → ✓ 3 tests passed
 
-7. ✓ Run full test suite
+6. ✓ Run full test suite
    → Run: npm test
    → ✓ All tests passed
 
-8. ✓ Run build
+7. ✓ Run build
    → Run: npm run build
    → ✓ Build successful
 
-9. ✓ Update task file:
+8. ✓ Update task file:
+   - Updated Task 1 section
    - Marked all AC as completed
    - Status: completed
+   - Updated Progress: 1/5 completed
 
-10. ✓ Task completed!
+9. ✓ Update Story file (story-based only):
+   - Marked Task 1 checkbox in PM story file
+
+10. ✓ Task completed! Progress: 1/5 tasks
 ```
 
 ## Iron Law
