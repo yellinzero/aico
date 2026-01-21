@@ -1,7 +1,13 @@
 import { z } from 'zod';
 import { skillCategorySchema } from './skill.js';
 
-export const fileTypeSchema = z.enum(['skill', 'command', 'doc']);
+export const fileTypeSchema = z.enum([
+  'skill',
+  'command',
+  'doc',
+  'script',
+  'asset',
+]);
 
 export type FileType = z.infer<typeof fileTypeSchema>;
 

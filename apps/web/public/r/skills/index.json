@@ -1,6 +1,60 @@
 [
   {
     "name": "init",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/init",
+    "version": "1.0.0",
+    "description": "Initialize frontend environment by creating design system and constraints documents from templates.\n\nUse this skill when:\n- Running /frontend.init command\n- User asks to \"initialize frontend\", \"setup frontend environment\"\n- Starting frontend work and need to establish design system and constraints\n- Need to create docs/reference/frontend/design-system.md or constraints.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "style-extraction",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/style-extraction",
+    "version": "1.0.0",
+    "description": "Extract design tokens (colors, typography, spacing, effects) from reference website or screenshot to create project design system.\n\nUNIQUE VALUE: Creates standardized design-system.md file with all design tokens extracted systematically.\n\nUse this skill when:\n- User shares reference website URL and wants to extract its style\n- User provides screenshot or image and asks to \"extract design\", \"extract style\"\n- Running /frontend.init and need to create design system from reference\n- User asks to \"create design system\", \"extract colors\", \"extract typography\"\n- Need to establish consistent design tokens before starting frontend work\n\nMethods: URL (via Playwright MCP screenshot) or direct screenshot analysis\nOutput: ALWAYS write to docs/reference/frontend/design-system.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "design",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/design",
+    "version": "1.0.0",
+    "description": "Transform PRD or story into complete page/component designs with ASCII layouts, component specs, interaction flows, and frontend implementation prompts.\n\nUse this skill when:\n- User asks to \"design the page\", \"design component\", \"create page design\"\n- User mentions \"page design\", \"component design\", \"UI design\", \"layout design\"\n- Running /frontend.design command\n- PRD or story is ready and need visual/interaction design before implementation\n- Need to create design spec that frontend developer can implement from\n\nPrerequisites: Design system must exist at docs/reference/frontend/design-system.md\nOutput: ALWAYS write design files to docs/reference/frontend/designs/{name}.md\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "task-breakdown",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/task-breakdown",
+    "version": "1.0.0",
+    "description": "Break down PM story into organized tasks in a single file following UI DEVELOPMENT order: Setup → Static UI → Dynamic Logic → Interactions → Testing.\n\nUNIQUE VALUE: Creates single task file (story-{name}.md) containing all tasks for a story. Tasks are ordered by UI development layers.\n\nUse this skill when:\n- Running /frontend.tasks command\n- User asks to \"break down story\", \"create frontend tasks\", \"split into tasks\"\n- Have story at docs/reference/pm/stories/ and need organized task breakdown\n- Need tasks ordered by UI development layers (not random order)\n- Starting frontend work and want organized task list\n\nTask order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests\nOutput: Create single file docs/reference/frontend/tasks/story-{name}.md with all tasks\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "plan",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/plan",
+    "version": "1.0.0",
+    "description": "Create or enhance frontend tasks with detailed implementation steps. Supports TWO modes:\n\nMODE A: Enhance existing task (add detailed steps to task in file)\nMODE B: Create new standalone task file (can contain single or multiple tasks)\n\nIMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.\nFor architecture planning or feature scoping, use EnterPlanMode instead.\n\nUse this skill when:\n- Running /frontend.plan command\n- User asks for \"atomic steps\", \"step-by-step plan with verification\"\n- Have a specific task and need implementation steps\n- User wants to create a standalone task file (not from story)\n- Need granular steps: Setup (create files) → Implementation (write code) → Test (verify)\n\nDO NOT use for:\n- Architecture planning (use EnterPlanMode)\n- General development planning\n- Feature scoping or estimation\n\nOutput:\n- MODE A: Update specific task section in file with Implementation Steps\n- MODE B: Create new standalone-{name}.md file with one or multiple tasks\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "implement",
+    "namespace": "@the-aico/frontend",
+    "fullName": "@the-aico/frontend/implement",
+    "version": "1.0.0",
+    "description": "Execute frontend task implementation with TDD. Read task file, execute steps, verify each, update status.\n\nUse this skill when:\n- User asks to \"implement task/plan\", \"start implementation\", \"execute plan\", or \"start coding\"\n- Have task file (story-* or standalone-*) ready to execute\n- User asks to \"use TDD\", \"write test first\", or \"test-driven\"\n- User asks to \"write tests\", \"add tests\", \"create tests\"\n- Fixing UI bugs (write failing test first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- Task file in docs/reference/frontend/tasks/ (story-* or standalone-*)\n- Read design-system.md, constraints.md, design spec before coding\n\nFlow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status\n",
+    "category": "frontend",
+    "tags": []
+  },
+  {
+    "name": "init",
     "namespace": "@the-aico/pm",
     "fullName": "@the-aico/pm/init",
     "version": "1.0.0",
@@ -105,60 +159,6 @@
     "version": "1.0.0",
     "description": "Execute backend task implementation with TDD. Read task file, execute steps, verify each, update status.\n\nUse this skill when:\n- User asks to \"implement task/plan\", \"start implementation\", \"execute plan\", or \"start coding\"\n- Have task file (story-* or standalone-*) ready to execute\n- User asks to \"use TDD\", \"write test first\", or \"test-driven\"\n- User asks to \"write tests\", \"add tests\", \"create tests\"\n- Fixing bugs (write failing test first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- Task file in docs/reference/backend/tasks/ (story-* or standalone-*)\n- Read constraints.md and design spec before coding\n\nFlow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status\n",
     "category": "backend",
-    "tags": []
-  },
-  {
-    "name": "init",
-    "namespace": "@the-aico/frontend",
-    "fullName": "@the-aico/frontend/init",
-    "version": "1.0.0",
-    "description": "Initialize frontend environment by creating design system and constraints documents from templates.\n\nUse this skill when:\n- Running /frontend.init command\n- User asks to \"initialize frontend\", \"setup frontend environment\"\n- Starting frontend work and need to establish design system and constraints\n- Need to create docs/reference/frontend/design-system.md or constraints.md\n",
-    "category": "frontend",
-    "tags": []
-  },
-  {
-    "name": "style-extraction",
-    "namespace": "@the-aico/frontend",
-    "fullName": "@the-aico/frontend/style-extraction",
-    "version": "1.0.0",
-    "description": "Extract design tokens (colors, typography, spacing, effects) from reference website or screenshot to create project design system.\n\nUNIQUE VALUE: Creates standardized design-system.md file with all design tokens extracted systematically.\n\nUse this skill when:\n- User shares reference website URL and wants to extract its style\n- User provides screenshot or image and asks to \"extract design\", \"extract style\"\n- Running /frontend.init and need to create design system from reference\n- User asks to \"create design system\", \"extract colors\", \"extract typography\"\n- Need to establish consistent design tokens before starting frontend work\n\nMethods: URL (via Playwright MCP screenshot) or direct screenshot analysis\nOutput: ALWAYS write to docs/reference/frontend/design-system.md\n",
-    "category": "frontend",
-    "tags": []
-  },
-  {
-    "name": "design",
-    "namespace": "@the-aico/frontend",
-    "fullName": "@the-aico/frontend/design",
-    "version": "1.0.0",
-    "description": "Transform PRD or story into complete page/component designs with ASCII layouts, component specs, interaction flows, and frontend implementation prompts.\n\nUse this skill when:\n- User asks to \"design the page\", \"design component\", \"create page design\"\n- User mentions \"page design\", \"component design\", \"UI design\", \"layout design\"\n- Running /frontend.design command\n- PRD or story is ready and need visual/interaction design before implementation\n- Need to create design spec that frontend developer can implement from\n\nPrerequisites: Design system must exist at docs/reference/frontend/design-system.md\nOutput: ALWAYS write design files to docs/reference/frontend/designs/{name}.md\n",
-    "category": "frontend",
-    "tags": []
-  },
-  {
-    "name": "task-breakdown",
-    "namespace": "@the-aico/frontend",
-    "fullName": "@the-aico/frontend/task-breakdown",
-    "version": "1.0.0",
-    "description": "Break down PM story into organized tasks in a single file following UI DEVELOPMENT order: Setup → Static UI → Dynamic Logic → Interactions → Testing.\n\nUNIQUE VALUE: Creates single task file (story-{name}.md) containing all tasks for a story. Tasks are ordered by UI development layers.\n\nUse this skill when:\n- Running /frontend.tasks command\n- User asks to \"break down story\", \"create frontend tasks\", \"split into tasks\"\n- Have story at docs/reference/pm/stories/ and need organized task breakdown\n- Need tasks ordered by UI development layers (not random order)\n- Starting frontend work and want organized task list\n\nTask order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests\nOutput: Create single file docs/reference/frontend/tasks/story-{name}.md with all tasks\n",
-    "category": "frontend",
-    "tags": []
-  },
-  {
-    "name": "plan",
-    "namespace": "@the-aico/frontend",
-    "fullName": "@the-aico/frontend/plan",
-    "version": "1.0.0",
-    "description": "Create or enhance frontend tasks with detailed implementation steps. Supports TWO modes:\n\nMODE A: Enhance existing task (add detailed steps to task in file)\nMODE B: Create new standalone task file (can contain single or multiple tasks)\n\nIMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.\nFor architecture planning or feature scoping, use EnterPlanMode instead.\n\nUse this skill when:\n- Running /frontend.plan command\n- User asks for \"atomic steps\", \"step-by-step plan with verification\"\n- Have a specific task and need implementation steps\n- User wants to create a standalone task file (not from story)\n- Need granular steps: Setup (create files) → Implementation (write code) → Test (verify)\n\nDO NOT use for:\n- Architecture planning (use EnterPlanMode)\n- General development planning\n- Feature scoping or estimation\n\nOutput:\n- MODE A: Update specific task section in file with Implementation Steps\n- MODE B: Create new standalone-{name}.md file with one or multiple tasks\n",
-    "category": "frontend",
-    "tags": []
-  },
-  {
-    "name": "implement",
-    "namespace": "@the-aico/frontend",
-    "fullName": "@the-aico/frontend/implement",
-    "version": "1.0.0",
-    "description": "Execute frontend task implementation with TDD. Read task file, execute steps, verify each, update status.\n\nUse this skill when:\n- User asks to \"implement task/plan\", \"start implementation\", \"execute plan\", or \"start coding\"\n- Have task file (story-* or standalone-*) ready to execute\n- User asks to \"use TDD\", \"write test first\", or \"test-driven\"\n- User asks to \"write tests\", \"add tests\", \"create tests\"\n- Fixing UI bugs (write failing test first)\n\nTDD Iron Law: NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\nTDD Cycle: RED (failing test) → Verify fails → GREEN (minimal code) → Verify passes → REFACTOR\n\nPrerequisites:\n- Task file in docs/reference/frontend/tasks/ (story-* or standalone-*)\n- Read design-system.md, constraints.md, design spec before coding\n\nFlow: Read Task → Read Constraints → Execute Steps → Verify → Test → Update Status\n",
-    "category": "frontend",
     "tags": []
   },
   {

@@ -3,8 +3,8 @@ name: aico-backend-plan
 description: |
   Create or enhance backend tasks with detailed implementation steps. Supports TWO modes:
 
-  MODE A: Enhance existing task file with detailed atomic steps
-  MODE B: Create new standalone task with complete information
+  MODE A: Enhance existing task (add detailed steps to task in file)
+  MODE B: Create new standalone task file (can contain single or multiple tasks)
 
   IMPORTANT: This skill creates MICRO-LEVEL atomic steps, NOT macro architecture plans.
   For architecture planning or feature scoping, use EnterPlanMode instead.
@@ -13,8 +13,8 @@ description: |
   - Running /backend.plan command
   - User asks for "atomic steps", "step-by-step plan with verification"
   - Have a specific task and need implementation steps
-  - User wants to create a standalone task (not from story)
-  - Need granular steps: Types → DB → Test (failing) → Implementation → Test (passing) → API
+  - User wants to create a standalone task file (not from story)
+  - Need granular steps: Types → DB → Repository → Service → API → Tests
 
   DO NOT use for:
   - Architecture planning (use EnterPlanMode)
@@ -22,29 +22,31 @@ description: |
   - Feature scoping or estimation
 
   Output:
-  - MODE A: Update existing task file with Implementation Steps section
-  - MODE B: Create new standalone-{task-name}.md file with complete task info
+  - MODE A: Update specific task section in file with Implementation Steps
+  - MODE B: Create new standalone-{name}.md file with one or multiple tasks
 ---
 
 # Plan
 
 ## ⚠️ CRITICAL RULES - READ FIRST
 
-1. **DETECT MODE**: Determine if input is a task file path or a task description
-   - If input looks like a filename (e.g., `story-user-profile-2-header` or `standalone-fix-login`): **MODE A**
-   - If input is a description (e.g., "Fix login button hover"): **MODE B**
+1. **DETECT MODE**: Determine if input is an existing task reference or a new requirement description
+   - If input looks like `story-user-api Task 1` or `standalone-fix-auth Task 2`: **MODE A**
+   - If input is a new requirement (e.g., "Add user authentication"): **MODE B**
 
 2. **MODE A - Enhance Existing Task**:
-   - Read the existing task file from `docs/reference/backend/tasks/`
-   - Add or update the "Implementation Steps" section
+   - Read the task file from `docs/reference/backend/tasks/`
+   - User must specify task number (e.g., "Task 1", "Task 2")
+   - Add or update the "Implementation Steps" section for that specific task
    - Keep all other sections intact
    - Save back to the same file
 
-3. **MODE B - Create Standalone Task**:
-   - Ask user for task type (feature | bugfix | improvement)
-   - Generate complete task file with all sections
-   - Use filename: `standalone-{task-name}.md` (kebab-case)
+3. **MODE B - Create Standalone Task File**:
+   - Analyze the requirement - is it simple (1 task) or complex (multiple tasks)?
+   - If complex, break into multiple tasks (like task-breakdown does)
+   - Use filename: `standalone-{requirement-name}.md` (kebab-case)
    - Save to `docs/reference/backend/tasks/`
+   - File format: same as story-based (multiple task sections)
 
 4. **READ CONSTRAINTS FIRST**:
    - Must read `docs/reference/backend/design-system.md` for design tokens
@@ -208,58 +210,15 @@ Each step = ONE atomic action:
 
 ## Standalone Task File Template
 
-For MODE B, use this complete template:
+For MODE B, see [Task File Template](../task-breakdown/references/task-file-template.md) for complete structure.
 
-```markdown
-# Task: [Task Name]
+Use the same format as story-based tasks, just with:
 
-> **File**: `standalone-{task-name}.md`
-> **Type**: feature | bugfix | improvement
-> **Source**: standalone
-> **Created**: YYYY-MM-DD
-> **Status**: pending
+- Filename: `standalone-{requirement-name}.md`
+- Header: `# Standalone Tasks: [Requirement Name]`
+- No `> **Story**: ...` line
 
-## Description
-
-[Clear, concise description of what needs to be done]
-
-## Context
-
-- Standalone task (not part of a story)
-- [Any relevant background or motivation]
-- [References to related components or files]
-
-## Acceptance Criteria
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Tests pass
-
-## Scope
-
-**Files to create/modify:**
-
-- Modify: `src/components/LoginButton.tsx`
-
-**Key changes:**
-
-- Update hover state styles
-- Ensure accessibility
-
-## Implementation Steps
-
-[Detailed atomic steps as described above]
-
----
-
-## Notes
-
-[Any additional technical notes or considerations]
-
-## Related Tasks
-
-- Related to: [If any]
-```
+**Note**: For simple requirements, file may contain only 1 task. For complex requirements, break into multiple tasks.
 
 ## Key Rules
 

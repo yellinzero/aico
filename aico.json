@@ -27,7 +27,7 @@
       "commands": ["init", "plan", "clarify"]
     },
     "frontend": {
-      "installedAt": "2026-01-20T13:07:15.023Z",
+      "installedAt": "2026-01-21T03:59:42.421Z",
       "skills": [
         "init",
         "style-extraction",
@@ -39,7 +39,7 @@
       "commands": ["init", "design", "tasks", "plan"]
     },
     "backend": {
-      "installedAt": "2026-01-20T13:07:15.935Z",
+      "installedAt": "2026-01-21T03:49:42.369Z",
       "skills": ["init", "task-breakdown", "plan", "implement"],
       "commands": ["init", "tasks", "plan"]
     }
