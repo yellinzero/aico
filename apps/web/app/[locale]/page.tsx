@@ -79,13 +79,18 @@ export default async function HomePage() {
 
       {/* Features Section */}
       <section className="container py-16 md:py-24">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('features.title')}
+          </h2>
+        </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
               <Blocks className="h-10 w-10 text-primary" />
-              <CardTitle className="mt-4">
+              <h3 className="mt-4 font-semibold leading-none tracking-tight">
                 {t('features.skills.title')}
-              </CardTitle>
+              </h3>
               <CardDescription>
                 {t('features.skills.description')}
               </CardDescription>
@@ -94,9 +99,9 @@ export default async function HomePage() {
           <Card>
             <CardHeader>
               <Globe className="h-10 w-10 text-primary" />
-              <CardTitle className="mt-4">
+              <h3 className="mt-4 font-semibold leading-none tracking-tight">
                 {t('features.employees.title')}
-              </CardTitle>
+              </h3>
               <CardDescription>
                 {t('features.employees.description')}
               </CardDescription>
@@ -105,16 +110,18 @@ export default async function HomePage() {
           <Card>
             <CardHeader>
               <Package className="h-10 w-10 text-primary" />
-              <CardTitle className="mt-4">{t('features.cli.title')}</CardTitle>
+              <h3 className="mt-4 font-semibold leading-none tracking-tight">
+                {t('features.cli.title')}
+              </h3>
               <CardDescription>{t('features.cli.description')}</CardDescription>
             </CardHeader>
           </Card>
           <Card>
             <CardHeader>
               <Sparkles className="h-10 w-10 text-primary" />
-              <CardTitle className="mt-4">
+              <h3 className="mt-4 font-semibold leading-none tracking-tight">
                 {t('features.openSource.title')}
-              </CardTitle>
+              </h3>
               <CardDescription>
                 {t('features.openSource.description')}
               </CardDescription>

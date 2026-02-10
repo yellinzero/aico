@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Toaster } from 'sonner';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { routing, type Locale } from '@/i18n/routing';
 import { SiteHeader } from '@/components/layout/site-header';
@@ -29,6 +30,18 @@ export async function generateMetadata({ params }: Props) {
 
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
+  // Generate canonical URL
+  const canonicalUrl =
+    locale === routing.defaultLocale ? baseUrl : `${baseUrl}/${locale}`;
+
+  // Generate hreflang alternates
+  const languages: Record<string, string> = {};
+  for (const loc of routing.locales) {
+    languages[loc === 'zh' ? 'zh-CN' : loc] =
+      loc === routing.defaultLocale ? baseUrl : `${baseUrl}/${loc}`;
+  }
+  languages['x-default'] = baseUrl;
+
   return {
     title: {
       default: t('title'),
@@ -39,10 +52,14 @@ export async function generateMetadata({ params }: Props) {
     authors: [{ name: 'AICO' }],
     creator: 'AICO',
     metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: canonicalUrl,
+      languages,
+    },
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: baseUrl,
+      url: canonicalUrl,
       siteName: 'AICO',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       type: 'website',
@@ -91,6 +108,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
     </html>
   );
 }

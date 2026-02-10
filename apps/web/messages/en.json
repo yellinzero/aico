@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "title": "AICO - AI Employee Framework",
-    "description": "Build AI teams in seconds, start working immediately. Manage AI collaborators like managing employees."
+    "title": "AICO - Open Source AI Employee Framework for Claude Code",
+    "description": "Build AI teams in seconds with AICO. An open-source framework to manage AI collaborators like employees. Install AI employees with one command."
   },
   "Navigation": {
     "home": "Home",
@@ -23,6 +23,7 @@
       "description": "Initialize your project and add AI employees in one command"
     },
     "features": {
+      "title": "Core Features",
       "skills": {
         "title": "Skills",
         "description": "Pre-built AI capabilities for common tasks"
