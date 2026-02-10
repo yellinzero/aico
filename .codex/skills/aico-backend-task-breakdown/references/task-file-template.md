@@ -1,19 +1,19 @@
 # Task File Template
 
-This template defines the structure for frontend task breakdown files.
+This template defines the structure for backend task breakdown files.
 
 ## Story-based Task File
 
 **Filename**: `story-{story-name}.md`
 
-**Location**: `docs/reference/frontend/tasks/`
+**Location**: `docs/reference/backend/tasks/`
 
 ```markdown
 # Story Tasks: [Story Name]
 
 > **Story**: docs/reference/pm/stories/{story-id}.md
-> **Design**: docs/reference/frontend/designs/{design-name}.md (if applicable)
-> **Role**: frontend
+> **Design**: docs/reference/backend/designs/{design-name}.md (if applicable)
+> **Role**: backend
 > **Created**: YYYY-MM-DD
 > **Updated**: YYYY-MM-DD
 
@@ -56,7 +56,7 @@ This template defines the structure for frontend task breakdown files.
 
 ### Implementation Steps
 
-> Note: Detailed steps can be added using `/frontend.plan` command
+> Note: Detailed steps can be added using `/backend.plan` command
 
 1. [Brief step description]
 2. [Brief step description]
@@ -97,7 +97,7 @@ This template defines the structure for frontend task breakdown files.
 
 ### Implementation Steps
 
-> Note: Add detailed steps using `/frontend.plan story-{name}` and specify task number
+> Note: Add detailed steps using `/backend.plan story-{name}` and specify task number
 
 1. [Brief step description]
 
@@ -151,7 +151,7 @@ Add comprehensive unit and integration tests for all implemented features.
 
 **Filename**: `standalone-{requirement-name}.md`
 
-**Location**: `docs/reference/frontend/tasks/`
+**Location**: `docs/reference/backend/tasks/`
 
 **Structure**: Same as story-based task file, just replace:
 

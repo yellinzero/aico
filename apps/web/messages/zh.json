@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "title": "AICO - AI 员工框架",
-    "description": "秒建 AI 团队，即刻开工。像管理员工一样管理 AI 协作者。"
+    "title": "AICO - 开源 AI 员工框架，为 Claude Code 打造专业 AI 团队",
+    "description": "使用 AICO 秒建 AI 团队。开源框架让你像管理员工一样管理 AI 协作者。一条命令安装产品经理、前端工程师、后端工程师等 AI 员工，即刻开工。"
   },
   "Navigation": {
     "home": "首页",
@@ -23,6 +23,7 @@
       "description": "一条命令初始化项目并添加 AI 员工"
     },
     "features": {
+      "title": "核心功能",
       "skills": {
         "title": "技能",
         "description": "预置的 AI 能力，适用于常见任务"

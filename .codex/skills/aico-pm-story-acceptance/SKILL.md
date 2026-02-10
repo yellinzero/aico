@@ -25,12 +25,18 @@ Before generating any content, check `aico.json` in project root for `language` 
 
 1. **Identify the story**: Get story ID (e.g., S-001) from notification or user
 2. **Read the story**: Load `docs/reference/pm/stories/{story-id}.md`
-3. **Find related tasks**:
-   - Check `docs/reference/frontend/tasks/` for frontend tasks
-   - Check `docs/reference/backend/tasks/` for backend tasks
+3. **Find related tasks** (use Strategy 1 if available, fallback to Strategy 2):
+   - **Strategy 1 (Preferred)**: Read "Related Tasks" section from story file
+     - Story file should contain task list created by task-breakdown
+     - Directly read the listed task files
+   - **Strategy 2 (Fallback)**: Pattern matching in task directories
+     - Extract story name from story filename (e.g., "user-profile" from "user-profile.md")
+     - Search `docs/reference/frontend/tasks/` for `story-{story-name}-*.md`
+     - Search `docs/reference/backend/tasks/` for `story-{story-name}-*.md`
 4. **Verify all tasks completed**:
-   - All task statuses should be `✅ completed`
-   - No `⏳ pending` or `🔄 in_progress` tasks remaining
+   - Read each task file's `> **Status**:` field
+   - All task statuses should be `completed`
+   - No `pending` or `in_progress` tasks remaining
 5. **Update story**:
    - If ALL tasks completed → Update acceptance criteria `- [ ]` to `- [x]`
    - If partial → Report progress, list incomplete tasks
