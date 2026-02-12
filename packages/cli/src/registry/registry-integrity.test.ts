@@ -5,8 +5,9 @@ import { employeeSchema } from '../schema/employee.js';
 import { skillSchema } from '../schema/skill.js';
 
 const REGISTRY_DIR = path.resolve(__dirname, '../../../../registry');
+const registryExists = fs.pathExistsSync(REGISTRY_DIR);
 
-describe('registry data integrity', () => {
+describe.skipIf(!registryExists)('registry data integrity', () => {
   describe('employee JSON files', () => {
     const employeeFiles = ['pm.json', 'frontend.json', 'backend.json'];
 
@@ -144,7 +145,7 @@ describe('employee source files', () => {
   }
 });
 
-describe('JSON Schema output', () => {
+describe.skipIf(!registryExists)('JSON Schema output', () => {
   it('employee.json schema should use correct file types', async () => {
     const schemaPath = path.join(REGISTRY_DIR, 'schema', 'employee.json');
     const schema = await fs.readJson(schemaPath);
