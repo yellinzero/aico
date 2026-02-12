@@ -13,11 +13,11 @@
         },
         {
           "path": "skills/init/references/design-system.template.md",
-          "type": "doc"
+          "type": "reference"
         },
         {
           "path": "skills/init/references/constraints.template.md",
-          "type": "doc"
+          "type": "reference"
         }
       ]
     },
@@ -48,7 +48,7 @@
         },
         {
           "path": "skills/task-breakdown/references/task-file-template.md",
-          "type": "doc"
+          "type": "reference"
         }
       ]
     },

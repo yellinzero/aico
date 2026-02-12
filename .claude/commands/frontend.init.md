@@ -83,11 +83,6 @@ docs/reference/frontend/
 /frontend.init --yes
 ```
 
-## Skills Used
-
-- `aico-frontend-init` - Initialize frontend environment with templates
-- `aico-frontend-style-extraction` - Extract design system from reference website (optional)
-
 ## Design System Options
 
 ### Option A: Extract from Reference Website

@@ -41,8 +41,8 @@ Convert a single backend task into atomic 2-5 minute implementation steps.
      - Exact action to take
      - Verification command
 
-4. **Save plan to file**
-   - Save to `docs/reference/backend/plans/{story}-task-{number}.md`
+4. **Update task file**
+   - Add Implementation Steps to the specified task in the existing task file
    - Present summary and next steps to user
 
 ## Output
@@ -68,7 +68,7 @@ Convert a single backend task into atomic 2-5 minute implementation steps.
 
 ...
 
-**Note**: The plan is saved to `docs/reference/backend/plans/{story}-task-{number}.md`
+**Note**: The implementation steps are added directly to the existing task file (story-_.md or standalone-_.md)
 
-Ready to implement? Review the plan file, then use the `aico-backend-implement` skill to execute this plan.
+Ready to implement? Review the task file, then use the `aico-backend-implement` skill to execute.
 ```

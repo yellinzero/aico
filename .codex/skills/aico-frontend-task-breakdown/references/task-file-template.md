@@ -1,18 +1,19 @@
 # Task File Template
 
-This template defines the structure for backend task breakdown files.
+This template defines the structure for frontend task breakdown files.
 
 ## Story-based Task File
 
 **Filename**: `story-{story-name}.md`
 
-**Location**: `docs/reference/backend/tasks/`
+**Location**: `docs/reference/frontend/tasks/`
 
 ```markdown
 # Story Tasks: [Story Name]
 
 > **Story**: docs/reference/pm/stories/{story-id}.md
-> **Role**: backend
+> **Design**: docs/reference/frontend/designs/{design-name}.md (if applicable)
+> **Role**: frontend
 > **Created**: YYYY-MM-DD
 > **Updated**: YYYY-MM-DD
 
@@ -33,7 +34,7 @@ This template defines the structure for backend task breakdown files.
 
 - Part of [Story Name] story
 - First task - sets up foundation
-- Should follow constraints and conventions
+- Should follow design system tokens
 
 ### Acceptance Criteria
 
@@ -45,17 +46,17 @@ This template defines the structure for backend task breakdown files.
 
 **Files to create/modify:**
 
-- Create: `src/types/...`
-- Modify: `src/services/...`
+- Create: `src/components/...`
+- Modify: `src/pages/...`
 
-**Key modules:**
+**Key components:**
 
-- Service A
-- Repository B
+- Component A
+- Component B
 
 ### Implementation Steps
 
-> Note: Detailed steps can be added using `/backend.plan` command
+> Note: Detailed steps can be added using `/frontend.plan` command
 
 1. [Brief step description]
 2. [Brief step description]
@@ -92,11 +93,11 @@ This template defines the structure for backend task breakdown files.
 
 **Files to create/modify:**
 
-- Create: `src/services/...`
+- Create: `src/components/...`
 
 ### Implementation Steps
 
-> Note: Add detailed steps using `/backend.plan story-{name}` and specify task number
+> Note: Add detailed steps using `/frontend.plan story-{name}` and specify task number
 
 1. [Brief step description]
 
@@ -118,15 +119,15 @@ Add comprehensive unit and integration tests for all implemented features.
 
 ### Acceptance Criteria
 
-- [ ] Unit tests for all services
-- [ ] Integration tests for API endpoints
+- [ ] Unit tests for all components
+- [ ] Integration tests for user flows
 - [ ] All tests passing
 
 ### Scope
 
 **Files to create:**
 
-- `src/services/__tests__/...`
+- `src/components/__tests__/...`
 
 ### Implementation Steps
 
@@ -150,7 +151,7 @@ Add comprehensive unit and integration tests for all implemented features.
 
 **Filename**: `standalone-{requirement-name}.md`
 
-**Location**: `docs/reference/backend/tasks/`
+**Location**: `docs/reference/frontend/tasks/`
 
 **Structure**: Same as story-based task file, just replace:
 
@@ -160,17 +161,17 @@ Add comprehensive unit and integration tests for all implemented features.
 
 ## Task Types
 
-| Type    | Examples                                 |
-| ------- | ---------------------------------------- |
-| Setup   | Define types, create database schema     |
-| Data    | Implement repository, data access layer  |
-| Logic   | Add business logic, service layer        |
-| API     | Implement endpoints, request handlers    |
-| Testing | Unit tests, integration tests, API tests |
+| Type        | Examples                                |
+| ----------- | --------------------------------------- |
+| Setup       | Create component structure, setup state |
+| UI          | Implement section/component layout      |
+| Logic       | Add form validation, API integration    |
+| Interaction | Implement hover, click, animations      |
+| Testing     | Unit tests, integration tests           |
 
 ## Ordering Rules
 
-1. **Setup tasks first** - Types, database schema
-2. **Data layer before logic** - Repository before service
+1. **Setup tasks first** - Component structure, routing
+2. **Static UI before dynamic** - Layout before logic
 3. **Core functionality before edge cases** - Happy path first
-4. **Tests after implementation** - Each layer gets tests
+4. **Tests after implementation** - Each feature gets tests

@@ -13,7 +13,7 @@
   },
   "employees": {
     "pm": {
-      "installedAt": "2026-01-21T11:28:13.304Z",
+      "installedAt": "2026-02-12T06:15:26.300Z",
       "skills": [
         "init",
         "brainstorming",
@@ -27,7 +27,7 @@
       "commands": ["init", "plan", "clarify"]
     },
     "frontend": {
-      "installedAt": "2026-01-21T11:28:13.576Z",
+      "installedAt": "2026-02-12T06:15:26.751Z",
       "skills": [
         "init",
         "style-extraction",
@@ -39,7 +39,7 @@
       "commands": ["init", "design", "tasks", "plan"]
     },
     "backend": {
-      "installedAt": "2026-01-21T11:28:13.914Z",
+      "installedAt": "2026-02-12T06:15:27.175Z",
       "skills": ["init", "task-breakdown", "plan", "implement"],
       "commands": ["init", "tasks", "plan"]
     }

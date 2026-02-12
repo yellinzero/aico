@@ -13,6 +13,7 @@ import {
   type Skill,
   type SkillSummary,
   type SkillCategory,
+  type SkillFileType,
 } from '../schema/skill.js';
 import { logger, spinner } from '../utils/logger.js';
 import { handleError } from '../utils/errors.js';
@@ -225,16 +226,9 @@ async function runBuild(options: BuildOptions): Promise<void> {
               ? file.path.substring(skillPrefix.length)
               : path.basename(file.path);
 
-            // Map employee file types to skill file types
-            // 'doc' and 'command' from employee.json become 'reference' in skill registry
-            const skillFileType =
-              file.type === 'doc' || file.type === 'command'
-                ? 'reference'
-                : file.type;
-
             skillFiles.push({
               path: relativePath,
-              type: skillFileType,
+              type: file.type as SkillFileType,
               content,
             });
           } else {
