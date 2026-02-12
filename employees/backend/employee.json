@@ -13,7 +13,7 @@
         },
         {
           "path": "skills/init/references/constraints.template.md",
-          "type": "doc"
+          "type": "reference"
         }
       ]
     },
@@ -26,7 +26,7 @@
         },
         {
           "path": "skills/task-breakdown/references/task-file-template.md",
-          "type": "doc"
+          "type": "reference"
         }
       ]
     },

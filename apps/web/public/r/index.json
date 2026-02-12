@@ -1,9 +1,9 @@
 {
   "employees": [
     {
-      "name": "pm",
-      "role": "Product Manager",
-      "description": "Product research, requirement analysis, user story writing, and version planning"
+      "name": "backend",
+      "role": "Backend Engineer",
+      "description": "Full-stack backend development: API design, database, business logic, TDD, and system architecture"
     },
     {
       "name": "frontend",
@@ -11,9 +11,9 @@
       "description": "Full-stack frontend development: design system, page design, task breakdown, implementation with TDD"
     },
     {
-      "name": "backend",
-      "role": "Backend Engineer",
-      "description": "Full-stack backend development: API design, database, business logic, TDD, and system architecture"
+      "name": "pm",
+      "role": "Product Manager",
+      "description": "Product research, requirement analysis, user story writing, and version planning"
     }
   ]
 }

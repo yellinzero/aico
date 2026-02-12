@@ -6,6 +6,7 @@
     "dev": "pnpm --filter @the-aico/cli dev",
     "build": "pnpm --filter @the-aico/cli build",
     "build:registry": "pnpm --filter @the-aico/cli build:registry",
+    "sync:registry": "rsync -a --delete registry/ apps/web/public/r/ && cp -r registry/schema/ apps/web/public/schema/",
     "test": "pnpm --filter @the-aico/cli test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

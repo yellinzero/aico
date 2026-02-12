@@ -4,7 +4,7 @@ import { skillCategorySchema } from './skill.js';
 export const fileTypeSchema = z.enum([
   'skill',
   'command',
-  'doc',
+  'reference',
   'script',
   'asset',
 ]);

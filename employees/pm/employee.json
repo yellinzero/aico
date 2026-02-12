@@ -13,7 +13,7 @@
         },
         {
           "path": "skills/init/references/constitution.template.md",
-          "type": "doc"
+          "type": "reference"
         }
       ]
     },

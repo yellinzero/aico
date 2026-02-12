@@ -298,7 +298,7 @@ const EMPLOYEE_SCHEMA = {
         },
         type: {
           type: 'string',
-          enum: ['skill', 'command', 'doc'],
+          enum: ['skill', 'command', 'reference', 'script', 'asset'],
           description: 'File type',
         },
       },
@@ -314,7 +314,7 @@ const EMPLOYEE_SCHEMA = {
         },
         type: {
           type: 'string',
-          enum: ['skill', 'command', 'doc'],
+          enum: ['skill', 'command', 'reference', 'script', 'asset'],
           description: 'File type',
         },
         content: {

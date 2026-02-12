@@ -33,9 +33,11 @@ export interface InstallOptions {
   silent?: boolean;
 }
 
+import type { FileType } from '../schema/employee.js';
+
 export interface ConflictInfo {
   path: string;
-  type: 'skill' | 'command' | 'doc';
+  type: FileType;
 }
 
 export interface InstallResult {

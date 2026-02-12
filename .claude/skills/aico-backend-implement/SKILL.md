@@ -38,9 +38,7 @@ Before generating any content, check `aico.json` in project root for `language` 
    - If NOT exists or task number not specified → STOP and ask user which task to implement
 
 1. **Read constraints FIRST** (before any code):
-   - `docs/reference/backend/design-system.md` - Colors, typography, spacing
    - `docs/reference/backend/constraints.md` - Tech stack, patterns
-   - If task references design: `docs/reference/backend/designs/{name}.md`
 
 2. **Execute implementation steps**:
    - Read "Implementation Steps" section from task
@@ -90,7 +88,7 @@ Both story-based and standalone tasks use the same file structure - the only dif
 ```
 Read Task File
      ↓
-Read Constraints (design-system.md, constraints.md, designs/)
+Read Constraints (constraints.md)
      ↓
 Execute Step 1 → Verify → Pass? → Continue
                       ↓
@@ -113,12 +111,13 @@ Show Completion Summary
 
 ### Rule 1: Follow Constraints Exactly
 
-```tsx
-// ❌ Wrong: Ignore design system
-<button className="bg-blue-500 text-white">
+```typescript
+// ❌ Wrong: Ignore error handling pattern
+const user = await db.users.findOne({ id });
 
-// ✅ Right: Use design tokens
-<button className="bg-primary text-primary-foreground">
+// ✅ Right: Follow established patterns from constraints
+const user = await userRepository.findById(id);
+if (!user) throw new NotFoundError('User not found');
 ```
 
 ### Rule 2: Verify Before Proceeding
@@ -229,18 +228,18 @@ RED → Verify Fails → GREEN → Verify Passes → REFACTOR → Repeat
 #### 1. RED - Write Failing Test
 
 ```typescript
-test('Button shows loading state when clicked', async () => {
-  render(<SubmitButton onClick={mockSubmit} />)
-  await userEvent.click(screen.getByRole('button'))
-  expect(screen.getByRole('button')).toBeDisabled()
-  expect(screen.getByTestId('spinner')).toBeInTheDocument()
-})
+test('UserService creates user with hashed password', async () => {
+  const userData = { email: 'test@example.com', password: 'password123' };
+  const user = await userService.create(userData);
+  expect(user.email).toBe('test@example.com');
+  expect(user.password).not.toBe('password123');
+});
 ```
 
 #### 2. Verify RED - Watch It Fail
 
 ```bash
-npm test -- --watch ComponentName
+npm test -- --watch user.service
 ```
 
 #### 3. GREEN - Write Minimal Code
@@ -253,57 +252,55 @@ Write simplest code to pass the test. Don't add features not in test.
 
 Only after green. Keep tests passing.
 
-### Testing Library Query Priority
+### Testing Best Practices
 
-1. `getByRole` - accessible by everyone
-2. `getByLabelText` - form fields
-3. `getByText` - non-interactive elements
-4. `getByTestId` - last resort
+1. Test behavior, not implementation details
+2. Use descriptive test names that explain the scenario
+3. Follow Arrange-Act-Assert pattern
+4. Mock external dependencies (DB, APIs)
 
 ### Test Coverage Requirements
 
-| Component Type | Required Tests                   |
-| -------------- | -------------------------------- |
-| UI Component   | Render, props, variants          |
-| Form           | Validation, submit, error states |
-| Interactive    | User events, callbacks           |
-| Data Display   | Loading, error, empty states     |
+| Component Type | Required Tests                     |
+| -------------- | ---------------------------------- |
+| Service        | Business logic, error handling     |
+| Repository     | CRUD operations, query methods     |
+| Controller     | Request handling, response format  |
+| Middleware     | Request processing, error handling |
 
 ### TDD Red Flags - STOP and Start Over
 
 - Code before test
 - Test passes immediately
 - Testing implementation details
-- `querySelector` everywhere
+- No assertions in test
 
 ---
 
 ## Example Workflow
 
 ```bash
-# User: "Implement story-user-profile-2-header"
+# User: "Implement story-user-api Task 1"
 
-1. ✓ Read task: docs/reference/backend/tasks/story-user-profile-2-header.md
+1. ✓ Read task: docs/reference/backend/tasks/story-user-api.md
 2. ✓ Read constraints:
-   - design-system.md
    - constraints.md
-   - designs/user-profile.md
 
-3. ✓ Execute Step 1: Create component file
-   → Run: npm run typecheck
+3. ✓ Execute Step 1: Define data types
+   → Run: npx tsc --noEmit
    → ✓ Pass
 
-4. ✓ Execute Step 2: Implement header layout
-   → Run: npm run dev
+4. ✓ Execute Step 2: Create database schema
+   → Run: npm run migrate
    → ✓ Pass
 
-5. ✓ Execute Step 3: Add responsive styles
-   → Run: npm run dev (test at different breakpoints)
+5. ✓ Execute Step 3: Implement repository layer
+   → Run: npm test user.repository
    → ✓ Pass
 
 6. ✓ Execute Step 4: Add unit tests
-   → Run: npm test LoginHeader
-   → ✓ 3 tests passed
+   → Run: npm test user
+   → ✓ 5 tests passed
 
 7. ✓ Run full test suite
    → Run: npm test
