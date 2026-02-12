@@ -11,7 +11,7 @@ Convert a single task into atomic implementation steps (2-5 minutes each).
 1. Read the specified task from task list
 2. Read related design and constraints
 3. Create atomic step-by-step plan
-4. Save plan to `docs/reference/frontend/plans/` directory
+4. Save plan to `docs/reference/frontend/tasks/` directory
 5. Each step has verification command
 6. Present summary and next steps to user
 
@@ -47,7 +47,7 @@ Convert a single task into atomic implementation steps (2-5 minutes each).
 │ - Break into atomic steps        │
 │ - Add verification for each      │
 │ - Include exact code             │
-│ - Save to plans/ directory       │
+│ - Save to tasks/ directory       │
 └───────────┬───────────────────────┘
             │
             ▼
@@ -122,11 +122,9 @@ Expected: No errors
 
 ...
 
-```
+````
 
-**Note**: The plan will be saved to `docs/reference/frontend/plans/{story}-task-{number}.md`
-
-```
+**Note**: The implementation steps are added directly to the existing task file (story-*.md or standalone-*.md)
 
 ## Step Granularity
 
@@ -155,9 +153,10 @@ After the plan is created and saved:
 /frontend.plan user-profile 2
 ```
 
-Creates a plan file at `docs/reference/frontend/plans/user-profile-task-2.md` with:
+Adds implementation steps to Task 2 in `docs/reference/frontend/tasks/story-user-profile.md` with:
 
 - 5 atomic steps
 - Exact code for each step
 - Verification command for each
 - Plan ready for review and execution
+````

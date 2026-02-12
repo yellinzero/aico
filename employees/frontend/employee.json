@@ -45,6 +45,10 @@
         {
           "path": "skills/task-breakdown/SKILL.md",
           "type": "skill"
+        },
+        {
+          "path": "skills/task-breakdown/references/task-file-template.md",
+          "type": "doc"
         }
       ]
     },

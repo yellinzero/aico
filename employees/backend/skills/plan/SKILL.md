@@ -49,9 +49,7 @@ description: |
    - File format: same as story-based (multiple task sections)
 
 4. **READ CONSTRAINTS FIRST**:
-   - Must read `docs/reference/backend/design-system.md` for design tokens
    - Must read `docs/reference/backend/constraints.md` for tech stack
-   - If task references a design, read from `docs/reference/backend/designs/`
 
 ## Language Configuration
 
@@ -62,31 +60,29 @@ Before generating any content, check `aico.json` in project root for `language` 
 ### Process
 
 1. **Read task file**: Get task details from `docs/reference/backend/tasks/{task-file}.md`
-2. **Read design** (if referenced): Load related design from `docs/reference/backend/designs/`
-3. **Read design system**: Load `docs/reference/backend/design-system.md` for design tokens
-4. **Read constraints**: Load `docs/reference/backend/constraints.md`
-5. **Break into atomic steps**:
+2. **Read constraints**: Load `docs/reference/backend/constraints.md`
+3. **Break into atomic steps**:
    - Start with file creation/setup
    - One section/feature per step
    - Include verification for each step
    - Do NOT include commit step (that happens during execution)
-6. **Keep steps atomic**: One action per step
-7. **Update task file**: Add/replace "Implementation Steps" section
-8. **Present summary**: Show file location and what was added
+4. **Keep steps atomic**: One action per step
+5. **Update task file**: Add/replace "Implementation Steps" section
+6. **Present summary**: Show file location and what was added
 
 ### Example
 
 ```bash
-# Input: User runs /backend.plan story-user-profile-2-header
+# Input: User runs /backend.plan story-user-api Task 1
 
 # Output:
-✓ Read task: docs/reference/backend/tasks/story-user-profile-2-header.md
-✓ Added 4 implementation steps to task file
+✓ Read task: docs/reference/backend/tasks/story-user-api.md
+✓ Added 4 implementation steps to Task 1
 
 Steps added:
-1. Create component file
-2. Implement header layout
-3. Add responsive styles
+1. Define data types and interfaces
+2. Create database schema
+3. Implement repository layer
 4. Add unit tests
 
 Task ready for implementation. Use aico-backend-implement to execute.
@@ -101,7 +97,7 @@ Task ready for implementation. Use aico-backend-implement to execute.
    - Confirm task name (auto-generate from description)
 
 2. **Read constraints**:
-   - Read design system and technical constraints
+   - Read technical constraints
    - If user mentions a component, check existing code
 
 3. **Generate complete task file**:
@@ -120,14 +116,14 @@ Task ready for implementation. Use aico-backend-implement to execute.
 ### Example
 
 ```bash
-# Input: User runs /backend.plan "Fix login button hover state"
+# Input: User runs /backend.plan "Fix user authentication endpoint"
 
 # Interactive:
 # Type: [feature | bugfix | improvement] → bugfix
-# Task name: fix-login-button-hover (auto-generated, confirm?)
+# Task name: fix-user-auth-endpoint (auto-generated, confirm?)
 
 # Output:
-✓ Created standalone task: standalone-fix-login-button-hover.md
+✓ Created standalone task: standalone-fix-user-auth-endpoint.md
 
 Task includes:
 - Description and context
@@ -149,8 +145,8 @@ Both modes use the same step format:
 
 **Files**:
 
-- Create: `src/components/[Name].tsx`
-- Modify: `src/pages/[Page].tsx:L10-L20`
+- Create: `src/services/[Name].ts`
+- Modify: `src/controllers/[Controller].ts:L10-L20`
 
 **Action**:
 [Exact code or action to take]
@@ -178,16 +174,16 @@ Each step = ONE atomic action:
 
 | Good Steps | Bad Steps |
 |------------|-----------|
-| Create component file with imports | Create component with all logic |
-| Add component skeleton (empty return) | Implement entire component |
-| Implement single section | Implement all sections |
+| Create service file with imports | Create service with all methods |
+| Add service skeleton (empty methods) | Implement entire service |
+| Implement single endpoint | Implement all endpoints |
 | Write one test case | Write all tests |
 
 ## Step Types
 
 ### Setup Step
 ```markdown
-**Files**: Create: `src/components/ProfileCard.tsx`
+**Files**: Create: `src/services/user.service.ts`
 **Action**: Create file with basic structure
 **Verify**: `npx tsc --noEmit` → No errors
 ````
@@ -195,17 +191,17 @@ Each step = ONE atomic action:
 ### Implementation Step
 
 ```markdown
-**Files**: Modify: `src/components/ProfileCard.tsx:L8-L10`
-**Action**: Implement header section with Avatar and name
-**Verify**: `npm run dev` → Component renders correctly
+**Files**: Modify: `src/services/user.service.ts:L8-L10`
+**Action**: Implement user creation method
+**Verify**: `npm test` → Service tests pass
 ```
 
 ### Test Step
 
 ```markdown
-**Files**: Create: `src/components/__tests__/ProfileCard.test.tsx`
-**Action**: Write unit test for profile name rendering
-**Verify**: `npm test ProfileCard` → 1 test passed
+**Files**: Create: `src/services/__tests__/user.service.test.ts`
+**Action**: Write unit test for user creation
+**Verify**: `npm test user.service` → 1 test passed
 ```
 
 ## Standalone Task File Template
