@@ -44,7 +44,7 @@ Break down a PM story into actionable frontend tasks with progress tracking.
             │
             ▼
 ┌───────────────────────────────────┐
-│ Output to tasks/[story].md       │
+│ Output to tasks/story-{name}.md  │
 │ - Task list with status          │
 │ - Acceptance criteria            │
 │ - Dependencies noted             │
@@ -72,7 +72,7 @@ Break down a PM story into actionable frontend tasks with progress tracking.
 
 ```
 docs/reference/frontend/tasks/
-└── [story-name].md
+└── story-{story-name}.md
 ```
 
 ## Task File Format
@@ -80,12 +80,12 @@ docs/reference/frontend/tasks/
 ```markdown
 # [Story Name] - Frontend Tasks
 
-> Project: [project-name]
-> Created: YYYY-MM-DD
-> Last Updated: YYYY-MM-DD
-> Source: docs/reference/pm/stories/[story].md
-> Design: docs/reference/frontend/designs/[name].md
-> Status: pending | in_progress | completed
+> **Project**: [project-name]
+> **Created**: YYYY-MM-DD
+> **Last Updated**: YYYY-MM-DD
+> **Source**: docs/reference/pm/stories/[story].md
+> **Design**: docs/reference/frontend/designs/[name].md
+> **Status**: pending | in_progress | completed
 
 ## Progress
 

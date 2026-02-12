@@ -29,10 +29,9 @@ Before generating any content, check `aico.json` in project root for `language` 
    - **Strategy 1 (Preferred)**: Read "Related Tasks" section from story file
      - Story file should contain task list created by task-breakdown
      - Directly read the listed task files
-   - **Strategy 2 (Fallback)**: Pattern matching in task directories
-     - Extract story name from story filename (e.g., "user-profile" from "user-profile.md")
-     - Search `docs/reference/frontend/tasks/` for `story-{story-name}-*.md`
-     - Search `docs/reference/backend/tasks/` for `story-{story-name}-*.md`
+   - **Strategy 2 (Fallback)**: Search task directories
+     - Search `docs/reference/frontend/tasks/` for files related to the story
+     - Search `docs/reference/backend/tasks/` for files related to the story
 4. **Verify all tasks completed**:
    - Read each task file's `> **Status**:` field
    - All task statuses should be `completed`

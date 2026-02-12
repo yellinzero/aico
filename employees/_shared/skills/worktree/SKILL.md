@@ -48,11 +48,10 @@ If NOT ignored → Add to `.gitignore` first.
 ```bash
 # Create worktree with new branch
 git worktree add ".worktrees/$BRANCH_NAME" -b "$BRANCH_NAME"
-cd ".worktrees/$BRANCH_NAME"
 
-# Run project setup (auto-detect)
-if [ -f package.json ]; then npm install; fi
-if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+# Run project setup in worktree (use absolute path)
+if [ -f ".worktrees/$BRANCH_NAME/package.json" ]; then npm install --prefix ".worktrees/$BRANCH_NAME"; fi
+if [ -f ".worktrees/$BRANCH_NAME/requirements.txt" ]; then pip install -r ".worktrees/$BRANCH_NAME/requirements.txt"; fi
 
 # Verify baseline tests
 npm test / pytest / go test ./...

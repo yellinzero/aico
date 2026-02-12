@@ -32,7 +32,7 @@ Convert a PM story/PRD into actionable backend tasks with progress tracking.
    - Decompose into tasks following layered architecture
 
 3. **Create task file**
-   - Output to `docs/reference/backend/tasks/[story-name].md`
+   - Output to `docs/reference/backend/tasks/story-{story-name}.md`
    - Include progress tracking table
    - Define each task with acceptance criteria
 
@@ -41,7 +41,7 @@ Convert a PM story/PRD into actionable backend tasks with progress tracking.
 ```
 ✓ Found story: [story-name]
 ✓ Analyzed backend requirements
-✓ Created docs/reference/backend/tasks/[story-name].md
+✓ Created docs/reference/backend/tasks/story-{story-name}.md
 
 Tasks created:
 1. Define data models (⏳ pending)

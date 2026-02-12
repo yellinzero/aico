@@ -9,7 +9,7 @@ description: |
   - Tasks are mostly independent (not tightly coupled)
   - User asks to "execute the plan", "run the tasks", "auto implement"
 
-  Prerequisites: Must have plan from aico-*-plan or aico-*-task-breakdown skill.
+  Prerequisites: Must have plan from aico-frontend-plan, aico-backend-plan, or aico-*-task-breakdown skill.
   Process: For each task: Dispatch Implementer → Spec Review (passes?) → Quality Review (passes?) → Next task
   Review order: ALWAYS spec compliance first, THEN code quality.
 ---
@@ -21,7 +21,7 @@ description: |
 ```
 1. Read plan, extract all tasks
       ↓
-2. Create TodoWrite with all tasks
+2. Create task list with TaskCreate for all tasks
       ↓
 3. For each task:
    a. Dispatch Implementer Subagent

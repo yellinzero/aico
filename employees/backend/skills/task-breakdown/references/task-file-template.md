@@ -12,7 +12,6 @@ This template defines the structure for backend task breakdown files.
 # Story Tasks: [Story Name]
 
 > **Story**: docs/reference/pm/stories/{story-id}.md
-> **Design**: docs/reference/backend/designs/{design-name}.md (if applicable)
 > **Role**: backend
 > **Created**: YYYY-MM-DD
 > **Updated**: YYYY-MM-DD
@@ -34,7 +33,7 @@ This template defines the structure for backend task breakdown files.
 
 - Part of [Story Name] story
 - First task - sets up foundation
-- Should follow design system tokens
+- Should follow constraints and conventions
 
 ### Acceptance Criteria
 
@@ -46,13 +45,13 @@ This template defines the structure for backend task breakdown files.
 
 **Files to create/modify:**
 
-- Create: `src/components/...`
-- Modify: `src/pages/...`
+- Create: `src/types/...`
+- Modify: `src/services/...`
 
-**Key components:**
+**Key modules:**
 
-- Component A
-- Component B
+- Service A
+- Repository B
 
 ### Implementation Steps
 
@@ -93,7 +92,7 @@ This template defines the structure for backend task breakdown files.
 
 **Files to create/modify:**
 
-- Create: `src/components/...`
+- Create: `src/services/...`
 
 ### Implementation Steps
 
@@ -119,15 +118,15 @@ Add comprehensive unit and integration tests for all implemented features.
 
 ### Acceptance Criteria
 
-- [ ] Unit tests for all components
-- [ ] Integration tests for user flows
+- [ ] Unit tests for all services
+- [ ] Integration tests for API endpoints
 - [ ] All tests passing
 
 ### Scope
 
 **Files to create:**
 
-- `src/components/__tests__/...`
+- `src/services/__tests__/...`
 
 ### Implementation Steps
 
@@ -161,17 +160,17 @@ Add comprehensive unit and integration tests for all implemented features.
 
 ## Task Types
 
-| Type        | Examples                                |
-| ----------- | --------------------------------------- |
-| Setup       | Create component structure, setup state |
-| UI          | Implement section/component layout      |
-| Logic       | Add form validation, API integration    |
-| Interaction | Implement hover, click, animations      |
-| Testing     | Unit tests, integration tests           |
+| Type    | Examples                                 |
+| ------- | ---------------------------------------- |
+| Setup   | Define types, create database schema     |
+| Data    | Implement repository, data access layer  |
+| Logic   | Add business logic, service layer        |
+| API     | Implement endpoints, request handlers    |
+| Testing | Unit tests, integration tests, API tests |
 
 ## Ordering Rules
 
-1. **Setup tasks first** - Component structure, routing
-2. **Static UI before dynamic** - Layout before logic
+1. **Setup tasks first** - Types, database schema
+2. **Data layer before logic** - Repository before service
 3. **Core functionality before edge cases** - Happy path first
-4. **Tests after implementation** - Each feature gets tests
+4. **Tests after implementation** - Each layer gets tests

@@ -12,7 +12,7 @@ description: |
   - Need tasks ordered by backend architecture layers (not random order)
   - Starting backend work and want organized task list
 
-  Task order is CRITICAL: Setup → Static UI → Dynamic → Interactions → Tests
+  Task order is CRITICAL: Types → Database → Repository → Service → API → Tests
   Output: Create single file docs/reference/backend/tasks/story-{name}.md with all tasks
 ---
 
@@ -46,8 +46,6 @@ description: |
 
 5. **READ CONTEXT FIRST**:
    - Read story from `docs/reference/pm/stories/`
-   - Read design from `docs/reference/backend/designs/` if exists
-   - Read design system from `docs/reference/backend/design-system.md`
    - Read constraints from `docs/reference/backend/constraints.md`
 
 ## Language Configuration
@@ -57,15 +55,14 @@ Before generating any content, check `aico.json` in project root for `language` 
 ## Process
 
 1. **Read story/PRD**: Load from `docs/reference/pm/stories/` or `docs/reference/pm/versions/`
-2. **Read design** (if exists): Load from `docs/reference/backend/designs/`
-3. **Read constraints**: Load design system and technical constraints
-4. **Identify components**: What backend layers are needed
-5. **Identify interactions**: What APIs and data flows are needed
-6. **Break into tasks**: Independently testable, single responsibility, by architecture layer
-7. **Order by dependencies**: Types → DB → Repository → Service → API → Tests
-8. **Generate single file**: Create `story-{story-name}.md` with all tasks in sections
-9. **Update Story file**: Add "Related Tasks" section to story file with link to task file
-10. **Summary**: Show created file and next steps
+2. **Read constraints**: Load technical constraints
+3. **Identify components**: What backend layers are needed
+4. **Identify interactions**: What APIs and data flows are needed
+5. **Break into tasks**: Independently testable, single responsibility, by architecture layer
+6. **Order by dependencies**: Types → DB → Repository → Service → API → Tests
+7. **Generate single file**: Create `story-{story-name}.md` with all tasks in sections
+8. **Update Story file**: Add "Related Tasks" section to story file with link to task file
+9. **Summary**: Show created file and next steps
 
 ## Task File Format
 
